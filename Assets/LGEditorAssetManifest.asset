@@ -1,0 +1,409 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8772d90e5941d499b93bc6d7a18c46, type: 3}
+  m_Name: LGEditorAssetManifest
+  m_EditorClassIdentifier: 
+  assetList:
+  - assetName: LGAssetManifest.asset
+    assetPath: Assets/LGAssetManifest.asset
+  - assetName: LGEditorAssetManifest.asset
+    assetPath: Assets/LGEditorAssetManifest.asset
+  - assetName: SkinMeshPreafb.prefab
+    assetPath: Assets/SkinMeshPreafb.prefab
+  - assetName: GameMainLogic.prefab
+    assetPath: Assets/ArtModules/GameMainLogic.prefab
+  - assetName: PostProcessResources.asset
+    assetPath: Assets/ArtModules/PostProcessResources.asset
+  - assetName: main.unity
+    assetPath: Assets/Scenes/main.unity
+  - assetName: SampleScene.unity
+    assetPath: Assets/Scenes/SampleScene.unity
+  - assetName: simsun.ttc
+    assetPath: Assets/_TMP_Resource/simsun.ttc
+  - assetName: GameAudioMixer.mixer
+    assetPath: Assets/ArtModules/Audio/GameAudioMixer.mixer
+  - assetName: msyh SDF.asset
+    assetPath: Assets/ArtModules/Fonts/msyh SDF.asset
+  - assetName: simsun SDF.asset
+    assetPath: Assets/ArtModules/Fonts/simsun SDF.asset
+  - assetName: skin_AnimatorController.overrideController
+    assetPath: Assets/ArtModules/Model/skin_AnimatorController.overrideController
+  - assetName: skin_hair.prefab
+    assetPath: Assets/ArtModules/Model/skin_hair.prefab
+  - assetName: skin_head.prefab
+    assetPath: Assets/ArtModules/Model/skin_head.prefab
+  - assetName: skin_skl.prefab
+    assetPath: Assets/ArtModules/Model/skin_skl.prefab
+  - assetName: skin_st.prefab
+    assetPath: Assets/ArtModules/Model/skin_st.prefab
+  - assetName: skin_ys.prefab
+    assetPath: Assets/ArtModules/Model/skin_ys.prefab
+  - assetName: GUISkin.guiskin
+    assetPath: Assets/Editor/Resources/GUISkin.guiskin
+  - assetName: UosCdnSettings.asset
+    assetPath: Assets/Editor/UnityOnlineServiceData/UosCdnSettings.asset
+  - assetName: UosSettings.asset
+    assetPath: Assets/Editor/UnityOnlineServiceData/UosSettings.asset
+  - assetName: link.xml
+    assetPath: Assets/HybridCLRData/Generated/link.xml
+  - assetName: GameObject (1) Profile.asset
+    assetPath: Assets/Scenes/main_Profiles/GameObject (1) Profile.asset
+  - assetName: msyh.ttc
+    assetPath: Assets/TextMesh Pro/Fonts/msyh.ttc
+  - assetName: Texts.txt
+    assetPath: Assets/TextMesh Pro/Fonts/Texts.txt
+  - assetName: TMP Settings.asset
+    assetPath: Assets/TextMesh Pro/Resources/TMP Settings.asset
+  - assetName: TMPro.cginc
+    assetPath: Assets/TextMesh Pro/Shaders/TMPro.cginc
+  - assetName: TMPro_Mobile.cginc
+    assetPath: Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc
+  - assetName: TMPro_Properties.cginc
+    assetPath: Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc
+  - assetName: TMPro_Surface.cginc
+    assetPath: Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc
+  - assetName: TMP_Bitmap-Custom-Atlas.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader
+  - assetName: TMP_Bitmap-Mobile.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader
+  - assetName: TMP_Bitmap.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader
+  - assetName: TMP_SDF Overlay.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader
+  - assetName: TMP_SDF SSD.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader
+  - assetName: TMP_SDF-Mobile Masking.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader
+  - assetName: TMP_SDF-Mobile Overlay.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader
+  - assetName: TMP_SDF-Mobile SSD.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader
+  - assetName: TMP_SDF-Mobile.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader
+  - assetName: TMP_SDF-Surface-Mobile.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader
+  - assetName: TMP_SDF-Surface.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader
+  - assetName: TMP_SDF.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF.shader
+  - assetName: TMP_Sprite.shader
+    assetPath: Assets/TextMesh Pro/Shaders/TMP_Sprite.shader
+  - assetName: CommonController.controller
+    assetPath: Assets/ArtModules/Model/CommonAnimators/CommonController.controller
+  - assetName: HumanoidController.controller
+    assetPath: Assets/ArtModules/Model/CommonAnimators/HumanoidController.controller
+  - assetName: New Animation.anim
+    assetPath: Assets/ArtModules/Model/CommonAnimators/New Animation.anim
+  - assetName: UIController.controller
+    assetPath: Assets/ArtModules/Model/CommonAnimators/UIController.controller
+  - assetName: AudioSetting.asset
+    assetPath: Assets/ArtModules/ScriptObject/GameSetting/AudioSetting.asset
+  - assetName: FilePathSetting.asset
+    assetPath: Assets/ArtModules/ScriptObject/GameSetting/FilePathSetting.asset
+  - assetName: LaunchSetting.asset
+    assetPath: Assets/ArtModules/ScriptObject/GameSetting/LaunchSetting.asset
+  - assetName: DOTween.dll
+    assetPath: Assets/Plugins/Demigiant/DOTween/DOTween.dll
+  - assetName: DOTween.dll.mdb
+    assetPath: Assets/Plugins/Demigiant/DOTween/DOTween.dll.mdb
+  - assetName: DOTween.XML
+    assetPath: Assets/Plugins/Demigiant/DOTween/DOTween.XML
+  - assetName: Assembly-GameBase.asmdef
+    assetPath: Assets/Scripts/AOT/GameBase/Assembly-GameBase.asmdef
+  - assetName: Assembly-GameCore.asmdef
+    assetPath: Assets/Scripts/HotUpdate/GameCore/Assembly-GameCore.asmdef
+  - assetName: Assembly-GameLogic.asmdef
+    assetPath: Assets/Scripts/HotUpdate/GameLogic/Assembly-GameLogic.asmdef
+  - assetName: Unity.UosCdn.Editor.asmdef
+    assetPath: Assets/Scripts/UosCdnSDK/Editor/Unity.UosCdn.Editor.asmdef
+  - assetName: README.TXT
+    assetPath: Assets/UnityChanTPK/Toon/Shader/README.TXT
+  - assetName: ToonColor_DoubleShadeWithFeather.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_DoubleShadeWithFeather.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_Clipping.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_DoubleShadeWithFeather_Clipping.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_Clipping_OnlyColor.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_DoubleShadeWithFeather_Clipping_OnlyColor.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_Clipping_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_DoubleShadeWithFeather_Clipping_StencilMask.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_Clipping_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_DoubleShadeWithFeather_Clipping_StencilOut.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_DoubleShadeWithFeather_StencilMask.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_DoubleShadeWithFeather_StencilOut.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_TransClipping.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_DoubleShadeWithFeather_TransClipping.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_TransClipping_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_DoubleShadeWithFeather_TransClipping_StencilMask.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_TransClipping_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_DoubleShadeWithFeather_TransClipping_StencilOut.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_Transparent.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_DoubleShadeWithFeather_Transparent.shader
+  - assetName: ToonColor_ShadingGradeMap.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_ShadingGradeMap.shader
+  - assetName: ToonColor_ShadingGradeMap_AngelRing.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_ShadingGradeMap_AngelRing.shader
+  - assetName: ToonColor_ShadingGradeMap_AngelRing_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_ShadingGradeMap_AngelRing_StencilOut.shader
+  - assetName: ToonColor_ShadingGradeMap_AngelRing_TransClipping.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_ShadingGradeMap_AngelRing_TransClipping.shader
+  - assetName: ToonColor_ShadingGradeMap_AngelRing_TransClipping_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_ShadingGradeMap_AngelRing_TransClipping_StencilOut.shader
+  - assetName: ToonColor_ShadingGradeMap_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_ShadingGradeMap_StencilMask.shader
+  - assetName: ToonColor_ShadingGradeMap_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_ShadingGradeMap_StencilOut.shader
+  - assetName: ToonColor_ShadingGradeMap_TransClipping.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_ShadingGradeMap_TransClipping.shader
+  - assetName: ToonColor_ShadingGradeMap_TransClipping_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_ShadingGradeMap_TransClipping_StencilMask.shader
+  - assetName: ToonColor_ShadingGradeMap_TransClipping_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_ShadingGradeMap_TransClipping_StencilOut.shader
+  - assetName: ToonColor_ShadingGradeMap_Transparent.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/ToonColor_ShadingGradeMap_Transparent.shader
+  - assetName: Toon_DoubleShadeWithFeather.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather.shader
+  - assetName: Toon_DoubleShadeWithFeather_Clipping.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather_Clipping.shader
+  - assetName: Toon_DoubleShadeWithFeather_Clipping_OnlyColor.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather_Clipping_OnlyColor.shader
+  - assetName: Toon_DoubleShadeWithFeather_Clipping_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather_Clipping_StencilMask.shader
+  - assetName: Toon_DoubleShadeWithFeather_Clipping_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather_Clipping_StencilOut.shader
+  - assetName: Toon_DoubleShadeWithFeather_Mobile.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather_Mobile.shader
+  - assetName: Toon_DoubleShadeWithFeather_Mobile_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather_Mobile_StencilMask.shader
+  - assetName: Toon_DoubleShadeWithFeather_Mobile_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather_Mobile_StencilOut.shader
+  - assetName: Toon_DoubleShadeWithFeather_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather_StencilMask.shader
+  - assetName: Toon_DoubleShadeWithFeather_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather_StencilOut.shader
+  - assetName: Toon_DoubleShadeWithFeather_TransClipping.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather_TransClipping.shader
+  - assetName: Toon_DoubleShadeWithFeather_TransClipping_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather_TransClipping_StencilMask.shader
+  - assetName: Toon_DoubleShadeWithFeather_TransClipping_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_DoubleShadeWithFeather_TransClipping_StencilOut.shader
+  - assetName: Toon_ShadingGradeMap.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap.shader
+  - assetName: Toon_ShadingGradeMap_AngelRing.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_AngelRing.shader
+  - assetName: Toon_ShadingGradeMap_AngelRing_Mobile.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_AngelRing_Mobile.shader
+  - assetName: Toon_ShadingGradeMap_AngelRing_Mobile_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_AngelRing_Mobile_StencilOut.shader
+  - assetName: Toon_ShadingGradeMap_AngelRing_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_AngelRing_StencilOut.shader
+  - assetName: Toon_ShadingGradeMap_AngelRing_TransClipping.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_AngelRing_TransClipping.shader
+  - assetName: Toon_ShadingGradeMap_AngelRing_TransClipping_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_AngelRing_TransClipping_StencilOut.shader
+  - assetName: Toon_ShadingGradeMap_Mobile.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_Mobile.shader
+  - assetName: Toon_ShadingGradeMap_Mobile_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_Mobile_StencilMask.shader
+  - assetName: Toon_ShadingGradeMap_Mobile_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_Mobile_StencilOut.shader
+  - assetName: Toon_ShadingGradeMap_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_StencilMask.shader
+  - assetName: Toon_ShadingGradeMap_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_StencilOut.shader
+  - assetName: Toon_ShadingGradeMap_TransClipping.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_TransClipping.shader
+  - assetName: Toon_ShadingGradeMap_TransClipping_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_TransClipping_StencilMask.shader
+  - assetName: Toon_ShadingGradeMap_TransClipping_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Toon_ShadingGradeMap_TransClipping_StencilOut.shader
+  - assetName: UCTS_DoubleShadeWithFeather.cginc
+    assetPath: Assets/UnityChanTPK/Toon/Shader/UCTS_DoubleShadeWithFeather.cginc
+  - assetName: UCTS_Outline.cginc
+    assetPath: Assets/UnityChanTPK/Toon/Shader/UCTS_Outline.cginc
+  - assetName: UCTS_ShadingGradeMap.cginc
+    assetPath: Assets/UnityChanTPK/Toon/Shader/UCTS_ShadingGradeMap.cginc
+  - assetName: UCTS_ShadowCaster.cginc
+    assetPath: Assets/UnityChanTPK/Toon/Shader/UCTS_ShadowCaster.cginc
+  - assetName: InputControls.inputactions
+    assetPath: Assets/Scripts/HotUpdate/GameCore/Input/InputControls.inputactions
+  - assetName: face3_main.mat
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Materials/face3_main.mat
+  - assetName: Unity2016_C_Add.mat
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Materials/Unity2016_C_Add.mat
+  - assetName: Unity2016_C_Body.mat
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Materials/Unity2016_C_Body.mat
+  - assetName: Unity2016_C_Hair_Spow.mat
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Materials/Unity2016_C_Hair_Spow.mat
+  - assetName: Unity2016_C_Skin.mat
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Materials/Unity2016_C_Skin.mat
+  - assetName: Unity2016_Wep.mat
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Materials/Unity2016_Wep.mat
+  - assetName: 01_kohaku_A.prefab
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Prefabs/01_kohaku_A.prefab
+  - assetName: kohaku_A_Add.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_Add.png
+  - assetName: kohaku_A_Add_Shd.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_Add_Shd.png
+  - assetName: kohaku_A_Add_Spow.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_Add_Spow.png
+  - assetName: kohaku_A_Body.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_Body.png
+  - assetName: kohaku_A_Body_Shd.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_Body_Shd.png
+  - assetName: kohaku_A_Body_spow.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_Body_spow.png
+  - assetName: kohaku_A_face3_lpow.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_face3_lpow.png
+  - assetName: kohaku_A_face3_main.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_face3_main.png
+  - assetName: kohaku_A_face3_main_Shd2.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_face3_main_Shd2.png
+  - assetName: kohaku_A_face3_main_spow.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_face3_main_spow.png
+  - assetName: kohaku_A_face3_main_sub.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_face3_main_sub.png
+  - assetName: kohaku_A_Hair_Spow.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_Hair_Spow.png
+  - assetName: kohaku_A_skin.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_skin.png
+  - assetName: kohaku_A_Skin_Shd.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_Skin_Shd.png
+  - assetName: kohaku_A_skin_spow.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_skin_spow.png
+  - assetName: kohaku_A_Wep.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_Wep.png
+  - assetName: kohaku_A_Wep_Emi.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_Wep_Emi.png
+  - assetName: kohaku_A_Wep_Shd.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_Wep_Shd.png
+  - assetName: kohaku_A_Wep_Spec.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/kohaku_A_Wep_Spec.png
+  - assetName: para_height2.png
+    assetPath: Assets/UnityChanTPK/Models/01_kohaku_A/Textures/para_height2.png
+  - assetName: ToonColor_DoubleShadeWithFeather_Clipping_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_DoubleShadeWithFeather_Clipping_Tess.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_Clipping_Tess_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_DoubleShadeWithFeather_Clipping_Tess_StencilMask.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_Clipping_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_DoubleShadeWithFeather_Clipping_Tess_StencilOut.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_DoubleShadeWithFeather_Tess.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_Tess_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_DoubleShadeWithFeather_Tess_StencilMask.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_DoubleShadeWithFeather_Tess_StencilOut.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_Tess_TransClipping.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_DoubleShadeWithFeather_Tess_TransClipping.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_TransClipping_Tess_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_DoubleShadeWithFeather_TransClipping_Tess_StencilMask.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_TransClipping_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_DoubleShadeWithFeather_TransClipping_Tess_StencilOut.shader
+  - assetName: ToonColor_DoubleShadeWithFeather_Transparent_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_DoubleShadeWithFeather_Transparent_Tess.shader
+  - assetName: ToonColor_ShadingGradeMap_AngelRing_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_ShadingGradeMap_AngelRing_Tess.shader
+  - assetName: ToonColor_ShadingGradeMap_AngelRing_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_ShadingGradeMap_AngelRing_Tess_StencilOut.shader
+  - assetName: ToonColor_ShadingGradeMap_AngelRing_Tess_TransClipping.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_ShadingGradeMap_AngelRing_Tess_TransClipping.shader
+  - assetName: ToonColor_ShadingGradeMap_AngelRing_TransClipping_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_ShadingGradeMap_AngelRing_TransClipping_Tess_StencilOut.shader
+  - assetName: ToonColor_ShadingGradeMap_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_ShadingGradeMap_Tess.shader
+  - assetName: ToonColor_ShadingGradeMap_Tess_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_ShadingGradeMap_Tess_StencilMask.shader
+  - assetName: ToonColor_ShadingGradeMap_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_ShadingGradeMap_Tess_StencilOut.shader
+  - assetName: ToonColor_ShadingGradeMap_TransClipping_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_ShadingGradeMap_TransClipping_Tess.shader
+  - assetName: ToonColor_ShadingGradeMap_TransClipping_Tess_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_ShadingGradeMap_TransClipping_Tess_StencilMask.shader
+  - assetName: ToonColor_ShadingGradeMap_TransClipping_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_ShadingGradeMap_TransClipping_Tess_StencilOut.shader
+  - assetName: ToonColor_ShadingGradeMap_Transparent_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/ToonColor_ShadingGradeMap_Transparent_Tess.shader
+  - assetName: Toon_DoubleShadeWithFeather_Clipping_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_DoubleShadeWithFeather_Clipping_Tess.shader
+  - assetName: Toon_DoubleShadeWithFeather_Clipping_Tess_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_DoubleShadeWithFeather_Clipping_Tess_StencilMask.shader
+  - assetName: Toon_DoubleShadeWithFeather_Clipping_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_DoubleShadeWithFeather_Clipping_Tess_StencilOut.shader
+  - assetName: Toon_DoubleShadeWithFeather_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_DoubleShadeWithFeather_Tess.shader
+  - assetName: Toon_DoubleShadeWithFeather_Tess_Light.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_DoubleShadeWithFeather_Tess_Light.shader
+  - assetName: Toon_DoubleShadeWithFeather_Tess_Light_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_DoubleShadeWithFeather_Tess_Light_StencilMask.shader
+  - assetName: Toon_DoubleShadeWithFeather_Tess_Light_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_DoubleShadeWithFeather_Tess_Light_StencilOut.shader
+  - assetName: Toon_DoubleShadeWithFeather_Tess_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_DoubleShadeWithFeather_Tess_StencilMask.shader
+  - assetName: Toon_DoubleShadeWithFeather_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_DoubleShadeWithFeather_Tess_StencilOut.shader
+  - assetName: Toon_DoubleShadeWithFeather_TransClipping_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_DoubleShadeWithFeather_TransClipping_Tess.shader
+  - assetName: Toon_DoubleShadeWithFeather_TransClipping_Tess_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_DoubleShadeWithFeather_TransClipping_Tess_StencilMask.shader
+  - assetName: Toon_DoubleShadeWithFeather_TransClipping_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_DoubleShadeWithFeather_TransClipping_Tess_StencilOut.shader
+  - assetName: Toon_ShadingGradeMap_AngelRing_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_AngelRing_Tess.shader
+  - assetName: Toon_ShadingGradeMap_AngelRing_Tess_Light.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_AngelRing_Tess_Light.shader
+  - assetName: Toon_ShadingGradeMap_AngelRing_Tess_Light_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_AngelRing_Tess_Light_StencilOut.shader
+  - assetName: Toon_ShadingGradeMap_AngelRing_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_AngelRing_Tess_StencilOut.shader
+  - assetName: Toon_ShadingGradeMap_AngelRing_TransClipping_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_AngelRing_TransClipping_Tess.shader
+  - assetName: Toon_ShadingGradeMap_AngelRing_TransClipping_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_AngelRing_TransClipping_Tess_StencilOut.shader
+  - assetName: Toon_ShadingGradeMap_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_Tess.shader
+  - assetName: Toon_ShadingGradeMap_Tess_Light.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_Tess_Light.shader
+  - assetName: Toon_ShadingGradeMap_Tess_Light_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_Tess_Light_StencilMask.shader
+  - assetName: Toon_ShadingGradeMap_Tess_Light_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_Tess_Light_StencilOut.shader
+  - assetName: Toon_ShadingGradeMap_Tess_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_Tess_StencilMask.shader
+  - assetName: Toon_ShadingGradeMap_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_Tess_StencilOut.shader
+  - assetName: Toon_ShadingGradeMap_TransClipping_Tess.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_TransClipping_Tess.shader
+  - assetName: Toon_ShadingGradeMap_TransClipping_Tess_StencilMask.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_TransClipping_Tess_StencilMask.shader
+  - assetName: Toon_ShadingGradeMap_TransClipping_Tess_StencilOut.shader
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/Toon_ShadingGradeMap_TransClipping_Tess_StencilOut.shader
+  - assetName: UCTS_DoubleShadeWithFeather_tess.cginc
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/UCTS_DoubleShadeWithFeather_tess.cginc
+  - assetName: UCTS_Outline_Tess.cginc
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/UCTS_Outline_Tess.cginc
+  - assetName: UCTS_ShadingGradeMap_tess.cginc
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/UCTS_ShadingGradeMap_tess.cginc
+  - assetName: UCTS_ShadowCaster_Tess.cginc
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/UCTS_ShadowCaster_Tess.cginc
+  - assetName: UCTS_Tess.cginc
+    assetPath: Assets/UnityChanTPK/Toon/Shader/Tess/UCTS_Tess.cginc
+  - assetName: LICENSE
+    assetPath: Assets/Scripts/UosCdnSDK/Editor/Package/wcs-csharp-sdk-1.0.1.0/LICENSE
+  - assetName: README.md
+    assetPath: Assets/Scripts/UosCdnSDK/Editor/Package/wcs-csharp-sdk-1.0.1.0/README.md
+  - assetName: WcsLib.sln
+    assetPath: Assets/Scripts/UosCdnSDK/Editor/Package/wcs-csharp-sdk-1.0.1.0/lib/WcsLib.sln
+  - assetName: COSXML.csproj
+    assetPath: Assets/Scripts/UosCdnSDK/Editor/Package/Tencent.QCloud.Cos.Sdk.5.4.9/src/COSXML/COSXML.csproj
+  - assetName: WcsLib.csproj
+    assetPath: Assets/Scripts/UosCdnSDK/Editor/Package/wcs-csharp-sdk-1.0.1.0/lib/WcsLib/WcsLib.csproj

@@ -1,0 +1,14 @@
+using LGameFramework.GameBase;
+using System.Collections;
+using UnityEngine;
+
+namespace LGameFramework.GameCore
+{
+    /// <summary>
+    /// ÓÎÏ·¿ò¼ÜÄ£¿é
+    /// </summary>
+    public abstract class FrameworkModule : GameModule
+    {
+
+    }
+}
