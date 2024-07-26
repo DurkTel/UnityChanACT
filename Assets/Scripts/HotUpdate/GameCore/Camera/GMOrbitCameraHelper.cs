@@ -1,8 +1,9 @@
+using LGameFramework.GameBase;
 using UnityEngine;
 
 namespace LGameFramework.GameCore
 {
-    public class GMOrbitCameraHelper : MonoBehaviour, IFrameworkEditorHelper<GMOrbitCamera>
+    public class GMOrbitCameraHelper : MonoBehaviour, IModuleEditorHelper<GMOrbitCamera>
     {
         [SerializeField]
         private GMOrbitCamera m_DataSource;

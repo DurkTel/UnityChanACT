@@ -1,3 +1,4 @@
+using LGameFramework.GameBase;
 using LGameFramework.GameCore.AOI;
 using LGameFramework.GameCore.Asset;
 using System.Collections;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace LGameFramework.GameCore.Input
 {
-    public class GMInputManagerHelper : MonoBehaviour, IFrameworkEditorHelper<GMInputManager>
+    public class GMInputManagerHelper : MonoBehaviour, IModuleEditorHelper<GMInputManager>
     {
         private GMInputManager m_DataSource;
 

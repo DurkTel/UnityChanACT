@@ -91,7 +91,7 @@ namespace LGameFramework.GameBase
 #if UNITY_EDITOR
             //添加管理模块的编辑器脚本 便于观察数据等
             string moduleHelper = typeof(T).FullName + "Helper";
-            Type type = Type.GetType(moduleHelper);
+            Type type = typeof(T).Assembly.GetType(moduleHelper);
             if (type != null)
                 (module.GameObject.AddComponent(type) as IModuleEditorHelper<T>).Attach(module);
 #endif

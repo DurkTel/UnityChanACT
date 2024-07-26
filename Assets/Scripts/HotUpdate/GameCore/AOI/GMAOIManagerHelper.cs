@@ -1,9 +1,10 @@
+using LGameFramework.GameBase;
 using LGameFramework.GameCore.AOI;
 using UnityEngine;
 
 namespace LGameFramework.GameCore.AOI
 {
-    public sealed class GMAOIManagerHelper : MonoBehaviour, IFrameworkEditorHelper<GMAOIManager>
+    public sealed class GMAOIManagerHelper : MonoBehaviour, IModuleEditorHelper<GMAOIManager>
     {
         private GMAOIManager m_DataSource;
         public GMAOIManager DataSource { get { return m_DataSource; } }

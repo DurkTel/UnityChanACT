@@ -1,10 +1,11 @@
+using LGameFramework.GameBase;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace LGameFramework.GameCore.Asset
 {
-    public class GMAssetManagerHelper : MonoBehaviour, IFrameworkEditorHelper<GMAssetManager>
+    public class GMAssetManagerHelper : MonoBehaviour, IModuleEditorHelper<GMAssetManager>
     {
         private GMAssetManager m_DataSource;
         public GMAssetManager DataSource

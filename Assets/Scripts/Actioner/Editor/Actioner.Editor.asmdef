@@ -1,0 +1,18 @@
+{
+    "name": "Actioner.Editor",
+    "rootNamespace": "Actioner.Editor",
+    "references": [
+        "GUID:d0f8d3242a834b44cbe7418fce17d377",
+        "GUID:3072bfba8acc8ff4ca4c09cf933bdd1e",
+        "GUID:eda8e593c05771a44a287a807452c54b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

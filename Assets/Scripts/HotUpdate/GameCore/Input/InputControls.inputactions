@@ -51,15 +51,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Escape",
-                    "type": "Button",
-                    "id": "0bb9c9c0-bfd1-4091-a045-353b6ddfdeb3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Weapon",
                     "type": "Button",
                     "id": "900be26c-70ff-46e2-a08c-faf8477c39d0",
@@ -72,15 +63,6 @@
                     "name": "LightAttack",
                     "type": "Button",
                     "id": "4b99525c-bb01-4a70-833c-aee3535d76b8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "HeavyAttack",
-                    "type": "Button",
-                    "id": "2d2d38d2-539d-497d-829a-c4b2406811be",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold",
@@ -130,13 +112,22 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Dodge",
+                    "type": "Button",
+                    "id": "72c0dfbf-56b2-4cd9-a0f2-7d631104c08c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "fa3e4364-c2bb-40b4-926a-3eeaca14fcab",
-                    "path": "<Keyboard>/k",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -223,17 +214,6 @@
                 },
                 {
                     "name": "",
-                    "id": "1afde551-1a58-4370-b65a-2037400ed28e",
-                    "path": "<Keyboard>/alt",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Escape",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "73e13ad6-f8b0-4fd6-a887-4c6df176f405",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -251,17 +231,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "LightAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6a16cb86-e4b6-4b57-8191-5ad9503c5183",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HeavyAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -372,6 +341,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ZoomCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12a298d6-dff7-4b52-bbc1-3ecec6c547d5",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -28,17 +28,29 @@ namespace LGameFramework.GameCore
         public static void OnInit()
         {
             //初始化UI
-            GameLogicEntry.GetModule<GMGUIManager>();
+            //GameLogicEntry.GetModule<GMGUIManager>();
 
             //初始化副本管理
-            GameLogicEntry.GetModule<GMLevelManager>();
+            //GameLogicEntry.GetModule<GMLevelManager>();
 
-            EntityUtility.EnterEntity(GMEntityArchetype.s_TestEntityArchetype);
+            //EntityUtility.EnterEntity(GMEntityArchetype.s_TestEntityArchetype);
+
+            var loader = AssetUtility.LoadAssetAsync<GameObject>("Player_GAS.prefab");
+            loader.onComplete += (p) =>
+            {
+                var player = p.GetInstantiate<GameObject>();
+                player.transform.position = Vector3.zero;
+                GameFrameworkEntry.GetModule<GMOrbitCamera>().Focus = player.transform;
+            };
+
         }
 
         public static void OninitWorldMessage()
         {
-            
+            InputUtility.RegisterListener((InputActionArgs.InputAction_Look, InputMode.Direction), (p) =>
+            {
+                GameFrameworkEntry.GetModule<GMOrbitCamera>().GetAxisInput(p.Direction);
+            });
         }
 
 

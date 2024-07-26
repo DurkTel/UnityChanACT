@@ -6,10 +6,11 @@ namespace LGameFramework.GameBase.FSM
 {
     public class FSM_StateMachine<TStateId> : FSM_Status<TStateId>, IFSM_Machine<TStateId>
     {
+        protected FSM_Status<TStateId> m_ActiveState;
         /// <summary>
         /// 当前状态
         /// </summary>
-        public FSM_Status<TStateId> ActiveState { get; set; }
+        public FSM_Status<TStateId> ActiveState { get { return m_ActiveState; } set { m_ActiveState = value; } }
         /// <summary>
         /// 上次状态
         /// </summary>
@@ -97,9 +98,11 @@ namespace LGameFramework.GameBase.FSM
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="name"></param>
-        public void AddStatus<T>(TStateId name) where T : FSM_Status<TStateId>, new()
+        public FSM_Status<TStateId> AddStatus<T>(TStateId name) where T : FSM_Status<TStateId>, new()
         {
-            AddStatus(name, new T());
+            T status = new T();
+            AddStatus(name, status);
+            return status;
         }
 
         /// <summary>
@@ -123,13 +126,14 @@ namespace LGameFramework.GameBase.FSM
         public void AddTransitionFromAny(FSM_Transition<TStateId> transition)
         {
             transitionsFromAny.Add(transition);
+            transitionsFromAny.Sort(SortTransitions);
         }
         /// <summary>
         /// 尝试进行过渡
         /// </summary>
         /// <param name="transition"></param>
         /// <returns></returns>
-        private bool TryTransition(FSM_Transition<TStateId> transition)
+        protected bool TryTransition(FSM_Transition<TStateId> transition)
         {
             if (!transition.Tick(dataBase))
                 return false;
@@ -211,6 +215,20 @@ namespace LGameFramework.GameBase.FSM
                 ActiveState.OnExit();
                 ActiveState = null;
             }
+        }
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public static int SortTransitions(FSM_Transition<TStateId> x, FSM_Transition<TStateId> y)
+        {
+            if (x.WeightOrder == y.WeightOrder)
+                return 0;
+
+            return x.WeightOrder > y.WeightOrder ? 1 : -1;
         }
     }
 

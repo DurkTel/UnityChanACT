@@ -7,23 +7,21 @@ namespace LGameFramework.GameBase.RangeDetection
     /// <summary>
     /// Ô²ÐÎ·¶Î§¼ì²â
     /// </summary>
-    public class Circle
+    public struct Circle
     {
         /// <summary>
         /// ÖÐÐÄµã
         /// </summary>
-        public Transform m_Center;
-        public Transform Center { get { return m_Center; } }  
+        public Vector3 center;
         /// <summary>
         /// °ë¾¶
         /// </summary>
-        public float m_Radius;
-        public float Radius { get { return m_Radius; } }
+        public float radius;
 
-        public Circle(Transform center, float radius)
+        public Circle(Vector3 center, float radius)
         {
-            m_Center = center;
-            m_Radius = radius;
+            this.center = center;
+            this.radius = radius;
         }
 
         /// <summary>
@@ -31,10 +29,10 @@ namespace LGameFramework.GameBase.RangeDetection
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public bool IsInZone(Vector3 position)
+        public readonly bool IsInZone(Vector3 position)
         {
-            Vector3 offset = position - m_Center.position;
-            return offset.sqrMagnitude <= m_Radius * m_Radius;
+            Vector3 offset = position - center;
+            return offset.sqrMagnitude <= radius * radius;
         }
     }
 }

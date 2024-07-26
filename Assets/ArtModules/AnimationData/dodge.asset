@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96780e75974a4f3449cbc14d969448bb, type: 3}
+  m_Name: dodge
+  m_EditorClassIdentifier: 
+  layer: 0
+  tag: 0
+  motion: {fileID: 7400000, guid: 6d3c71ab26d60784daf17b14908aba1a, type: 2}
+  speed: 1
+  timeOffset: 0
+  footIK: 0
+  rootMotion: 1
+  motions:
+  - {fileID: 7400000, guid: 6d3c71ab26d60784daf17b14908aba1a, type: 2}
+  - {fileID: 7400000, guid: b38d49890916a0445922ddfb7e3210bb, type: 2}

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48e705c420a8804f991bbce6e9762f2, type: 3}
+  m_Name: ActionManifest
+  m_EditorClassIdentifier: 
+  actionNames:
+  - Idle
+  - Run_Start
+  - Run_Front
+  - Run_End
+  - Run_Return
+  - Sprint_Front
+  - Sprint_End
+  - Attack_01
+  actionDatas:
+  - {fileID: 11400000, guid: 43c06f3de621876438f4a9dae16a8cda, type: 2}
+  - {fileID: 11400000, guid: cc8b3fd28991a3346b7aff30f308cbe4, type: 2}
+  - {fileID: 11400000, guid: 6127f4b4e71fea843bab5b1f8e83066c, type: 2}
+  - {fileID: 11400000, guid: b666a11dfd0d0ed41848cfa9ef41b190, type: 2}
+  - {fileID: 11400000, guid: ee117957efc68b94f8295498b4534b70, type: 2}
+  - {fileID: 11400000, guid: 19ce97ebfacc4b84791bcf2414091264, type: 2}
+  - {fileID: 11400000, guid: 0f18cb63ce7ded2499b1fa5da7caf9d3, type: 2}
+  - {fileID: 11400000, guid: e107f44d8bcc8ee4d94bce989187c1d0, type: 2}
+  bundleNames:
+  - Dodge
+  bundleDatas:
+  - {fileID: 11400000, guid: 05e334820413e004bb604085fcee4af0, type: 2}
+  blendNames: []
+  blendDatas: []

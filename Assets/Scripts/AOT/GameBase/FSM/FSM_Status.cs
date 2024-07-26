@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace LGameFramework.GameBase.FSM
 {
@@ -29,15 +30,15 @@ namespace LGameFramework.GameBase.FSM
         /// <summary>
         /// 每帧刷新的事件
         /// </summary>
-        private readonly Action<FSM_Status<TStateId>> m_OnAction;
+        protected readonly Action<FSM_Status<TStateId>> m_OnAction;
         /// <summary>
         /// 进入该状态的事件
         /// </summary>
-        private readonly Action<FSM_Status<TStateId>> m_OnEnter;
+        protected readonly Action<FSM_Status<TStateId>> m_OnEnter;
         /// <summary>
         /// 退出该状态的事件
         /// </summary>
-        private readonly Action<FSM_Status<TStateId>> m_OnExit;
+        protected readonly Action<FSM_Status<TStateId>> m_OnExit;
 
         public FSM_Status(Action<FSM_Status<TStateId>> onEnter = null, Action<FSM_Status<TStateId>> onExit = null, Action<FSM_Status<TStateId>> onAction = null)
         {
@@ -50,8 +51,11 @@ namespace LGameFramework.GameBase.FSM
         /// </summary>
         public virtual void AddTransition(FSM_Transition<TStateId> transition)
         {
+            if (!transition.Equals(transition.FormStatusID, name))
+                return;
             transitions ??= new List<FSM_Transition<TStateId>>();
             transitions.Add(transition);
+            transitions.Sort(FSM_StateMachine<TStateId>.SortTransitions);
         }
         /// <summary>
         /// 初始化时

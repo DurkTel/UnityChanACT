@@ -7,6 +7,7 @@ namespace LGameFramework.GameCore
     /// <summary>
     /// 轨道相机
     /// </summary>
+    [System.Serializable]
     public class GMOrbitCamera : FrameworkModule
     {
         /// <summary>

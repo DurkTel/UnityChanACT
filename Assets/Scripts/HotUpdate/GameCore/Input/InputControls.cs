@@ -75,15 +75,6 @@ namespace LGameFramework.GameCore.Input
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Escape"",
-                    ""type"": ""Button"",
-                    ""id"": ""0bb9c9c0-bfd1-4091-a045-353b6ddfdeb3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Hold"",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Weapon"",
                     ""type"": ""Button"",
                     ""id"": ""900be26c-70ff-46e2-a08c-faf8477c39d0"",
@@ -96,15 +87,6 @@ namespace LGameFramework.GameCore.Input
                     ""name"": ""LightAttack"",
                     ""type"": ""Button"",
                     ""id"": ""4b99525c-bb01-4a70-833c-aee3535d76b8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Hold"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""HeavyAttack"",
-                    ""type"": ""Button"",
-                    ""id"": ""2d2d38d2-539d-497d-829a-c4b2406811be"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold"",
@@ -154,13 +136,22 @@ namespace LGameFramework.GameCore.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""72c0dfbf-56b2-4cd9-a0f2-7d631104c08c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""fa3e4364-c2bb-40b4-926a-3eeaca14fcab"",
-                    ""path"": ""<Keyboard>/k"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -247,17 +238,6 @@ namespace LGameFramework.GameCore.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1afde551-1a58-4370-b65a-2037400ed28e"",
-                    ""path"": ""<Keyboard>/alt"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Escape"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""73e13ad6-f8b0-4fd6-a887-4c6df176f405"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -275,17 +255,6 @@ namespace LGameFramework.GameCore.Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LightAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6a16cb86-e4b6-4b57-8191-5ad9503c5183"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""HeavyAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -398,6 +367,17 @@ namespace LGameFramework.GameCore.Input
                     ""action"": ""ZoomCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12a298d6-dff7-4b52-bbc1-3ecec6c547d5"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -411,15 +391,14 @@ namespace LGameFramework.GameCore.Input
             m_GamePlay_Walk = m_GamePlay.FindAction("Walk", throwIfNotFound: true);
             m_GamePlay_Jump = m_GamePlay.FindAction("Jump", throwIfNotFound: true);
             m_GamePlay_Lock = m_GamePlay.FindAction("Lock", throwIfNotFound: true);
-            m_GamePlay_Escape = m_GamePlay.FindAction("Escape", throwIfNotFound: true);
             m_GamePlay_Weapon = m_GamePlay.FindAction("Weapon", throwIfNotFound: true);
             m_GamePlay_LightAttack = m_GamePlay.FindAction("LightAttack", throwIfNotFound: true);
-            m_GamePlay_HeavyAttack = m_GamePlay.FindAction("HeavyAttack", throwIfNotFound: true);
             m_GamePlay_Revenges = m_GamePlay.FindAction("Revenges", throwIfNotFound: true);
             m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
             m_GamePlay_Interact = m_GamePlay.FindAction("Interact", throwIfNotFound: true);
             m_GamePlay_Discard = m_GamePlay.FindAction("Discard", throwIfNotFound: true);
             m_GamePlay_ZoomCamera = m_GamePlay.FindAction("ZoomCamera", throwIfNotFound: true);
+            m_GamePlay_Dodge = m_GamePlay.FindAction("Dodge", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -486,15 +465,14 @@ namespace LGameFramework.GameCore.Input
         private readonly InputAction m_GamePlay_Walk;
         private readonly InputAction m_GamePlay_Jump;
         private readonly InputAction m_GamePlay_Lock;
-        private readonly InputAction m_GamePlay_Escape;
         private readonly InputAction m_GamePlay_Weapon;
         private readonly InputAction m_GamePlay_LightAttack;
-        private readonly InputAction m_GamePlay_HeavyAttack;
         private readonly InputAction m_GamePlay_Revenges;
         private readonly InputAction m_GamePlay_Move;
         private readonly InputAction m_GamePlay_Interact;
         private readonly InputAction m_GamePlay_Discard;
         private readonly InputAction m_GamePlay_ZoomCamera;
+        private readonly InputAction m_GamePlay_Dodge;
         public struct GamePlayActions
         {
             private @InputControls m_Wrapper;
@@ -504,15 +482,14 @@ namespace LGameFramework.GameCore.Input
             public InputAction @Walk => m_Wrapper.m_GamePlay_Walk;
             public InputAction @Jump => m_Wrapper.m_GamePlay_Jump;
             public InputAction @Lock => m_Wrapper.m_GamePlay_Lock;
-            public InputAction @Escape => m_Wrapper.m_GamePlay_Escape;
             public InputAction @Weapon => m_Wrapper.m_GamePlay_Weapon;
             public InputAction @LightAttack => m_Wrapper.m_GamePlay_LightAttack;
-            public InputAction @HeavyAttack => m_Wrapper.m_GamePlay_HeavyAttack;
             public InputAction @Revenges => m_Wrapper.m_GamePlay_Revenges;
             public InputAction @Move => m_Wrapper.m_GamePlay_Move;
             public InputAction @Interact => m_Wrapper.m_GamePlay_Interact;
             public InputAction @Discard => m_Wrapper.m_GamePlay_Discard;
             public InputAction @ZoomCamera => m_Wrapper.m_GamePlay_ZoomCamera;
+            public InputAction @Dodge => m_Wrapper.m_GamePlay_Dodge;
             public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -537,18 +514,12 @@ namespace LGameFramework.GameCore.Input
                 @Lock.started += instance.OnLock;
                 @Lock.performed += instance.OnLock;
                 @Lock.canceled += instance.OnLock;
-                @Escape.started += instance.OnEscape;
-                @Escape.performed += instance.OnEscape;
-                @Escape.canceled += instance.OnEscape;
                 @Weapon.started += instance.OnWeapon;
                 @Weapon.performed += instance.OnWeapon;
                 @Weapon.canceled += instance.OnWeapon;
                 @LightAttack.started += instance.OnLightAttack;
                 @LightAttack.performed += instance.OnLightAttack;
                 @LightAttack.canceled += instance.OnLightAttack;
-                @HeavyAttack.started += instance.OnHeavyAttack;
-                @HeavyAttack.performed += instance.OnHeavyAttack;
-                @HeavyAttack.canceled += instance.OnHeavyAttack;
                 @Revenges.started += instance.OnRevenges;
                 @Revenges.performed += instance.OnRevenges;
                 @Revenges.canceled += instance.OnRevenges;
@@ -564,6 +535,9 @@ namespace LGameFramework.GameCore.Input
                 @ZoomCamera.started += instance.OnZoomCamera;
                 @ZoomCamera.performed += instance.OnZoomCamera;
                 @ZoomCamera.canceled += instance.OnZoomCamera;
+                @Dodge.started += instance.OnDodge;
+                @Dodge.performed += instance.OnDodge;
+                @Dodge.canceled += instance.OnDodge;
             }
 
             private void UnregisterCallbacks(IGamePlayActions instance)
@@ -583,18 +557,12 @@ namespace LGameFramework.GameCore.Input
                 @Lock.started -= instance.OnLock;
                 @Lock.performed -= instance.OnLock;
                 @Lock.canceled -= instance.OnLock;
-                @Escape.started -= instance.OnEscape;
-                @Escape.performed -= instance.OnEscape;
-                @Escape.canceled -= instance.OnEscape;
                 @Weapon.started -= instance.OnWeapon;
                 @Weapon.performed -= instance.OnWeapon;
                 @Weapon.canceled -= instance.OnWeapon;
                 @LightAttack.started -= instance.OnLightAttack;
                 @LightAttack.performed -= instance.OnLightAttack;
                 @LightAttack.canceled -= instance.OnLightAttack;
-                @HeavyAttack.started -= instance.OnHeavyAttack;
-                @HeavyAttack.performed -= instance.OnHeavyAttack;
-                @HeavyAttack.canceled -= instance.OnHeavyAttack;
                 @Revenges.started -= instance.OnRevenges;
                 @Revenges.performed -= instance.OnRevenges;
                 @Revenges.canceled -= instance.OnRevenges;
@@ -610,6 +578,9 @@ namespace LGameFramework.GameCore.Input
                 @ZoomCamera.started -= instance.OnZoomCamera;
                 @ZoomCamera.performed -= instance.OnZoomCamera;
                 @ZoomCamera.canceled -= instance.OnZoomCamera;
+                @Dodge.started -= instance.OnDodge;
+                @Dodge.performed -= instance.OnDodge;
+                @Dodge.canceled -= instance.OnDodge;
             }
 
             public void RemoveCallbacks(IGamePlayActions instance)
@@ -634,15 +605,14 @@ namespace LGameFramework.GameCore.Input
             void OnWalk(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnLock(InputAction.CallbackContext context);
-            void OnEscape(InputAction.CallbackContext context);
             void OnWeapon(InputAction.CallbackContext context);
             void OnLightAttack(InputAction.CallbackContext context);
-            void OnHeavyAttack(InputAction.CallbackContext context);
             void OnRevenges(InputAction.CallbackContext context);
             void OnMove(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
             void OnDiscard(InputAction.CallbackContext context);
             void OnZoomCamera(InputAction.CallbackContext context);
+            void OnDodge(InputAction.CallbackContext context);
         }
     }
 }

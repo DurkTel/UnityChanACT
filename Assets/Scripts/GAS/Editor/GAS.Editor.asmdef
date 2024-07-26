@@ -1,0 +1,17 @@
+{
+    "name": "GAS.Editor",
+    "rootNamespace": "GAS.Editor",
+    "references": [
+        "GUID:bae78366e394df143a7dea7fd51d233b",
+        "GUID:eda8e593c05771a44a287a807452c54b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

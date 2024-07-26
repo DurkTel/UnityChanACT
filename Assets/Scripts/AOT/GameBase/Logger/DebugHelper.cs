@@ -56,7 +56,7 @@ public class DebugHelper : MonoBehaviour
 #endif
     }
 
-    public class Label
+    public struct Label
     {
         public string label;
         public Vector3 center;
@@ -67,12 +67,13 @@ public class DebugHelper : MonoBehaviour
 
     #region ªÊ÷∆«ÚÃÂ
     private static Queue<Sphere> m_SphereGizmosQueue = new Queue<Sphere>();
-    public static void DrawSphere(Vector3 center, float radius, Color color, float duration = 0)
+    public static void DrawSphere(Vector3 center, float radius, Color color, float duration = 0, bool isWire = true)
     {
         Sphere sphere = new Sphere();
         sphere.center = center;
         sphere.radius = radius;
         sphere.color = color;
+        sphere.isWire = isWire;
         sphere.remainingTime = duration;
 
         m_SphereGizmosQueue.Enqueue(sphere);
@@ -86,7 +87,10 @@ public class DebugHelper : MonoBehaviour
             Sphere sphere = m_SphereGizmosQueue.Dequeue();
 
             Gizmos.color = sphere.color;
-            Gizmos.DrawWireSphere(sphere.center, sphere.radius);
+            if (sphere.isWire)
+                Gizmos.DrawWireSphere(sphere.center, sphere.radius);
+            else
+                Gizmos.DrawSphere(sphere.center, sphere.radius);
 
             if (sphere.remainingTime > 0)
             {
@@ -96,12 +100,13 @@ public class DebugHelper : MonoBehaviour
         }
     }
 
-    public class Sphere
+    public struct Sphere
     {
         public Vector3 center;
         public float radius;
         public Color color;
         public float remainingTime;
+        public bool isWire;
     }
     #endregion
 
@@ -151,7 +156,7 @@ public class DebugHelper : MonoBehaviour
         }
     }
 
-    public class Capsule
+    public struct Capsule
     {
         public Vector3 bot;
         public Vector3 top;
@@ -246,8 +251,8 @@ public class DebugHelper : MonoBehaviour
     {
         CircleGizmos cg = new CircleGizmos();
         cg.color = color;
-        cg.center = circle.Center; 
-        cg.radius = circle.Radius;
+        cg.center = circle.center; 
+        cg.radius = circle.radius;
         cg.remainingTime = duration;
         m_CircleGizmos.Enqueue(cg);
     }
@@ -263,7 +268,7 @@ public class DebugHelper : MonoBehaviour
             float radian = 2f * Mathf.PI / num;
             for (int j = 1; j < num; j++)
             {
-                Gizmos.DrawSphere(new Vector3(circle.center.position.x + (circle.radius * Mathf.Cos(j * radian)), 0, circle.center.position.z + (circle.radius * Mathf.Sin(j * radian))), 0.05f);
+                Gizmos.DrawSphere(new Vector3(circle.center.x + (circle.radius * Mathf.Cos(j * radian)), 0, circle.center.z + (circle.radius * Mathf.Sin(j * radian))), 0.05f);
             }
 
             if (circle.remainingTime > 0)
@@ -275,9 +280,9 @@ public class DebugHelper : MonoBehaviour
     }
 
 
-    public class CircleGizmos
+    public struct CircleGizmos
     {
-        public Transform center;
+        public Vector3 center;
         public float radius;
         public Color color;
         public float remainingTime;
@@ -290,9 +295,9 @@ public class DebugHelper : MonoBehaviour
     {
         TriangleGizmos tr = new TriangleGizmos();
         tr.color = color;
-        tr.point1 = triangle.Corner1;
-        tr.point2 = triangle.Corner2;
-        tr.point3 = triangle.Corner3;
+        tr.point1 = triangle.corner1;
+        tr.point2 = triangle.corner2;
+        tr.point3 = triangle.corner3;
 
         tr.remainingTime = duration;
         m_TriangleGizmos.Enqueue(tr);
@@ -318,7 +323,7 @@ public class DebugHelper : MonoBehaviour
         }
     }
 
-    public class TriangleGizmos
+    public struct TriangleGizmos
     {
         public Vector3 point1;
         public Vector3 point2;
@@ -334,9 +339,9 @@ public class DebugHelper : MonoBehaviour
     {
         FanshapedGizmos tr = new FanshapedGizmos();
         tr.color = color;
-        tr.tran = fanshaped.Transform;
-        tr.angel = fanshaped.Angel;
-        tr.radius = fanshaped.Radius;
+        tr.tran = fanshaped.transform;
+        tr.angel = fanshaped.angel;
+        tr.radius = fanshaped.radius;
 
         tr.remainingTime = duration;
         m_FanshapedGizmos.Enqueue(tr);
@@ -382,7 +387,7 @@ public class DebugHelper : MonoBehaviour
         }
     }
 
-    public class FanshapedGizmos
+    public struct FanshapedGizmos
     {
         public Transform tran;
         public float angel;

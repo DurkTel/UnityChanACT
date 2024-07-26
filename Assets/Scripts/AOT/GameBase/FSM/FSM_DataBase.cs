@@ -55,7 +55,7 @@ namespace LGameFramework.GameBase.FSM
             int dataId = GetIndexOfDataId(name);
             if (dataId == -1)
             {
-                Debug.LogError("DataBase中不存在name为：" + name + "的key");
+                //Debug.LogError("DataBase中不存在name为：" + name + "的key");
                 return default(T);
             }
 

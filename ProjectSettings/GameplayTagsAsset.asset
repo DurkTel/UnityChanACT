@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 944af4ef38d2cfa448ac7c5a57035d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RootNode:
+    name: Root
+    fullName: Root
+    description: 
+    childs:
+    - name: Ability
+      fullName: Ability
+      description: "\u80FD\u529B\u6807\u7B7E"
+      childs:
+      - name: Locomotion
+        fullName: Ability.Locomotion
+        description: "\u8FD0\u52A8"
+        childs:
+        - name: SharpTurn
+          fullName: Ability.Locomotion.SharpTurn
+          description: "\u6025\u8F6C\u5F2F"
+          childs: []
+        - name: NotCancelled
+          fullName: Ability.Locomotion.NotCancelled
+          description: "\u4E0D\u53EF\u53D6\u6D88"
+          childs: []
+    - name: Camp
+      fullName: Camp
+      description: "\u9635\u8425"
+      childs:
+      - name: Friendly
+        fullName: Camp.Friendly
+        description: "\u53CB\u65B9\u9635\u8425"
+        childs: []
+      - name: Enemy
+        fullName: Camp.Enemy
+        description: "\u654C\u65B9\u9635\u8425"
+        childs: []
+    - name: Event
+      fullName: Event
+      description: "\u89E6\u53D1\u4E8B\u4EF6"
+      childs:
+      - name: Animation
+        fullName: Event.Animation
+        description: "\u52A8\u753B\u76F8\u5173\u7684\u4E8B\u4EF6"
+        childs:
+        - name: RootMotion
+          fullName: Event.Animation.RootMotion
+          description: "\u5F00\u542F\u6839\u8FD0\u52A8"
+          childs: []
+      - name: Locomotion
+        fullName: Event.Locomotion
+        description: "\u8FD0\u52A8"
+        childs:
+        - name: IsMoveing
+          fullName: Event.Locomotion.IsMoveing
+          description: "\u79FB\u52A8\u4E2D"
+          childs: []
+        - name: Sprint
+          fullName: Event.Locomotion.Sprint
+          description: "\u51B2\u523A"
+          childs: []
+        - name: Dodge
+          fullName: Event.Locomotion.Dodge
+          description: "\u95EA\u907F"
+          childs: []
+        - name: BanMove
+          fullName: Event.Locomotion.BanMove
+          description: "\u7981\u6B62\u79FB\u52A8"
+          childs: []
+        - name: BanRotate
+          fullName: Event.Locomotion.BanRotate
+          description: "\u7981\u6B62\u79FB\u52A8"
+          childs: []
+        - name: BanLocomotion
+          fullName: Event.Locomotion.BanLocomotion
+          description: "\u7981\u6B62\u79FB\u52A8\u65CB\u8F6C"
+          childs: []
+      - name: Fight
+        fullName: Event.Fight
+        description: "\u6218\u6597\u76F8\u5173"
+        childs:
+        - name: AttackDelay
+          fullName: Event.Fight.AttackDelay
+          description: "\u653B\u51FB\u524D\u6447\u4E2D"
+          childs: []
+        - name: AttackWindup
+          fullName: Event.Fight.AttackWindup
+          description: "\u653B\u51FB\u540E\u6447\u4E2D"
+          childs: []

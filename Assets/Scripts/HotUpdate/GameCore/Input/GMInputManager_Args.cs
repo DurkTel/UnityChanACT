@@ -64,12 +64,12 @@ namespace LGameFramework.GameCore.Input
             public const string InputAction_Escape      = "Escape";
             public const string InputAction_Weapon      = "Weapon";
             public const string InputAction_LightAttack = "LightAttack";
-            public const string InputAction_HeavyAttack = "HeavyAttack";
             public const string InputAction_AttackEx    = "AttackEx";
             public const string InputAction_Revenges    = "Revenges";
             public const string InputAction_Move        = "Move";
             public const string InputAction_Interact    = "Interact";
             public const string InputAction_Discard     = "Discard";
+            public const string InputAction_Dodge       = "Dodge";
         }
     }
 }

@@ -7,29 +7,26 @@ namespace LGameFramework.GameBase.RangeDetection
     /// <summary>
     /// Èý½ÇÐÎ·¶Î§¼ì²â
     /// </summary>
-    public class Triangle
+    public struct Triangle
     {
         /// <summary>
         /// ½Ç1
         /// </summary>
-        private Vector3 m_Corner1;
-        public Vector3 Corner1 { get {  return m_Corner1; } }
+        public Vector3 corner1;
         /// <summary>
         /// ½Ç2
         /// </summary>
-        private Vector3 m_Corner2;
-        public Vector3 Corner2 { get { return m_Corner2; } }
+        public Vector3 corner2;
         /// <summary>
         /// ½Ç3
         /// </summary>
-        private Vector3 m_Corner3;
-        public Vector3 Corner3 { get { return m_Corner3; } }
+        public Vector3 corner3;
 
         public Triangle(Vector3 point0, Vector3 point1, Vector3 point2)
         {
-            m_Corner1 = point0;
-            m_Corner2 = point1;
-            m_Corner3 = point2;
+            corner1 = point0;
+            corner2 = point1;
+            corner3 = point2;
         }
 
         /// <summary>
@@ -37,11 +34,11 @@ namespace LGameFramework.GameBase.RangeDetection
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        public bool IsInZone(Vector3 position)
+        public readonly bool IsInZone(Vector3 position)
         {
-            Vector3 v0 = m_Corner2 - m_Corner1;
-            Vector3 v1 = m_Corner3 - m_Corner1;
-            Vector3 v2 = position - m_Corner1;
+            Vector3 v0 = corner2 - corner1;
+            Vector3 v1 = corner3 - corner1;
+            Vector3 v2 = position - corner1;
 
             float _00 = Vector3.Dot(v0, v0);
             float _01 = Vector3.Dot(v0, v1);

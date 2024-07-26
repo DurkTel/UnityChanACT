@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 namespace LGameFramework.GameCore
 {
@@ -11,8 +12,9 @@ namespace LGameFramework.GameCore
         [Range(0f, 1f)]
         public float transition;
         [Range(0f, 1f)]
-        public float layerWeight;
-
+        public float layerWeight1;
+        [Range(0f, 1f)]
+        public float layerWeight2;
         public AvatarMask mask;
 
         [SerializeField]
@@ -46,13 +48,14 @@ namespace LGameFramework.GameCore
 
         private void Update()
         {
-            m_AnimationQueue.SetLayerWeight(1, layerWeight);
-            m_AnimationQueue.SetLayerWeight(0, 1 - layerWeight);
+            m_AnimationQueue.SetLayerWeight(0, layerWeight1);
+            m_AnimationQueue.SetLayerWeight(1, layerWeight2);
         }
 
         private void OnDestroy()
         {
-            m_PlayableGraph.Destroy();
+            if (m_PlayableGraph.IsValid())
+                m_PlayableGraph.Destroy();
         }
 
         private void OnGUI()
@@ -94,11 +97,12 @@ namespace LGameFramework.GameCore
         private AnimationMixerPlayable m_Mix;
 
         private AnimationLayerMixerPlayable m_LayerMixer;
+        private AvatarMask m_AvatarMask;
 
         public void OnInit(Animator animator, AvatarMask mask)
         {
             m_Animator = animator;
-
+            m_AvatarMask = mask;
             m_CurrentIndex = 0;
             m_PlayableGraph = m_Owner.GetGraph();
 
@@ -107,8 +111,6 @@ namespace LGameFramework.GameCore
 
             m_Mix = AnimationMixerPlayable.Create(m_PlayableGraph);
             m_LayerMixer.AddInput(m_Mix, 0, 1);
-
-            m_LayerMixer.SetLayerMaskFromAvatarMask(0, mask);
 
         }
 
@@ -137,6 +139,10 @@ namespace LGameFramework.GameCore
 
             var clip = AnimationClipPlayable.Create(m_PlayableGraph, m_Clips[0]);
             m_LayerMixer.AddInput(clip, 0, 1);
+
+            m_LayerMixer.SetLayerMaskFromAvatarMask(1, m_AvatarMask);
+            m_LayerMixer.SetLayerAdditive(1, false);
+
         }
 
         public override void OnPlayableCreate(Playable playable)
@@ -182,7 +188,7 @@ namespace LGameFramework.GameCore
             int count = m_Mix.GetInputCount();
             if (count <= 0) return;
 
-            if (!m_InTransition && m_Mix.GetInput(m_CurrentIndex).IsDone())
+            if (!m_InTransition && m_Mix.GetInput(m_CurrentIndex).IsValid() && m_Mix.GetInput(m_CurrentIndex).IsDone())
             {
                 DoNext();
             }

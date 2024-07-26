@@ -9,7 +9,7 @@ namespace LGameFramework.GameBase
         public T Data { get; set; }
         public TreeNode<T> Parent { get; set; }
 
-        private List<TreeNode<T>> m_Children;
+        protected List<TreeNode<T>> m_Children;
         public int Count { get { return m_Children.Count; } }
         public bool IsReadOnly { get { return false; } }
 
@@ -17,8 +17,7 @@ namespace LGameFramework.GameBase
 
         public TreeNode(T data) 
         {
-            Data = data;
-            m_Children = new List<TreeNode<T>>(0);
+            SetData(data);
         }
 
         public TreeNode()
@@ -72,6 +71,7 @@ namespace LGameFramework.GameBase
 
         public bool Contains(TreeNode<T> item)
         {
+            if (m_Children == null) return false;
             return m_Children.Contains(item);
         }
 

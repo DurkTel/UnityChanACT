@@ -67,7 +67,7 @@ namespace LGameFramework.GameCore.Asset
             EditorUtility.SetDirty(assetManifest);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            GameLogger.DEBUG("更新资源清单完成");
+            GameLogger.INFO("更新资源清单完成");
         }
 
         public static AssetManifest_Editor GetAssetManifest(string path)
