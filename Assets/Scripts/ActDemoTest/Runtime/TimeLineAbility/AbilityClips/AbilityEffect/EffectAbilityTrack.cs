@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace GAS.Runtime
@@ -8,9 +7,9 @@ namespace GAS.Runtime
     {
         public override Color TrackColor => new Color(0.141f, 0.333f, 0.537f, 1f);
 
-        public override TimeLineAbilityClip GetClip()
+        public override Type GetClipType()
         {
-            return new EffectAbilityClip();
+            return typeof(EffectAbilityClip);
         }
 
         public override TimeLineTrackSpec GetSpec(AbilitySystemComponent asc)

@@ -8,18 +8,18 @@ namespace GAS.Editor
     {
         public class TimeLineParticleEffectPreview : TimeLineClipPreview
         {
-            private ParticleEffectCueAsset m_CueAsset;
-
             private ParticleSystem m_ParticleSystem;
 
             private GameObject m_ParticleObj;
 
+            private ParticleEffectCueClip m_ParticleClip;
+
             public Transform Avatar { get { return m_Preview.m_PreviewAvatar.transform; } }
 
-            public TimeLineParticleEffectPreview(TimeLineAbilityClip clip, TimeLinePreview preview, object obj) : base(clip, preview, obj)
+            public TimeLineParticleEffectPreview(TimeLineAbilityClip clip, TimeLinePreview preview) : base(clip, preview)
             {
-                m_CueAsset = obj as ParticleEffectCueAsset;
-                m_ParticleObj = Instantiate(m_CueAsset.particleEffect);
+                m_ParticleClip = clip as ParticleEffectCueClip;
+                m_ParticleObj = Instantiate(m_ParticleClip.particleEffect);
 
                 m_ParticleObj.SetActive(false);
 
@@ -31,7 +31,6 @@ namespace GAS.Editor
 
             public override void Dispose()
             {
-                m_CueAsset = null;
                 m_ParticleSystem = null;
                 m_ParticleObj = null;
             }
@@ -60,9 +59,9 @@ namespace GAS.Editor
                 if (m_ParticleSystem != null)
                     m_ParticleSystem.Simulate(offsetTick * 0.02f, true, true, true);
 
-                m_ParticleObj.transform.rotation = Quaternion.Euler(m_CueAsset.rotation);
+                m_ParticleObj.transform.rotation = Quaternion.Euler(m_ParticleClip.rotation);
                 m_ParticleObj.transform.localPosition = GetTargetPos();
-                m_ParticleObj.transform.localScale = m_CueAsset.scale;
+                m_ParticleObj.transform.localScale = m_ParticleClip.scale;
 
                 m_Preview.Repaint();
             }
@@ -70,14 +69,14 @@ namespace GAS.Editor
             private Vector3 GetTargetPos()
             {
                 Vector3 pos = Vector3.zero;
-                if (m_CueAsset.effectPointType == ParticleEffectCueAsset.EffectPointType.Source)
+                if (m_ParticleClip.effectPointType == ParticleEffectCue.EffectPointType.Source)
                     pos = Avatar.position;
-                else if (m_CueAsset.effectPointType == ParticleEffectCueAsset.EffectPointType.Target)
+                else if (m_ParticleClip.effectPointType == ParticleEffectCue.EffectPointType.Target)
                     pos = Avatar.forward;
-                else if(m_CueAsset.effectPointType == ParticleEffectCueAsset.EffectPointType.HitPoints)
+                else if(m_ParticleClip.effectPointType == ParticleEffectCue.EffectPointType.HitPoints)
                     pos = Avatar.forward;
 
-                pos += m_CueAsset.position;
+                pos += m_ParticleClip.position;
 
                 return pos;
             }

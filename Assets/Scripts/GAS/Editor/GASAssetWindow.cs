@@ -26,7 +26,6 @@ namespace GAS.Editor
         {
             [typeof(GameplayAbilityAsset)] = new GameplayAbilityContent(),
             [typeof(GameplayEffectAsset)] = new GameplayEffectContent(),
-            [typeof(GameplayCueAsset)] = new GameplayCueContent(),
             [typeof(AbilitySystemArchetype)] = new AbilitySystemArchetypeContent(),
             [typeof(ModifierMagnitudeCalculation)] = new GameplayMMCContent(),
         };
@@ -41,6 +40,12 @@ namespace GAS.Editor
             return m_GASAssetTreeView;
         }
 
+        public static List<Type> GetAllSubClass(Type baseType)
+        {
+            return AppDomain.CurrentDomain.GetAssemblies()
+                    .SelectMany(assembly => assembly.GetTypes())
+                    .Where(type => type.IsSubclassOf(baseType) && !type.IsAbstract).ToList();
+        }
     }
 
     public class GASAssetTreeView : MenuTreeView
@@ -179,20 +184,10 @@ namespace GAS.Editor
                 {
                     if (first.menuType == typeof(GameplayAbilityAsset))
                     {
-                        Type type = typeof(GameplayAbilityAsset);
+                        Type baseType = typeof(GameplayAbilityAsset);
+                        var list = GASAssetWindow.GetAllSubClass(baseType);
 
-                        var list = typeof(GameplayAbilityAsset).Assembly
-                        .GetTypes()
-                        .Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(type))
-                        .ToList();
-
-                        var list2 = System.AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "ActDemoTest")
-                        .GetTypes()
-                        .Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(type))
-                        .ToList();
-
-                        list.AddRange(list2);   
-                        var types = Assembly.GetAssembly(type).GetTypes();
+                        var types = Assembly.GetAssembly(baseType).GetTypes();
                         TogglesTypeWindow.OpenWindow(list, "Create New Ability Asset", true, (types) =>
                         {
                             InputStringWindow.OpenWindow("Create New Ability Asset", (p) =>
@@ -210,31 +205,6 @@ namespace GAS.Editor
                             var asset = ScriptableObject.CreateInstance<GameplayEffectAsset>();
                             AssetDatabase.CreateAsset(asset, Path.Combine(first.filePath, p[0] + ".asset"));
                         }, new InputStringWindow.InputStringSet() { tips = "New Effect Name", });
-                    }
-                    else if (first.menuType == typeof(GameplayCueAsset))
-                    {
-                        Type type = typeof(GameplayCueAsset);
-
-                        var list = typeof(GameplayCueAsset).Assembly
-                        .GetTypes()
-                        .Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(type))
-                        .ToList();
-
-                        var list2 = System.AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "UnityChanAct")
-                        .GetTypes()
-                        .Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(type))
-                        .ToList();
-
-                        list.AddRange(list2);
-                        var types = Assembly.GetAssembly(type).GetTypes();
-                        TogglesTypeWindow.OpenWindow(list, "Create New Cue Asset", true, (types) =>
-                        {
-                            InputStringWindow.OpenWindow("Create New Cue Asset", (p) =>
-                            {
-                                var asset = ScriptableObject.CreateInstance(types[0]);
-                                AssetDatabase.CreateAsset(asset, Path.Combine(first.filePath, p[0] + ".asset"));
-                            }, new InputStringWindow.InputStringSet() { tips = "New Cue Name" });
-                        });
                     }
                     else if (first.menuType == typeof(AbilitySystemArchetype))
                     {

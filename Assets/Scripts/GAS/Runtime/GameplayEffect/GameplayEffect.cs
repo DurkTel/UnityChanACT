@@ -22,6 +22,10 @@ namespace GAS.Runtime
         /// 永远
         /// </summary>
         Forever,
+        /// <summary>
+        /// 时间轴控制
+        /// </summary>
+        TimeLine,
     }
 
     /// <summary>
@@ -87,13 +91,13 @@ namespace GAS.Runtime
         /// <summary>
         /// 发起者
         /// </summary>
-        public AbilitySystemComponent Source { get {  return m_Source; } }
+        public AbilitySystemComponent Source { get {  return m_Source; } set { m_Source = value; } }
 
         private AbilitySystemComponent m_Target;
         /// <summary>
         /// 目标者
         /// </summary>
-        public AbilitySystemComponent Target { get {  return m_Target; } }
+        public AbilitySystemComponent Target { get {  return m_Target; } set { m_Target = value; } }
 
         private Dictionary<string, float> m_AttributeSnapshot;
         /// <summary>
@@ -135,7 +139,7 @@ namespace GAS.Runtime
         /// <summary>
         /// 应用效果时
         /// </summary>
-        public virtual void OnApply()
+        public virtual void OnApply(params object[] paramArgs)
         {
             
         }
@@ -163,10 +167,10 @@ namespace GAS.Runtime
             }
         }
 
-
         public virtual void UpdateEndTime(long? curStamp = null)
         {
-            m_EndTimeStamp = curStamp != null ? (long)curStamp + (long)(Duration * 10000000d) : DateTime.Now.Ticks + (long)(Duration * 10000000d);
+            float duration = m_DurationType == EffectDurationType.TimeLine ? m_EffectAsset.ClipDuration : Duration;
+            m_EndTimeStamp = curStamp != null ? (long)curStamp + (long)(duration * 10000000d) : DateTime.Now.Ticks + (long)(duration * 10000000d);
         }
 
         public virtual void UpdatePeriodTime(long? curStamp = null)

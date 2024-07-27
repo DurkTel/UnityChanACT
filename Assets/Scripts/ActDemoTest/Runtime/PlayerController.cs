@@ -64,6 +64,7 @@ namespace GAS.Runtime
             {
                 m_ASC.Abilitys.TryActivateAbility<TimeLineAbility>();
             }
+
         }
 
         private void LateUpdate()
@@ -72,6 +73,8 @@ namespace GAS.Runtime
 
             if (!m_LocomotionController.IsReturnning)
                 m_LocomotionController.UpdateMoveDirection(worldDir);
+
+            m_ASC.Tags.RemoveDynamicTags(this, GameplayTagsLib.Command_Fight_Attack);
         }
 
         private void OnUpdateMoveInput(InputActionArgs arg)
@@ -99,7 +102,7 @@ namespace GAS.Runtime
         private void OnUpdateAttackInput(InputActionArgs arg)
         {
             m_ASC.Abilitys.TryActivateAbility("Skill_10000");
-
+            m_ASC.Tags.AddDynamicTags(this, GameplayTagsLib.Command_Fight_Attack);
         }
 
         private void OnGUI()

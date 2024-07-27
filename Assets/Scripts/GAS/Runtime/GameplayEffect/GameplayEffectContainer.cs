@@ -64,10 +64,10 @@ namespace GAS.Runtime
         /// 应用该特效
         /// </summary>
         /// <param name="effect"></param>
-        private void ApplyEffect(GameplayEffect effect)
+        private void ApplyEffect(GameplayEffect effect, params object[] paramArgs)
         {
             TryRemoveEffectByTags(effect.ConditionTags.CancelTags);
-            effect.OnApply();
+            effect.OnApply(paramArgs);
         }
 
         /// <summary>
@@ -75,17 +75,18 @@ namespace GAS.Runtime
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public void AddEffect<T>(GameplayEffectAsset effectAsset) where T : GameplayEffect, new()
+        private void AddEffect<T>(GameplayEffectAsset effectAsset, params object[] paramArgs) where T : GameplayEffect, new()
         {
             T effect = new T();
             effect.OnInit(effectAsset);
+            effect.Source = m_ASC;
 
             m_GameplayEffects.Add(effect);
 
             if (effect.DurationType != EffectDurationType.Instant)
                 m_PreUpdateEffects.Add(effect);
 
-            ApplyEffect(effect);
+            ApplyEffect(effect, paramArgs);
             effect.Stacking++;
             m_ASC.AddTagFromDynamic(effect, effect.ConditionTags.ActivationTags);
 
@@ -115,7 +116,7 @@ namespace GAS.Runtime
         /// <typeparam name="T"></typeparam>
         /// <param name="effectAsset"></param>
         /// <returns></returns>
-        public bool TryAddEffect<T>(GameplayEffectAsset effectAsset) where T : GameplayEffect, new()
+        public bool TryAddEffect<T>(GameplayEffectAsset effectAsset, params object[] paramArgs) where T : GameplayEffect, new()
         {
             if (!m_ASC.CheckTagCondition(effectAsset.BlockActiveTags, effectAsset.RequireTags))
                 return false;
@@ -125,15 +126,17 @@ namespace GAS.Runtime
             //持续类型是瞬时的或者是不堆叠 直接加一个 独立计算
             if (effectAsset.DurationType == EffectDurationType.Instant || stackingEffect.stackingType == StackingType.None)
             {
-                AddEffect<T>(effectAsset);
+                AddEffect<T>(effectAsset, paramArgs);
                 return true;
             }
             else
             {
                 foreach (var effect in m_GameplayEffects)
                 {
+                    //如果已经有了 重新应用一次 并刷新时间（如果要）
                     if (effect.EffectAsset.Equals(effectAsset))
                     {
+                        ApplyEffect(effect, paramArgs);
                         if (stackingEffect.durationRefreshType == StackingDurationRefreshType.Refresh)
                             effect.UpdateEndTime();
 

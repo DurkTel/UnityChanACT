@@ -3,6 +3,7 @@ using System.Linq;
 using System;
 using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace GAS.Editor
 {
@@ -15,10 +16,25 @@ namespace GAS.Editor
 
         private Rect m_ContentRect;
 
+        private List<Type> m_AllEffectSubClass;
+
+        private string[] m_AllEffectSubName;
+
+        private int m_CurrentSelectSubClass;
+
         private void OnEnable()
         {
             m_EffectAsset = target as GameplayEffectAsset;
             m_TagsArrayInspector ??= new TagsArrayInspector(m_EffectAsset);
+            m_AllEffectSubClass = GASAssetWindow.GetAllSubClass(typeof(GameplayEffect));
+
+            m_AllEffectSubName = new string[m_AllEffectSubClass.Count + 1];
+            m_AllEffectSubName[0] = typeof(GameplayEffect).Name;
+            for (int i = 0; i < m_AllEffectSubClass.Count; i++)
+                m_AllEffectSubName[i + 1] = m_AllEffectSubClass[i].Name;
+
+            m_CurrentSelectSubClass = Array.IndexOf<string>(m_AllEffectSubName, m_EffectAsset.Type);
+            m_CurrentSelectSubClass = m_CurrentSelectSubClass < 0 ? 0 : m_CurrentSelectSubClass;
 
         }
 
@@ -26,14 +42,14 @@ namespace GAS.Editor
         {
             m_ContentRect = GUILayoutUtility.GetRect(680, 500);
             //base.OnInspectorGUI();
-            OnDrawDescriptionTags();
+            OnDrawDescription();
             m_TagsArrayInspector.OnDrawGameplayTags(m_ContentRect);
             OnDrawEffectType();
 
             GUILayout.Space(600);
         }
 
-        private void OnDrawDescriptionTags()
+        private void OnDrawDescription()
         {
             
             Rect titleRect = new Rect(m_ContentRect.x, m_ContentRect.y + 15, 300, 150);
@@ -46,9 +62,20 @@ namespace GAS.Editor
             EditorGUI.LabelField(titleRect, "基本信息", GUI.skin.label);
             GUI.skin.label.alignment = oriAlig;
             titleRect.x += 5;
-            titleRect.y += 25;
-            titleRect.height = 110;
-
+            titleRect.y += 20;
+            titleRect.height = 20;
+            titleRect.width = 70;
+            EditorGUI.LabelField(titleRect, "要应用的类");
+            titleRect.x += titleRect.width;
+            titleRect.width = 220;
+            EditorGUI.BeginChangeCheck();
+            m_CurrentSelectSubClass = EditorGUI.Popup(titleRect, m_CurrentSelectSubClass, m_AllEffectSubName);
+            if (EditorGUI.EndChangeCheck())
+                m_EffectAsset.Type = m_AllEffectSubName[m_CurrentSelectSubClass];
+            titleRect.x = m_ContentRect.x + 5;
+            titleRect.y += 20;
+            titleRect.width = 290;
+            titleRect.height = 100;
             string empty = "对于特效的描述\n目前未填写该特效的描述哦~";
             bool isEmpty = string.IsNullOrEmpty(m_EffectAsset.Description);
 
@@ -58,6 +85,7 @@ namespace GAS.Editor
             if (str != empty)
                 m_EffectAsset.Description = str;
             EditorStyles.textField.fontStyle = oriFont;
+
         }
 
         private void OnDrawEffectType()
@@ -100,14 +128,16 @@ namespace GAS.Editor
                 titleRect.width += 170;
                 m_EffectAsset.TriggerType = (EffectTriggerType)EditorGUI.EnumPopup(titleRect, m_EffectAsset.TriggerType);
 
-                titleRect.x = x1;
-                titleRect.y += 25;
-                titleRect.width = 60;
-                EditorGUI.LabelField(titleRect, "持续时间");
-
-                titleRect.y += 25;
-                m_EffectAsset.Duration = EditorGUI.FloatField(titleRect, m_EffectAsset.Duration);
-                titleRect.y -= 25;
+                using (new EditorGUI.DisabledScope(m_EffectAsset.DurationType == EffectDurationType.TimeLine))
+                {
+                    titleRect.x = x1;
+                    titleRect.y += 25;
+                    titleRect.width = 60;
+                    EditorGUI.LabelField(titleRect, "持续时间");
+                    titleRect.y += 25;
+                    m_EffectAsset.Duration = EditorGUI.FloatField(titleRect, m_EffectAsset.Duration);
+                    titleRect.y -= 25;
+                }
 
                 using (new EditorGUI.DisabledScope(m_EffectAsset.TriggerType == EffectTriggerType.None))
                 {
@@ -117,6 +147,14 @@ namespace GAS.Editor
                     m_EffectAsset.Period = EditorGUI.FloatField(titleRect, m_EffectAsset.Period);
                 }
 
+                using (new EditorGUI.DisabledScope(m_EffectAsset.DurationType != EffectDurationType.TimeLine))
+                {
+                    titleRect.y -= 25;
+                    titleRect.x += 90;
+                    EditorGUI.LabelField(titleRect, "片段时间");
+                    titleRect.y += 25;
+                    m_EffectAsset.ClipDuration = EditorGUI.FloatField(titleRect, m_EffectAsset.ClipDuration);
+                }
             }
 
 

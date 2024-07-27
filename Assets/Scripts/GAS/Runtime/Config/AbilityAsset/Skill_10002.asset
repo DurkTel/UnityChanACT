@@ -10,21 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f2787ce3abd5e345a438fcecbb30695, type: 3}
-  m_Name: Skill_10000
+  m_Name: Skill_10002
   m_EditorClassIdentifier: 
   Description: 
-  UID: Skill_10000
+  UID: Skill_10002
   FixedTags: []
   ActivationTags: []
   CancelTags: []
-  BlockActiveTags:
-  - m_FullName: Event.Fight.AttackDelay
-    m_ShortName: AttackDelay
-    m_HashCode: 1163191617
-    m_ParentHasCodes: 0276cb277ecb7b29
-    m_ParentNames:
-    - Event
-    - Event.Fight
+  BlockActiveTags: []
   BlockInActiveTags: []
   RequireTags: []
   m_AbilityTracks:
@@ -33,7 +26,6 @@ MonoBehaviour:
   - rid: 3172068526652653573
   - rid: 3172068526652653575
   - rid: 3172068554137665547
-  - rid: 3172068575939657731
   references:
     version: 2
     RefIds:
@@ -67,45 +59,45 @@ MonoBehaviour:
       data:
         clipLabel: "\u653B\u51FB\u52A8\u753B"
         m_StartTick: 0
-        m_EndTick: 55
+        m_EndTick: 122
         layer: 0
         duration: 0.15
-        clip: {fileID: 7400000, guid: 291bd15f0315c3f4db1f9b84b13c32d2, type: 2}
+        clip: {fileID: 7400000, guid: 14749dfae451d14499961327beb4cbde, type: 2}
     - rid: 3172068554137665542
       type: {class: ParticleEffectCueClip, ns: UnityChanAct, asm: UnityChanAct}
       data:
         clipLabel: "\u5200\u5149\u7279\u6548"
-        m_StartTick: 11
-        m_EndTick: 35
-        particleEffect: {fileID: 1872147318604286, guid: 5bea49531fc500c408823a2e2863106f, type: 3}
+        m_StartTick: 34
+        m_EndTick: 58
+        particleEffect: {fileID: 1294101409476956, guid: 231e3be01ac50c047bb16d07fd8d2ba5, type: 3}
         effectPointType: 0
         constraintType: 0
         bindBone: 
-        position: {x: 0, y: 0.6, z: 0}
-        rotation: {x: 0, y: 0, z: 197.3}
+        position: {x: 0, y: 0.8, z: 0}
+        rotation: {x: 105.54, y: 90, z: 4.26}
         scale: {x: 0.6, y: 0.6, z: 0.6}
         duration: 0.48
     - rid: 3172068554137665544
       type: {class: AudioCueClip, ns: UnityChanAct, asm: UnityChanAct}
       data:
         clipLabel: "\u6325\u5251\u97F3\u6548"
-        m_StartTick: 0
-        m_EndTick: 15
+        m_StartTick: 23
+        m_EndTick: 38
         audioGroupName: HitAudio
-        audioClip: {fileID: 8300000, guid: fc784dd9ed56e1042a5921a38f4b2842, type: 3}
+        audioClip: {fileID: 8300000, guid: 9d0eabb6d0a95764183e44d4664a37dc, type: 3}
     - rid: 3172068554137665545
       type: {class: AssetEffectClip, ns: UnityChanAct, asm: UnityChanAct}
       data:
         clipLabel: "\u524D\u6447"
         m_StartTick: 0
-        m_EndTick: 22
+        m_EndTick: 51
         gameplayEffect: {fileID: 11400000, guid: 26c7d42bc71a31a4ba5809797e4317e9, type: 2}
     - rid: 3172068554137665546
       type: {class: AssetEffectClip, ns: UnityChanAct, asm: UnityChanAct}
       data:
         clipLabel: "\u540E\u6447"
-        m_StartTick: 22
-        m_EndTick: 55
+        m_StartTick: 51
+        m_EndTick: 122
         gameplayEffect: {fileID: 11400000, guid: fe42796086be08242847bfb781649d22, type: 2}
     - rid: 3172068554137665547
       type: {class: EffectAbilityTrack, ns: GAS.Runtime, asm: UnityChanAct}
@@ -117,26 +109,10 @@ MonoBehaviour:
       type: {class: HitBoxEffectClip, ns: UnityChanAct, asm: UnityChanAct}
       data:
         clipLabel: "\u6253\u51FB\u6846"
-        m_StartTick: 14
-        m_EndTick: 20
+        m_StartTick: 37
+        m_EndTick: 49
         gameplayEffect: {fileID: 11400000, guid: ac6f5f4a531d6574d8e664fb7044b8ce, type: 2}
-        boxShape: 3
-        position: {x: 0, y: 0.6, z: 0.84}
-        rotation: {x: 0, y: 0, z: 0}
-        scale: {x: 2.5, y: 1, z: 1}
-    - rid: 3172068575939657731
-      type: {class: EffectAbilityTrack, ns: GAS.Runtime, asm: UnityChanAct}
-      data:
-        trackLabel: "\u6280\u80FD\u6D3E\u751F\u8F68\u9053"
-        m_Clips:
-        - rid: 3172068575939657733
-    - rid: 3172068575939657733
-      type: {class: ComboEffectClip, ns: UnityChanAct, asm: UnityChanAct}
-      data:
-        clipLabel: "\u6D3E\u751F1"
-        m_StartTick: 0
-        m_EndTick: 25
-        gameplayEffect: {fileID: 11400000, guid: 0fe9108a20ddea2409f23941532505ad, type: 2}
-        comboName: Skill_10001
-        condition: 0
-        delayComboTick: 21
+        boxShape: 0
+        position: {x: -0.1, y: 0.78, z: 0}
+        rotation: {x: 0, y: 0, z: -17.22}
+        scale: {x: 1, y: 3.5, z: 3.5}

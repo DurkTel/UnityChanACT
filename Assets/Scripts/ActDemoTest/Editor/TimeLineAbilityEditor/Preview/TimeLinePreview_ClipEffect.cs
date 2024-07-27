@@ -19,7 +19,7 @@ namespace GAS.Editor
             private int m_CurrentTick;
             public int CurrentTick { get { return m_CurrentTick; } set { m_CurrentTick = value; } }
 
-            public TimeLineClipPreview(TimeLineAbilityClip clip, TimeLinePreview preview, object obj)
+            public TimeLineClipPreview(TimeLineAbilityClip clip, TimeLinePreview preview)
             {
                 m_TimeLineClip = clip;
                 m_Preview = preview;
@@ -92,7 +92,7 @@ namespace GAS.Editor
                     preview = OnInitCue(clipCue);
                     break;
                 case EffectAbilityClip clipEffect:
-
+                    preview = OnInitEffect(clipEffect);
                     break;
             }
 
@@ -107,24 +107,36 @@ namespace GAS.Editor
         {
             TimeLineClipPreview preview = null;
 
-            //根据Cue再一次细分
-            switch (clip.gameplayCue)
+            //根据clip再一次细分
+            switch (clip)
             {
-                case AnimationActionCueAsset animation:
-                    preview = new TimeLineAnimationPreview(clip, this, animation);
+                case AnimationCueClip animation:
+                    preview = new TimeLineAnimationPreview(animation, this);
                     break;
-                case ParticleEffectCueAsset particle:
-                    preview = new TimeLineParticleEffectPreview(clip, this, particle);
+                case ParticleEffectCueClip particle:
+                    preview = new TimeLineParticleEffectPreview(particle, this);
                     break;
-                case AudioCueAsset audio:
-                    preview = new TimeLineAudioPreview(clip, this, audio);
-                    break;
-                default:
+                case AudioCueClip audio:
+                    preview = new TimeLineAudioPreview(audio, this);
                     break;
             }
 
             return preview;
         }
 
+        private TimeLineClipPreview OnInitEffect(EffectAbilityClip clip)
+        {
+            TimeLineClipPreview preview = null;
+
+            //根据clip再一次细分
+            switch (clip)
+            {
+                case HitBoxEffectClip hitBox:
+                    preview = new TimeLineHitBoxPreview(hitBox, this);
+                    break;
+            }
+
+            return preview;
+        }
     }
 }

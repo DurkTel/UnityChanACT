@@ -1,10 +1,5 @@
 using GAS.Runtime;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityChanAct;
-using UnityEditor.IMGUI.Controls;
-using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
 
@@ -14,21 +9,18 @@ namespace GAS.Editor
     {
         public class TimeLineAnimationPreview : TimeLineClipPreview
         {
-            private AnimationActionCueAsset m_CueAsset;
-
             private AnimationClipPlayable m_ClipPlayable;
-            public TimeLineAnimationPreview(TimeLineAbilityClip clip, TimeLinePreview preview, object obj) : base(clip, preview, obj)
+            public TimeLineAnimationPreview(TimeLineAbilityClip clip, TimeLinePreview preview) : base(clip, preview)
             {
-                m_CueAsset = obj as AnimationActionCueAsset;
-
-                m_ClipPlayable = AnimationClipPlayable.Create(preview.m_PreviewPlayableGraph, m_CueAsset.animationArg.clip);
+                AnimationCueClip aniCue = clip as AnimationCueClip;
+                m_ClipPlayable = AnimationClipPlayable.Create(preview.m_PreviewPlayableGraph, aniCue.clip);
                 preview.m_PreviewPlayableOutput.SetSourcePlayable(m_ClipPlayable);
                 preview.m_PreviewPlayableGraph.Play();
             }
 
             public override void Dispose()
             {
-                m_CueAsset = null;
+               
             }
 
             public override void OnEnter()

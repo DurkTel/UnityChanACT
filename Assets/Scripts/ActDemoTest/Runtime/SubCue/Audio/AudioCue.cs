@@ -1,5 +1,8 @@
+using Actioner.Runtime;
 using GAS.Runtime;
 using LGameFramework.GameCore;
+using UnityEngine.Events;
+using UnityEngine;
 
 namespace UnityChanAct
 {
@@ -12,15 +15,20 @@ namespace UnityChanAct
 
         public override void Trigger<V>(V arg)
         {
-            
+            if (arg is AudioCueArg actionArg)
+                AudioUtility.Play(actionArg.audioGroupName, actionArg.audioClip);
         }
 
-        public override void Trigger(GameplayCueAsset asset, object param = null)
+        public static AudioCue Trigger(AbilitySystemComponent asc, AudioCueArg arg)
         {
-            if (asset is AudioCueAsset audioAsset)
-            {
-                AudioUtility.Play("HitAudio", audioAsset.audioClip);
-            }
+            return asc.Cues.TriggerCue<AudioCue, AudioCueArg>(arg);
         }
+    }
+
+    [System.Serializable]
+    public struct AudioCueArg
+    {
+        public string audioGroupName;
+        public AudioClip audioClip;
     }
 }

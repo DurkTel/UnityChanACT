@@ -97,3 +97,15 @@ MonoBehaviour:
           fullName: Event.Fight.AttackWindup
           description: "\u653B\u51FB\u540E\u6447\u4E2D"
           childs: []
+    - name: Command
+      fullName: Command
+      description: "\u8F93\u5165\u547D\u4EE4"
+      childs:
+      - name: Fight
+        fullName: Command.Fight
+        description: "\u6218\u6597\u547D\u4EE4"
+        childs:
+        - name: Attack
+          fullName: Command.Fight.Attack
+          description: "\u653B\u51FB\u547D\u4EE4"
+          childs: []

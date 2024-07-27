@@ -347,22 +347,30 @@ namespace GAS.Editor
         /// </summary>
         public void OpneAddClipMenu()
         {
+            if (m_AbilityAsset == null || m_CurrentSelectTrack == -1 || m_CurrentSelectTrack >= m_AbilityAsset.AbilityTracks.Count)
+                return;
             var mousePos = Event.current.mousePosition;
             GenericMenu menu = new GenericMenu();
-            menu.AddItem(new GUIContent("Add Clip"), false, () =>
+            var track = m_AbilityAsset.AbilityTracks[m_CurrentSelectTrack];
+            Type baseType = track.GetClipType();
+            var list = AppDomain.CurrentDomain.GetAssemblies()
+                    .SelectMany(assembly => assembly.GetTypes())
+                    .Where(type => type.IsSubclassOf(baseType) && !type.IsAbstract).ToList();
+
+            foreach (var itemType in list)
             {
-                if (m_AbilityAsset == null || m_CurrentSelectTrack == -1 || m_CurrentSelectTrack >= m_AbilityAsset.AbilityTracks.Count)
-                    return;
+                menu.AddItem(new GUIContent($"Add {itemType.Name}"), false, () =>
+                {
+                    var track = m_AbilityAsset.AbilityTracks[m_CurrentSelectTrack];
+                    var clip = Activator.CreateInstance(itemType) as TimeLineAbilityClip;
+                    var sTime = mousePos.x;
+                    sTime = Mathf.RoundToInt(sTime / 10); //∂‘∆Î÷°
 
-                var track = m_AbilityAsset.AbilityTracks[m_CurrentSelectTrack];
-                var clip = track.GetClip(); 
-                var sTime = mousePos.x;
-                sTime = Mathf.RoundToInt(sTime / 10); //∂‘∆Î÷°
-
-                clip.UpdateTime((int)sTime, (int)sTime + 25);
-                track.Add(clip);
-                OnInit();
-            });
+                    clip.UpdateTime((int)sTime, (int)sTime + 25);
+                    track.Add(clip);
+                    OnInit();
+                });
+            }
 
             menu.ShowAsContext();
         }

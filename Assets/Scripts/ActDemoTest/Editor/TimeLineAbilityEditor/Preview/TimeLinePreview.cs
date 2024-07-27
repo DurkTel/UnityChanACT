@@ -1,14 +1,8 @@
-using DG.Tweening;
 using GAS.Runtime;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEditor;
-using UnityEditor.Graphs;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
-using UnityEngine.Windows;
 
 namespace GAS.Editor
 {
@@ -41,7 +35,7 @@ namespace GAS.Editor
 
         private PreviewRenderUtility m_PreviewUtility;
 
-        private GameObject m_Cube;
+        private int m_SelectAvatarControlID;
 
         private Material m_WireframeMat;
         public Material WireframeMat
@@ -80,12 +74,6 @@ namespace GAS.Editor
             OnInitPlane();
             OnInitAvatar(null);
             OnInitCamera();
-
-
-            m_Cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            m_Cube.transform.position = Vector3.zero;
-            m_Cube.GetComponent<Renderer>().sharedMaterial = WireframeMat;
-            m_PreviewUtility.AddSingleGO(m_Cube);
         }
 
 
@@ -178,13 +166,11 @@ namespace GAS.Editor
         private void Update()
         {
             int id = EditorGUIUtility.GetObjectPickerControlID();
-
-            if (id != 0)
+            if (id == m_SelectAvatarControlID && id != 0)
             {
                 var selectedObject = EditorGUIUtility.GetObjectPickerObject();
-                if (selectedObject != null)
+                if (selectedObject != null && selectedObject is GameObject newPreviewAvatar)
                 {
-                    var newPreviewAvatar = (GameObject)EditorGUIUtility.GetObjectPickerObject();
                     OnInitAvatar(newPreviewAvatar);
                     OnInitAllTrack(); //替换了模型要重新初始化轨道
                     EditorGUIUtility.ShowObjectPicker<GameObject>(null, false, "", 0); // Reset the picker
@@ -357,8 +343,8 @@ namespace GAS.Editor
             }
             else if (type == 1)
             {
-                int id = GUIUtility.GetControlID(FocusType.Passive);
-                EditorGUIUtility.ShowObjectPicker<GameObject>(null, false, "", id);
+                m_SelectAvatarControlID = GUIUtility.GetControlID(FocusType.Passive);
+                EditorGUIUtility.ShowObjectPicker<GameObject>(null, false, "", m_SelectAvatarControlID);
             }
         }
     }

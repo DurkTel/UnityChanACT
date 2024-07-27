@@ -77,27 +77,6 @@ namespace GAS.Runtime
             return cue;
         }
 
-        public GameplayCue TriggerCue(GameplayCueAsset asset, object param = null)
-        {
-            Type type = asset.GetCueType();
-            var cue = GetOrCreateCue(type);
-
-            cue.triggerTime = Time.unscaledTime;
-            cue.Trigger(asset, param);
-
-            if (cue is GameplayCueDuration cueDuration)
-            {
-                cueDuration.OnAdd();
-                m_PreUpdateCues.Add(cueDuration);
-            }
-            else
-            {
-                m_GameplayCueCache[type].Enqueue(cue);
-            }
-
-            return cue;
-        }
-
         public T TriggerCue<T, V>(V arg) where T : GameplayCue, new() where V : struct
         { 
             T cue = GetOrCreateCue<T>();

@@ -12,6 +12,24 @@ namespace GAS.Runtime
 {
     public static class GameplayTagsLib
     {
+        private static GameplayTag s_Command = new GameplayTag("Command");
+        /// <summary>
+        /// 输入命令
+        /// </summary>
+        public static GameplayTag Command { get { return s_Command; } }
+
+        private static GameplayTag s_Command_Fight = new GameplayTag("Command.Fight");
+        /// <summary>
+        /// 战斗命令
+        /// </summary>
+        public static GameplayTag Command_Fight { get { return s_Command_Fight; } }
+
+        private static GameplayTag s_Command_Fight_Attack = new GameplayTag("Command.Fight.Attack");
+        /// <summary>
+        /// 攻击命令
+        /// </summary>
+        public static GameplayTag Command_Fight_Attack { get { return s_Command_Fight_Attack; } }
+
         private static GameplayTag s_Event = new GameplayTag("Event");
         /// <summary>
         /// 触发事件
@@ -138,6 +156,9 @@ namespace GAS.Runtime
         /// </summary>
         public static Dictionary<string, GameplayTag> TagMap = new Dictionary<string, GameplayTag>
         {
+            ["Command"] = Command,
+            ["Command.Fight"] = Command_Fight,
+            ["Command.Fight.Attack"] = Command_Fight_Attack,
             ["Event"] = Event,
             ["Event.Fight"] = Event_Fight,
             ["Event.Fight.AttackWindup"] = Event_Fight_AttackWindup,

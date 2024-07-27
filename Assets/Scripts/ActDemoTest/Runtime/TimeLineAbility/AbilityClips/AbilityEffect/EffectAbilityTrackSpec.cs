@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityChanAct;
 using UnityEngine;
 
 namespace GAS.Runtime
@@ -14,7 +15,18 @@ namespace GAS.Runtime
         {
             base.OnEnterClip(index);
             var effect = m_ClipsArray[index] as EffectAbilityClip;
-            m_ASC.Effects.TryAddEffect<GameplayEffect>(effect.gameplayEffect);
+            switch (effect.gameplayEffect.Type)
+            {
+                case "ComboEffect":
+                    m_ASC.Effects.TryAddEffect<ComboEffect>(effect.gameplayEffect, effect);
+                    break;
+                case "HitBoxEffect":
+                    m_ASC.Effects.TryAddEffect<HitBoxEffect>(effect.gameplayEffect, effect);
+                    break;
+                default:
+                    m_ASC.Effects.TryAddEffect<GameplayEffect>(effect.gameplayEffect, effect);
+                    break;
+            }
         }
 
         public override void OnExitClip(int index)

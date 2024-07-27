@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
 namespace GAS.Runtime
 {
     public class CueAbilityTrack : TimeLineTrack
     {
-        public override TimeLineAbilityClip GetClip()
+        public override Type GetClipType()
         {
-            return new CueAbilityClip();
+            return typeof(CueAbilityClip);
         }
 
         public override TimeLineTrackSpec GetSpec(AbilitySystemComponent asc)

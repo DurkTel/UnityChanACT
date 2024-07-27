@@ -59,6 +59,14 @@ MonoBehaviour:
     assetPath: Assets/ArtExport/AnimationClips/Attack_3Combo_3.anim
   - assetName: Attack_5Combo_1.anim
     assetPath: Assets/ArtExport/AnimationClips/Attack_5Combo_1.anim
+  - assetName: Attack_5Combo_2.anim
+    assetPath: Assets/ArtExport/AnimationClips/Attack_5Combo_2.anim
+  - assetName: Attack_5Combo_3.anim
+    assetPath: Assets/ArtExport/AnimationClips/Attack_5Combo_3.anim
+  - assetName: Attack_5Combo_4.anim
+    assetPath: Assets/ArtExport/AnimationClips/Attack_5Combo_4.anim
+  - assetName: Attack_5Combo_5.anim
+    assetPath: Assets/ArtExport/AnimationClips/Attack_5Combo_5.anim
   - assetName: Attack_5Combo_ALL.anim
     assetPath: Assets/ArtExport/AnimationClips/Attack_5Combo_ALL.anim
   - assetName: Idle_ver_A.anim
@@ -143,6 +151,8 @@ MonoBehaviour:
     assetPath: Assets/ArtModules/Model/skin_ys.prefab
   - assetName: walk_strafe_front.anim
     assetPath: Assets/ArtModules/Model/walk_strafe_front.anim
+  - assetName: NewUnlitShader.shader
+    assetPath: Assets/ArtModules/Shader/NewUnlitShader.shader
   - assetName: UosCdnSettings.asset
     assetPath: Assets/Scripts/Editor/UnityOnlineServiceData/UosCdnSettings.asset
   - assetName: UosSettings.asset
@@ -1113,18 +1123,20 @@ MonoBehaviour:
     assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/LocomotionAbility.asset
   - assetName: Skill_10000.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Skill_10000.asset
+  - assetName: Skill_10001.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Skill_10001.asset
+  - assetName: Skill_10002.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Skill_10002.asset
   - assetName: SprintAbility.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/SprintAbility.asset
   - assetName: Player.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/ArchetypeAsset/Player.asset
-  - assetName: Attack01.asset
-    assetPath: Assets/Scripts/GAS/Runtime/Config/CueAsset/Attack01.asset
-  - assetName: Attack01_Audio.asset
-    assetPath: Assets/Scripts/GAS/Runtime/Config/CueAsset/Attack01_Audio.asset
-  - assetName: Attack01_Effect.asset
-    assetPath: Assets/Scripts/GAS/Runtime/Config/CueAsset/Attack01_Effect.asset
+  - assetName: Attack3ComboEffect.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/EffectAsset/Attack3ComboEffect.asset
   - assetName: AttackDelayEffect.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/EffectAsset/AttackDelayEffect.asset
+  - assetName: AttackHitBoxEffect.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/EffectAsset/AttackHitBoxEffect.asset
   - assetName: AttackWindupEffect.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/EffectAsset/AttackWindupEffect.asset
   - assetName: ddd.asset

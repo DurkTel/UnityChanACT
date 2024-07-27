@@ -10,13 +10,10 @@ namespace GAS.Editor
     {
         public class TimeLineAudioPreview : TimeLineClipPreview
         {
-
-            private AudioCueAsset m_CueAsset;
-
-            public TimeLineAudioPreview(TimeLineAbilityClip clip, GAS.Editor.TimeLinePreview preview, object obj) : base(clip, preview, obj)
+            public TimeLineAudioPreview(TimeLineAbilityClip clip, TimeLinePreview preview) : base(clip, preview)
             {
-                m_CueAsset = obj as AudioCueAsset;
-                m_Preview.m_AudioSource.clip = m_CueAsset.audioClip;
+                var audioClip = clip as AudioCueClip;
+                m_Preview.m_AudioSource.clip = audioClip.audioClip;
             }
 
             public override void Dispose()

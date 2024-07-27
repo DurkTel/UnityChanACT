@@ -41,12 +41,6 @@ namespace UnityChanAct
                 m_Action = PlayAction(actionArg);
         }
 
-        public override void Trigger(GameplayCueAsset asset, object param = null)
-        {
-            if (asset is AnimationActionCueAsset actionAsset)
-                m_Action = PlayAction(actionAsset.animationArg);
-        }
-
         protected abstract ActionerAction PlayAction(AnimationCueArg arg);
 
         public static T Trigger<T>(AbilitySystemComponent asc, AnimationCueArg arg) where T : GameplayCue, new()

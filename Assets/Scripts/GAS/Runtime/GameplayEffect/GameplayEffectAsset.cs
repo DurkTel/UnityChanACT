@@ -12,6 +12,11 @@ namespace GAS.Runtime
         public string Description;
 
         /// <summary>
+        /// 生效的类型
+        /// </summary>
+        public string Type;
+
+        /// <summary>
         /// 持续类型
         /// </summary>
         public EffectDurationType DurationType;
@@ -31,6 +36,11 @@ namespace GAS.Runtime
         /// 在持续时间内 每一个周期时间触发一次
         /// </summary>
         public float Period;
+
+        /// <summary>
+        /// 片段时间
+        /// </summary>
+        public float ClipDuration;
 
         /// <summary>
         /// 叠加处理

@@ -27,8 +27,7 @@ namespace GAS.Editor
         private void OnGUI()
         {
             if (m_CurrentSelectClip != null)
-                m_IsDirty = m_CurrentSelectClip.OnInspectorGUI();
-
+                m_IsDirty = m_CurrentSelectClip.OnInspectorGUI() || m_IsDirty;
         }
 
         public void UpdateSelect(TimeLineAbilityClip clip)

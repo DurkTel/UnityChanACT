@@ -108,7 +108,7 @@ namespace GAS.Editor
 
                     kind.width = rect.width;
                     kind.xMin += 20;
-                    GUI.Label(kind, string.IsNullOrEmpty(track.trackLabel) ? track.GetType().Name : track.trackLabel);
+                    GUI.Label(kind, string.IsNullOrEmpty(track.trackLabel) ? track.GetClipType().Name : track.trackLabel);
                     var e = Event.current;
                     if (e.type == EventType.MouseDown && rect.Contains(e.mousePosition))
                     {

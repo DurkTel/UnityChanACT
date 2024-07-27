@@ -35,6 +35,6 @@ namespace GAS.Runtime
 
         public abstract TimeLineTrackSpec GetSpec(AbilitySystemComponent asc);
 
-        public abstract TimeLineAbilityClip GetClip();
+        public abstract Type GetClipType();
     }
 }

@@ -8,6 +8,8 @@ namespace GAS.Runtime
     {
         public const float c_TimeFrameRate = 50f;
 
+        public const float c_TimeFrameSec = 1 / c_TimeFrameRate;
+
         private TimeLineAbilityAsset m_TimeLineAsset;
 
         private List<TimeLineTrackSpec> m_TimeLineTrackSpecs;

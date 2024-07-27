@@ -19,7 +19,6 @@ namespace GAS.Runtime
         }
 
         public abstract void Trigger<V>(V arg) where V :struct;
-        public abstract void Trigger(GameplayCueAsset asset, object param = null);
         public abstract void Dispose();
 
     }

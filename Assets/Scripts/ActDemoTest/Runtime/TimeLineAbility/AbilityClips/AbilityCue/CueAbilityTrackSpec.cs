@@ -14,7 +14,7 @@ namespace GAS.Runtime
         {
             base.OnEnterClip(index);
             var cue = m_ClipsArray[index] as CueAbilityClip;
-            m_ASC.Cues.TriggerCue(cue.gameplayCue, cue);
+            cue.OnTrigger(m_ASC);
         }
 
         public override void OnExitClip(int index)
