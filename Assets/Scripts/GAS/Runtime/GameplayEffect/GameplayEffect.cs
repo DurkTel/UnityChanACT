@@ -79,7 +79,7 @@ namespace GAS.Runtime
         /// <summary>
         /// 持续时间
         /// </summary>
-        public float Duration { get { return m_Duration; } }
+        public float Duration { get { return m_Duration; } set { m_Duration = value; } }
 
         private int m_Stacking;
         /// <summary>
@@ -121,6 +121,10 @@ namespace GAS.Runtime
             m_ConditionTags.BlockActiveTags = new GameplayTagSet(effectAsset.BlockActiveTags);
             m_ConditionTags.RequireTags = new GameplayTagSet(effectAsset.RequireTags);
 
+        }
+
+        public virtual void OnUpdateTime(params object[] paramArgs)
+        {
             m_StartTime = DateTime.Now;
             if (m_DurationType != EffectDurationType.Instant)
             {
@@ -128,7 +132,6 @@ namespace GAS.Runtime
                 if (m_TriggerType == EffectTriggerType.Period)
                     UpdatePeriodTime(m_StartTime.Ticks);
             }
-            
         }
 
         public virtual void OnUpdate(float deltaTime)
@@ -169,8 +172,7 @@ namespace GAS.Runtime
 
         public virtual void UpdateEndTime(long? curStamp = null)
         {
-            float duration = m_DurationType == EffectDurationType.TimeLine ? m_EffectAsset.ClipDuration : Duration;
-            m_EndTimeStamp = curStamp != null ? (long)curStamp + (long)(duration * 10000000d) : DateTime.Now.Ticks + (long)(duration * 10000000d);
+            m_EndTimeStamp = curStamp != null ? (long)curStamp + (long)(Duration * 10000000d) : DateTime.Now.Ticks + (long)(Duration * 10000000d);
         }
 
         public virtual void UpdatePeriodTime(long? curStamp = null)

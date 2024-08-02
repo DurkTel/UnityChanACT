@@ -60,7 +60,7 @@ namespace GAS.Runtime
             ability.OnInit(abilityAsset, m_ASC);
             m_Abilitys.Add(abilityAsset.UID, ability);
 
-            if (ability is IGameplayUpdate update)
+            if (ability is IGameplayUpdate update && ability.ConditionTags.AssetTags.HasNoneTags(GameplayTagsLib.Ability_Action))
                 m_PreUpdateAbilitys.Add(update);
 
             if (ability is IGameplayAnimationUpdate aupdate)
@@ -133,9 +133,9 @@ namespace GAS.Runtime
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public bool TryActivateAbility<T>()
+        public bool TryActivateAbility<T>(params object[] paramsArgs)
         {
-            return TryActivateAbility(typeof(T).Name);
+            return TryActivateAbility(typeof(T).Name, paramsArgs);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace GAS.Runtime
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public bool TryActivateAbility(string name)
+        public bool TryActivateAbility(string name, params object[] paramsArgs)
         {
             if (!m_Abilitys.TryGetValue(name, out GameplayAbility ability))
                 return false;
@@ -158,13 +158,13 @@ namespace GAS.Runtime
                     continue;
 
                 if (tag.ConditionTags.AssetTags.HasAnyTags(cancelTag))
-                    tag.TryInActivateAbility();
+                    TryInActivateAbility(tag.AbilityAsset.UID);
             }
 
             var activationTag = ability.ConditionTags.ActivationTags;
             m_ASC.AddTagFromDynamic(ability, activationTag);
 
-            ability.OnActivation();
+            ability.OnActivation(paramsArgs);
             return true;
         }
 
@@ -203,5 +203,14 @@ namespace GAS.Runtime
             return true;
         }
 
+        public GameplayAbility GetAbility(string name)
+        { 
+            return m_Abilitys.GetValueOrDefault(name);
+        }
+
+        public bool TryGetAbility(string name, out GameplayAbility ability)
+        {
+            return m_Abilitys.TryGetValue(name, out ability);
+        }
     }
 }

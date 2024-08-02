@@ -38,11 +38,6 @@ namespace GAS.Runtime
         public float Period;
 
         /// <summary>
-        /// 片段时间
-        /// </summary>
-        public float ClipDuration;
-
-        /// <summary>
         /// 叠加处理
         /// </summary>
         public GameplayEffectStacking StackingEffect;

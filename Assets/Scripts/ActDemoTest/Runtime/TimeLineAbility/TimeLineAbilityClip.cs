@@ -8,7 +8,7 @@ namespace GAS.Runtime
     [System.Serializable]
     public class TimeLineAbilityClip
     {
-        public string clipLabel = "Clip";
+        public string clipLabel;
 
         [SerializeField]
         protected int m_StartTick;
@@ -34,7 +34,7 @@ namespace GAS.Runtime
         /// </summary>
         /// <param name="sTime"></param>
         /// <param name="eTime"></param>
-        public void UpdateTime(int sTime, int eTime)
+        public virtual void UpdateTime(int sTime, int eTime)
         { 
             m_StartTick = sTime;
             m_EndTick = eTime;

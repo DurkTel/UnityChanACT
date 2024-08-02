@@ -196,14 +196,14 @@ namespace Actioner.Runtime
             if (!action.IsLooping)
             {
 
-                if (m_CurrentAction == action && m_DefaultAction != null && PreAction.Equals(default(PreActionData))) //是当前正在播的要销毁了 切成默认的
-                {
-                    PreAction = new PreActionData() { action = m_DefaultAction, durtion = ActionerPlayable.s_DefaultFadeSpeed };
-                    this.RequireUpdate(UpdateStep.PrePlay);
+                //if (m_CurrentAction == action && m_DefaultAction != null && PreAction.Equals(default(PreActionData))) //是当前正在播的要销毁了 切成默认的
+                //{
+                //    PreAction = new PreActionData() { action = m_DefaultAction, durtion = ActionerPlayable.s_DefaultFadeSpeed };
+                //    this.RequireUpdate(UpdateStep.PrePlay);
 
-                    //SwitchActiveAction(m_DefaultAction, ActionerPlayable.s_DefaultFadeSpeed);
-                }
-                else
+                //    //SwitchActiveAction(m_DefaultAction, ActionerPlayable.s_DefaultFadeSpeed);
+                //}
+                //else
                 {
                     //该层只有这一个节点 清理该层
                     if (this.GetValidChildCount() == 1)

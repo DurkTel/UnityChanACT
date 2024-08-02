@@ -12,10 +12,11 @@ namespace Actioner.Runtime
         /// </summary>
         /// <param name="animator"></param>
         /// <returns></returns>
-        public static ActionerPlayable Create(ActionerController controller)
+        public static ActionerPlayable Create(ActionerController controller, DirectorUpdateMode updateMode = DirectorUpdateMode.GameTime)
         {
             ActionerTags.OnInitTags();
             var graph = PlayableGraph.Create();
+            graph.SetTimeUpdateMode(updateMode);
             var playable = ScriptPlayable<ActionerPlayable>.Create(graph, ActionerPlayable.s_Template).GetBehaviour();
             playable.OnCreateOutput(controller);
             return playable;

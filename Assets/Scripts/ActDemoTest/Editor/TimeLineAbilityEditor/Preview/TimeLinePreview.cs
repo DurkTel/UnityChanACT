@@ -25,8 +25,6 @@ namespace GAS.Editor
 
         private Transform m_CameraTran;
 
-        private AudioSource m_AudioSource;
-
         private Animator m_PreviewAnimator;
 
         private PlayableGraph m_PreviewPlayableGraph;
@@ -37,17 +35,31 @@ namespace GAS.Editor
 
         private int m_SelectAvatarControlID;
 
-        private Material m_WireframeMat;
-        public Material WireframeMat
+        private Material m_WireframeMatR;
+        public Material WireframeMatR
         {
             get
             {
-                if (m_WireframeMat == null)
+                if (m_WireframeMatR == null)
                 {
-                    m_WireframeMat = new Material(Shader.Find("Custom/Common/Wireframe"));
-                    m_WireframeMat.SetColor("_Color", Color.red);
+                    m_WireframeMatR = new Material(Shader.Find("Custom/Common/Wireframe"));
+                    m_WireframeMatR.SetColor("_Color", Color.red);
                 }
-                return m_WireframeMat;
+                return m_WireframeMatR;
+            }
+        }
+
+        private Material m_WireframeMatG;
+        public Material WireframeMatG
+        {
+            get
+            {
+                if (m_WireframeMatG == null)
+                {
+                    m_WireframeMatG = new Material(Shader.Find("Custom/Common/Wireframe"));
+                    m_WireframeMatG.SetColor("_Color", Color.green);
+                }
+                return m_WireframeMatG;
             }
         }
 
@@ -89,10 +101,10 @@ namespace GAS.Editor
                 DestroyImmediate(m_Plane);
                 m_Plane = null; 
             }
-            if (m_WireframeMat != null)
+            if (m_WireframeMatR != null)
             { 
-                DestroyImmediate(m_WireframeMat);
-                m_WireframeMat = null;
+                DestroyImmediate(m_WireframeMatR);
+                m_WireframeMatR = null;
             }
 
             if (m_PreviewUtility != null)
@@ -178,6 +190,7 @@ namespace GAS.Editor
             }
         }
 
+
         public void OnAssetUpdate(TimeLineAbilityAsset asset)
         {
             m_AbilityAsset = asset;
@@ -249,7 +262,6 @@ namespace GAS.Editor
 
             var go = new GameObject("CameraRoot");
             go.AddComponent<AudioListener>();
-            m_AudioSource = go.AddComponent<AudioSource>();
             m_PreviewUtility.AddSingleGO(go);
             m_CameraTran = go.transform;
             m_PreviewUtility.camera.transform.SetParent(m_CameraTran);

@@ -7,6 +7,8 @@ namespace GAS.Runtime
 {
     public class TimeLineAbilityAsset : GameplayAbilityAsset
     {
+        public bool IsLoop;
+
         [SerializeReference]
         private List<TimeLineTrack> m_AbilityTracks;
         public List<TimeLineTrack> AbilityTracks 

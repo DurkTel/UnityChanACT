@@ -51,7 +51,7 @@ namespace GAS.Runtime
         /// <summary>
         /// 激活能力时
         /// </summary>
-        public virtual void OnActivation()
+        public virtual void OnActivation(params object[] paramsArgs)
         { 
             
         }

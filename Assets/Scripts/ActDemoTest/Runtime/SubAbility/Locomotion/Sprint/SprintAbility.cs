@@ -1,15 +1,19 @@
 using Actioner.Runtime;
 using GAS.Runtime;
+using System;
 using UnityEngine;
 
 namespace UnityChanAct
 {
     public class SprintAbility : GameplayAbility
     {
-        public override void OnActivation()
+        public override void OnActivation(params object[] paramsArgs)
         {
             base.OnActivation();
-            AnimationCue.Trigger<AnimationActionCue>(m_ASC, new AnimationCueArg() { name = PlayerAction.A_SprintFront, duration = ActionerPlayable.s_DefaultFadeSpeed });
+            float duration = paramsArgs.Length > 0 && paramsArgs[0] is float ? (float)paramsArgs[0] : ActionerPlayable.s_DefaultFadeSpeed;
+
+            AnimationCue.Trigger<AnimationBudleCue>(m_ASC, new AnimationCueArg() { name = PlayerAction.B_Move, index = 1, duration = duration });
+
         }
 
         public override void OnInactivation()

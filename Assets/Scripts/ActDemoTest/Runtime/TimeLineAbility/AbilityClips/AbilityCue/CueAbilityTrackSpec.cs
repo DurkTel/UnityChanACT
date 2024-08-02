@@ -10,16 +10,16 @@ namespace GAS.Runtime
         {
         }
 
-        public override void OnEnterClip(int index)
+        public override void OnEnterClip(int index, float deltaTime)
         {
-            base.OnEnterClip(index);
+            base.OnEnterClip(index, deltaTime);
             var cue = m_ClipsArray[index] as CueAbilityClip;
             cue.OnTrigger(m_ASC);
         }
 
-        public override void OnExitClip(int index)
+        public override void OnExitClip(int index, float deltaTime)
         {
-            base.OnExitClip(index);
+            base.OnExitClip(index, deltaTime);
 
         }
     }

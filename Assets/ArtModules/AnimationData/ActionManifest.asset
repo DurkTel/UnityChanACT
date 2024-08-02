@@ -14,25 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionNames:
   - Idle
-  - Run_Start
-  - Run_Front
-  - Run_End
-  - Run_Return
-  - Sprint_Front
-  - Sprint_End
-  - Attack_01
   actionDatas:
-  - {fileID: 11400000, guid: 43c06f3de621876438f4a9dae16a8cda, type: 2}
-  - {fileID: 11400000, guid: cc8b3fd28991a3346b7aff30f308cbe4, type: 2}
-  - {fileID: 11400000, guid: 6127f4b4e71fea843bab5b1f8e83066c, type: 2}
-  - {fileID: 11400000, guid: b666a11dfd0d0ed41848cfa9ef41b190, type: 2}
-  - {fileID: 11400000, guid: ee117957efc68b94f8295498b4534b70, type: 2}
-  - {fileID: 11400000, guid: 19ce97ebfacc4b84791bcf2414091264, type: 2}
-  - {fileID: 11400000, guid: 0f18cb63ce7ded2499b1fa5da7caf9d3, type: 2}
-  - {fileID: 11400000, guid: e107f44d8bcc8ee4d94bce989187c1d0, type: 2}
+  - {fileID: 11400000, guid: e58004877de8d584e9a5ace07a47689c, type: 2}
   bundleNames:
   - Dodge
+  - Return
+  - Move
+  - Move_Stop
+  - Guard
   bundleDatas:
   - {fileID: 11400000, guid: 05e334820413e004bb604085fcee4af0, type: 2}
+  - {fileID: 11400000, guid: 1346184dc68d58649913a46935cd5da3, type: 2}
+  - {fileID: 11400000, guid: 00e8cd1ffc69cb342a7d90aa8a1f2852, type: 2}
+  - {fileID: 11400000, guid: 58106b31724fb584989a0d91a6b2534d, type: 2}
+  - {fileID: 11400000, guid: 0c682dbffea23bd42ad7f0cf39909837, type: 2}
   blendNames: []
   blendDatas: []

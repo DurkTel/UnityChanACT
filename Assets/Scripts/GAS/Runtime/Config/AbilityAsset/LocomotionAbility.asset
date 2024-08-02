@@ -28,5 +28,5 @@ MonoBehaviour:
   RequireTags: []
   StartRotateTime: 0.15
   RotateSpeed: 30
-  TiltAngle: 15
+  TiltAngle: 10
   TiltSpeed: 5

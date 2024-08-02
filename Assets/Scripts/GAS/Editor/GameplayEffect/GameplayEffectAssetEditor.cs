@@ -28,10 +28,9 @@ namespace GAS.Editor
             m_TagsArrayInspector ??= new TagsArrayInspector(m_EffectAsset);
             m_AllEffectSubClass = GASAssetWindow.GetAllSubClass(typeof(GameplayEffect));
 
-            m_AllEffectSubName = new string[m_AllEffectSubClass.Count + 1];
-            m_AllEffectSubName[0] = typeof(GameplayEffect).Name;
+            m_AllEffectSubName = new string[m_AllEffectSubClass.Count];
             for (int i = 0; i < m_AllEffectSubClass.Count; i++)
-                m_AllEffectSubName[i + 1] = m_AllEffectSubClass[i].Name;
+                m_AllEffectSubName[i] = m_AllEffectSubClass[i].Name;
 
             m_CurrentSelectSubClass = Array.IndexOf<string>(m_AllEffectSubName, m_EffectAsset.Type);
             m_CurrentSelectSubClass = m_CurrentSelectSubClass < 0 ? 0 : m_CurrentSelectSubClass;
@@ -71,7 +70,10 @@ namespace GAS.Editor
             EditorGUI.BeginChangeCheck();
             m_CurrentSelectSubClass = EditorGUI.Popup(titleRect, m_CurrentSelectSubClass, m_AllEffectSubName);
             if (EditorGUI.EndChangeCheck())
+            {
                 m_EffectAsset.Type = m_AllEffectSubName[m_CurrentSelectSubClass];
+                EditorUtility.SetDirty(m_EffectAsset);
+            }
             titleRect.x = m_ContentRect.x + 5;
             titleRect.y += 20;
             titleRect.width = 290;
@@ -145,15 +147,6 @@ namespace GAS.Editor
                     EditorGUI.LabelField(titleRect, "周期时间");
                     titleRect.y += 25;
                     m_EffectAsset.Period = EditorGUI.FloatField(titleRect, m_EffectAsset.Period);
-                }
-
-                using (new EditorGUI.DisabledScope(m_EffectAsset.DurationType != EffectDurationType.TimeLine))
-                {
-                    titleRect.y -= 25;
-                    titleRect.x += 90;
-                    EditorGUI.LabelField(titleRect, "片段时间");
-                    titleRect.y += 25;
-                    m_EffectAsset.ClipDuration = EditorGUI.FloatField(titleRect, m_EffectAsset.ClipDuration);
                 }
             }
 

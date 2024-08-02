@@ -31,8 +31,17 @@ namespace GAS.Editor
 
             public override void Dispose()
             {
-                m_ParticleSystem = null;
-                m_ParticleObj = null;
+                if (m_ParticleObj != null)
+                {
+                    DestroyImmediate(m_ParticleObj);
+                    m_ParticleObj = null;
+                }
+
+                if (m_ParticleClip != null)
+                    m_ParticleClip = null;
+
+                if (m_ParticleSystem != null)
+                    m_ParticleSystem = null;
             }
 
             public override void OnEnter()
@@ -53,6 +62,8 @@ namespace GAS.Editor
 
             public override void Repaint()
             {
+                if (m_ParticleObj == null)
+                    return;
                 m_ParticleObj.SetActive(true);
 
                 int offsetTick = CurrentTick - (int)RangeTick[0];

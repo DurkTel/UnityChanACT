@@ -85,19 +85,20 @@ namespace GAS.Editor
         {
             args.label = "";
             base.RowGUI(args);
-            bool isParent = args.item is AssetFirstTreeItem;
+            bool isParent = args.item.depth == 0;
 
-            var originalStyle = new GUIStyle(EditorStyles.label);
-            originalStyle.fontSize = isParent ? 16 : 14;
+            var originalSize = EditorStyles.label.fontSize;
+            EditorStyles.label.fontSize = isParent ? 16 : 14;
             var labelRect = new Rect(args.rowRect);
-            labelRect.x += isParent ? 40 : 50;
-            EditorGUI.LabelField(labelRect, args.item.displayName, originalStyle);
+            labelRect.x += args.item.depth * 15 + 40;
+            EditorGUI.LabelField(labelRect, args.item.displayName, EditorStyles.label);
             labelRect.x = 15;
             labelRect.y += labelRect.height;
 
             labelRect.width -= 30;
             labelRect.height = 0.5f;
             EditorGUI.DrawRect(labelRect, Color.black);
+            EditorStyles.label.fontSize = originalSize;
         }
 
         protected override float GetCustomRowHeight(int row, TreeViewItem item)
@@ -141,6 +142,24 @@ namespace GAS.Editor
             return root;
         }
 
+        private void AddChildinternal(AssetFirstTreeItem parent, string path, ref int id)
+        {
+            var allFiles = Directory.GetFiles(path, "*.asset");
+            if (allFiles.Length == 0)
+                return;
+            int index = 0;
+            foreach (var file in allFiles)
+            {
+                var obj = AssetDatabase.LoadAssetAtPath(file, parent.menuType);
+                if (obj == null)
+                    continue;
+
+                parent.children ??= new List<TreeViewItem>();
+                var child = new AssetSecondTreeItem() { id = id++, displayName = obj.name, depth = parent.depth + 1, asset = obj, menuType = parent.menuType, isParent = false, index = index };
+                parent.AddChild(child);
+                index++;
+            }
+        }
 
         private void AddChildByDirectory(TreeViewItem parent, ref int id)
         {
@@ -149,21 +168,45 @@ namespace GAS.Editor
                 if (!Directory.Exists(first.filePath))
                     Directory.CreateDirectory(first.filePath);
 
-                var allFiles = Directory.GetFiles(first.filePath, "*.asset");
-                if (allFiles.Length == 0)
-                    continue;
-                int index = 0;
-                foreach (var file in allFiles)
+                var dirPath =  Directory.GetDirectories(first.filePath);
+                if (dirPath.Length > 0)
                 {
-                    var obj = AssetDatabase.LoadAssetAtPath(file, first.menuType);
-                    if (obj == null)
-                        continue;
+                    foreach (var dir in dirPath)
+                    {
+                        var child = new AssetFirstTreeItem()
+                        {
+                            id = id++,
+                            displayName = Path.GetFileName(dir),
+                            depth = parent.depth + 1,
+                            menuType = first.menuType,
+                            isParent = true,
+                            index = first.index,
+                            filePath = dir
+                        };
+                        first.AddChild(child);
 
-                    first.children ??= new List<TreeViewItem>();
-                    var child = new AssetSecondTreeItem() { id = id++, displayName = obj.name, depth = parent.depth + 1, asset = obj, menuType = first.menuType, isParent = false, index = index };
-                    first.AddChild(child);
-                    index++;
+                        AddChildinternal(child, dir, ref id);
+                    }
                 }
+
+                AddChildinternal(first, first.filePath, ref id);
+
+
+                //allFiles = Directory.GetFiles(first.filePath, "*.asset");
+                //if (allFiles.Length == 0)
+                //    continue;
+                //int index = 0;
+                //foreach (var file in allFiles)
+                //{
+                //    var obj = AssetDatabase.LoadAssetAtPath(file, first.menuType);
+                //    if (obj == null)
+                //        continue;
+
+                //    first.children ??= new List<TreeViewItem>();
+                //    var child = new AssetSecondTreeItem() { id = id++, displayName = obj.name, depth = parent.depth + 1, asset = obj, menuType = first.menuType, isParent = false, index = index };
+                //    first.AddChild(child);
+                //    index++;
+                //}
             }
         }
 

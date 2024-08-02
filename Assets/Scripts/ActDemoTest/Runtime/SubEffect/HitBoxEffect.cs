@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UnityChanAct
 {
-    public class HitBoxEffect : GameplayEffect
+    public class HitBoxEffect : TimeLineEffect
     {
         
     }

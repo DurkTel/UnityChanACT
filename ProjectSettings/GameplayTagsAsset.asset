@@ -33,6 +33,26 @@ MonoBehaviour:
           fullName: Ability.Locomotion.NotCancelled
           description: "\u4E0D\u53EF\u53D6\u6D88"
           childs: []
+        - name: Sprint
+          fullName: Ability.Locomotion.Sprint
+          description: "\u51B2\u523A"
+          childs: []
+      - name: Fight
+        fullName: Ability.Fight
+        description: "\u6218\u6597"
+        childs:
+        - name: Skill
+          fullName: Ability.Fight.Skill
+          description: "\u6280\u80FD"
+          childs: []
+        - name: Guard
+          fullName: Ability.Fight.Guard
+          description: "\u683C\u6321"
+          childs: []
+      - name: Action
+        fullName: Ability.Action
+        description: "\u884C\u4E3A"
+        childs: []
     - name: Camp
       fullName: Camp
       description: "\u9635\u8425"
@@ -97,6 +117,14 @@ MonoBehaviour:
           fullName: Event.Fight.AttackWindup
           description: "\u653B\u51FB\u540E\u6447\u4E2D"
           childs: []
+        - name: SpecialAttack
+          fullName: Event.Fight.SpecialAttack
+          description: "\u7279\u6B8A\u653B\u51FB"
+          childs: []
+        - name: Guard
+          fullName: Event.Fight.Guard
+          description: "\u683C\u6321"
+          childs: []
     - name: Command
       fullName: Command
       description: "\u8F93\u5165\u547D\u4EE4"
@@ -108,4 +136,16 @@ MonoBehaviour:
         - name: Attack
           fullName: Command.Fight.Attack
           description: "\u653B\u51FB\u547D\u4EE4"
+          childs: []
+      - name: Move
+        fullName: Command.Move
+        description: "\u79FB\u52A8\u547D\u4EE4"
+        childs: []
+      - name: BanCommand
+        fullName: Command.BanCommand
+        description: "\u7981\u6B62\u547D\u4EE4"
+        childs:
+        - name: BanMoveCommand
+          fullName: Command.BanCommand.BanMoveCommand
+          description: "\u7981\u6B62\u79FB\u52A8\u547D\u4EE4"
           childs: []

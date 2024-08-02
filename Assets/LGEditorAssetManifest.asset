@@ -57,80 +57,58 @@ MonoBehaviour:
     assetPath: Assets/ArtExport/AnimationClips/Attack_3Combo_2.anim
   - assetName: Attack_3Combo_3.anim
     assetPath: Assets/ArtExport/AnimationClips/Attack_3Combo_3.anim
-  - assetName: Attack_5Combo_1.anim
-    assetPath: Assets/ArtExport/AnimationClips/Attack_5Combo_1.anim
-  - assetName: Attack_5Combo_2.anim
-    assetPath: Assets/ArtExport/AnimationClips/Attack_5Combo_2.anim
-  - assetName: Attack_5Combo_3.anim
-    assetPath: Assets/ArtExport/AnimationClips/Attack_5Combo_3.anim
-  - assetName: Attack_5Combo_4.anim
-    assetPath: Assets/ArtExport/AnimationClips/Attack_5Combo_4.anim
-  - assetName: Attack_5Combo_5.anim
-    assetPath: Assets/ArtExport/AnimationClips/Attack_5Combo_5.anim
-  - assetName: Attack_5Combo_ALL.anim
-    assetPath: Assets/ArtExport/AnimationClips/Attack_5Combo_ALL.anim
-  - assetName: Idle_ver_A.anim
-    assetPath: Assets/ArtExport/AnimationClips/Idle_ver_A.anim
+  - assetName: Dash_Attack_ver_A.anim
+    assetPath: Assets/ArtExport/AnimationClips/Dash_Attack_ver_A.anim
+  - assetName: Dash_Attack_ver_B.anim
+    assetPath: Assets/ArtExport/AnimationClips/Dash_Attack_ver_B.anim
+  - assetName: Dodge_Back.anim
+    assetPath: Assets/ArtExport/AnimationClips/Dodge_Back.anim
+  - assetName: Dodge_Front.anim
+    assetPath: Assets/ArtExport/AnimationClips/Dodge_Front.anim
+  - assetName: Idle_B_To_Jogging_B_Root.anim
+    assetPath: Assets/ArtExport/AnimationClips/Idle_B_To_Jogging_B_Root.anim
+  - assetName: Idle_B_Turn.anim
+    assetPath: Assets/ArtExport/AnimationClips/Idle_B_Turn.anim
+  - assetName: Idle_ver_B.anim
+    assetPath: Assets/ArtExport/AnimationClips/Idle_ver_B.anim
   - assetName: Jogging_8Way_verB_F_Root.anim
     assetPath: Assets/ArtExport/AnimationClips/Jogging_8Way_verB_F_Root.anim
-  - assetName: Lucy_Dodge_B_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Lucy_Dodge_B_Root.anim
-  - assetName: Lucy_Idle.anim
-    assetPath: Assets/ArtExport/AnimationClips/Lucy_Idle.anim
-  - assetName: Lucy_Run_F_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Lucy_Run_F_Root.anim
-  - assetName: Lucy_Run_F_Start_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Lucy_Run_F_Start_Root.anim
   - assetName: Lucy_Run_F_Stop_Root.anim
     assetPath: Assets/ArtExport/AnimationClips/Lucy_Run_F_Stop_Root.anim
-  - assetName: Lucy_Slide_F_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Lucy_Slide_F_Root.anim
-  - assetName: Lucy_Sprint_1_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Lucy_Sprint_1_Root.anim
   - assetName: Lucy_Sprint_Stop_Root.anim
     assetPath: Assets/ArtExport/AnimationClips/Lucy_Sprint_Stop_Root.anim
-  - assetName: Lucy_TurnL_180_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Lucy_TurnL_180_Root.anim
-  - assetName: Lucy_TurnL_90_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Lucy_TurnL_90_Root.anim
-  - assetName: Lucy_TurnR_180_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Lucy_TurnR_180_Root.anim
-  - assetName: Lucy_TurnR_90_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Lucy_TurnR_90_Root.anim
-  - assetName: Mvm_Jog_Start_Fwd_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Mvm_Jog_Start_Fwd_Root.anim
-  - assetName: Mvm_Jog_TurnL_180_Left_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Mvm_Jog_TurnL_180_Left_Root.anim
-  - assetName: Mvm_Jog_TurnL_180_Right_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Mvm_Jog_TurnL_180_Right_Root.anim
-  - assetName: Mvm_Jog_TurnR_180_Left_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Mvm_Jog_TurnR_180_Left_Root.anim
-  - assetName: Mvm_Jog_TurnR_180_Right_Root.anim
-    assetPath: Assets/ArtExport/AnimationClips/Mvm_Jog_TurnR_180_Right_Root.anim
+  - assetName: Revenge_Guard_Accept.anim
+    assetPath: Assets/ArtExport/AnimationClips/Revenge_Guard_Accept.anim
+  - assetName: Revenge_Guard_End.anim
+    assetPath: Assets/ArtExport/AnimationClips/Revenge_Guard_End.anim
+  - assetName: Revenge_Guard_Loop.anim
+    assetPath: Assets/ArtExport/AnimationClips/Revenge_Guard_Loop.anim
+  - assetName: Revenge_Guard_Start.anim
+    assetPath: Assets/ArtExport/AnimationClips/Revenge_Guard_Start.anim
   - assetName: Run_Root_ver_B.anim
     assetPath: Assets/ArtExport/AnimationClips/Run_Root_ver_B.anim
+  - assetName: Turn_in_place_Jog_B_to_Jog_B_Root.anim
+    assetPath: Assets/ArtExport/AnimationClips/Turn_in_place_Jog_B_to_Jog_B_Root.anim
+  - assetName: Turn_in_place_Run_B_to_Run_B_Root.anim
+    assetPath: Assets/ArtExport/AnimationClips/Turn_in_place_Run_B_to_Run_B_Root.anim
+  - assetName: UpperAttack.anim
+    assetPath: Assets/ArtExport/AnimationClips/UpperAttack.anim
   - assetName: ActionManifest.asset
     assetPath: Assets/ArtModules/AnimationData/ActionManifest.asset
   - assetName: ActionOverrideManifest.asset
     assetPath: Assets/ArtModules/AnimationData/ActionOverrideManifest.asset
-  - assetName: attack01.asset
-    assetPath: Assets/ArtModules/AnimationData/attack01.asset
   - assetName: dodge.asset
     assetPath: Assets/ArtModules/AnimationData/dodge.asset
+  - assetName: guard.asset
+    assetPath: Assets/ArtModules/AnimationData/guard.asset
   - assetName: idle.asset
     assetPath: Assets/ArtModules/AnimationData/idle.asset
-  - assetName: run_end.asset
-    assetPath: Assets/ArtModules/AnimationData/run_end.asset
-  - assetName: run_front.asset
-    assetPath: Assets/ArtModules/AnimationData/run_front.asset
-  - assetName: run_return.asset
-    assetPath: Assets/ArtModules/AnimationData/run_return.asset
-  - assetName: run_start.asset
-    assetPath: Assets/ArtModules/AnimationData/run_start.asset
-  - assetName: sprint_end.asset
-    assetPath: Assets/ArtModules/AnimationData/sprint_end.asset
-  - assetName: sprint_front.asset
-    assetPath: Assets/ArtModules/AnimationData/sprint_front.asset
+  - assetName: move.asset
+    assetPath: Assets/ArtModules/AnimationData/move.asset
+  - assetName: move_stop.asset
+    assetPath: Assets/ArtModules/AnimationData/move_stop.asset
+  - assetName: return.asset
+    assetPath: Assets/ArtModules/AnimationData/return.asset
   - assetName: GameAudioMixer.mixer
     assetPath: Assets/ArtModules/Audio/GameAudioMixer.mixer
   - assetName: msyh SDF.asset
@@ -205,20 +183,74 @@ MonoBehaviour:
     assetPath: Assets/TextMesh Pro/Shaders/TMP_SDF.shader
   - assetName: TMP_Sprite.shader
     assetPath: Assets/TextMesh Pro/Shaders/TMP_Sprite.shader
-  - assetName: idle 1.asset
-    assetPath: Assets/ArtModules/AnimationData/Fight/idle 1.asset
-  - assetName: run_end 1.asset
-    assetPath: Assets/ArtModules/AnimationData/Fight/run_end 1.asset
-  - assetName: run_front 1.asset
-    assetPath: Assets/ArtModules/AnimationData/Fight/run_front 1.asset
-  - assetName: run_return 1.asset
-    assetPath: Assets/ArtModules/AnimationData/Fight/run_return 1.asset
-  - assetName: run_start 1.asset
-    assetPath: Assets/ArtModules/AnimationData/Fight/run_start 1.asset
-  - assetName: sprint_end 1.asset
-    assetPath: Assets/ArtModules/AnimationData/Fight/sprint_end 1.asset
-  - assetName: sprint_front 1.asset
-    assetPath: Assets/ArtModules/AnimationData/Fight/sprint_front 1.asset
+  - assetName: V0001.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0001.wav
+  - assetName: V0002.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0002.wav
+  - assetName: V0003.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0003.wav
+  - assetName: V0004.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0004.wav
+  - assetName: V0005.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0005.wav
+  - assetName: V0006.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0006.wav
+  - assetName: V0007.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0007.wav
+  - assetName: V0008.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0008.wav
+  - assetName: V0009.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0009.wav
+  - assetName: V0010.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0010.wav
+  - assetName: V0011.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0011.wav
+  - assetName: V0012.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0012.wav
+  - assetName: V0013.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0013.wav
+  - assetName: V0014.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0014.wav
+  - assetName: V0015.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0015.wav
+  - assetName: V0016.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0016.wav
+  - assetName: V0017.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0017.wav
+  - assetName: V0018.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0018.wav
+  - assetName: V0019.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0019.wav
+  - assetName: V0020.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0020.wav
+  - assetName: V0021.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0021.wav
+  - assetName: V0022.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0022.wav
+  - assetName: V0023.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0023.wav
+  - assetName: V0024.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0024.wav
+  - assetName: V0025.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0025.wav
+  - assetName: V0025b.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0025b.wav
+  - assetName: V0026.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0026.wav
+  - assetName: V0027.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0027.wav
+  - assetName: V0028.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0028.wav
+  - assetName: V0029.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0029.wav
+  - assetName: V0030.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0030.wav
+  - assetName: V0031.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0031.wav
+  - assetName: V0032.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0032.wav
+  - assetName: V0033.wav
+    assetPath: Assets/ArtModules/Audio/Kohaku/V0033.wav
   - assetName: beamswda_01.ogg
     assetPath: Assets/ArtModules/Audio/weapon/beamswda_01.ogg
   - assetName: beamswda_02.ogg
@@ -1117,8 +1149,10 @@ MonoBehaviour:
     assetPath: Assets/Plugins/UosCdnSDK/Editor/Package/wcs-csharp-sdk-1.0.1.0/LICENSE
   - assetName: README.md
     assetPath: Assets/Plugins/UosCdnSDK/Editor/Package/wcs-csharp-sdk-1.0.1.0/README.md
-  - assetName: DodgeAbility.asset
-    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/DodgeAbility.asset
+  - assetName: ActionAbility.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/ActionAbility.asset
+  - assetName: GuardAbility.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/GuardAbility.asset
   - assetName: LocomotionAbility.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/LocomotionAbility.asset
   - assetName: Skill_10000.asset
@@ -1127,18 +1161,26 @@ MonoBehaviour:
     assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Skill_10001.asset
   - assetName: Skill_10002.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Skill_10002.asset
-  - assetName: SprintAbility.asset
-    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/SprintAbility.asset
+  - assetName: Skill_10003.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Skill_10003.asset
+  - assetName: Skill_10004.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Skill_10004.asset
   - assetName: Player.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/ArchetypeAsset/Player.asset
+  - assetName: AffectedBoxEffect.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/EffectAsset/AffectedBoxEffect.asset
   - assetName: Attack3ComboEffect.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/EffectAsset/Attack3ComboEffect.asset
   - assetName: AttackDelayEffect.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/EffectAsset/AttackDelayEffect.asset
   - assetName: AttackHitBoxEffect.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/EffectAsset/AttackHitBoxEffect.asset
+  - assetName: AttackSearchEffect.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/EffectAsset/AttackSearchEffect.asset
   - assetName: AttackWindupEffect.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/EffectAsset/AttackWindupEffect.asset
+  - assetName: BanMoveCommand.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/EffectAsset/BanMoveCommand.asset
   - assetName: ddd.asset
     assetPath: Assets/Scripts/GAS/Runtime/Config/MMCAsset/ddd.asset
   - assetName: CLazy@Mvm_Walk_Arc_180_Left_Root.controller
@@ -2509,6 +2551,24 @@ MonoBehaviour:
     assetPath: Assets/Plugins/MagicaCloth2/Scripts/Editor/UnityPackageImporter/Collections/MagicaCloth2UPMImporterCollections.asmdef
   - assetName: WcsLib.sln
     assetPath: Assets/Plugins/UosCdnSDK/Editor/Package/wcs-csharp-sdk-1.0.1.0/lib/WcsLib.sln
+  - assetName: Action_DodgeBack.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Action/Action_DodgeBack.asset
+  - assetName: Action_DodgeFront.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Action/Action_DodgeFront.asset
+  - assetName: Action_Idle.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Action/Action_Idle.asset
+  - assetName: Action_Run.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Action/Action_Run.asset
+  - assetName: Action_RunReturn.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Action/Action_RunReturn.asset
+  - assetName: Action_RunStop.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Action/Action_RunStop.asset
+  - assetName: Action_Sprint.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Action/Action_Sprint.asset
+  - assetName: Action_SprintReturn.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Action/Action_SprintReturn.asset
+  - assetName: Action_SprintStop.asset
+    assetPath: Assets/Scripts/GAS/Runtime/Config/AbilityAsset/Action/Action_SprintStop.asset
   - assetName: COSXML.csproj
     assetPath: Assets/Plugins/UosCdnSDK/Editor/Package/Tencent.QCloud.Cos.Sdk.5.4.9/src/COSXML/COSXML.csproj
   - assetName: WcsLib.csproj

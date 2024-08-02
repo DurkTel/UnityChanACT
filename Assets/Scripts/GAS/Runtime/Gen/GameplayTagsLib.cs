@@ -18,6 +18,24 @@ namespace GAS.Runtime
         /// </summary>
         public static GameplayTag Command { get { return s_Command; } }
 
+        private static GameplayTag s_Command_BanCommand = new GameplayTag("Command.BanCommand");
+        /// <summary>
+        /// 禁止命令
+        /// </summary>
+        public static GameplayTag Command_BanCommand { get { return s_Command_BanCommand; } }
+
+        private static GameplayTag s_Command_BanCommand_BanMoveCommand = new GameplayTag("Command.BanCommand.BanMoveCommand");
+        /// <summary>
+        /// 禁止移动命令
+        /// </summary>
+        public static GameplayTag Command_BanCommand_BanMoveCommand { get { return s_Command_BanCommand_BanMoveCommand; } }
+
+        private static GameplayTag s_Command_Move = new GameplayTag("Command.Move");
+        /// <summary>
+        /// 移动命令
+        /// </summary>
+        public static GameplayTag Command_Move { get { return s_Command_Move; } }
+
         private static GameplayTag s_Command_Fight = new GameplayTag("Command.Fight");
         /// <summary>
         /// 战斗命令
@@ -41,6 +59,18 @@ namespace GAS.Runtime
         /// 战斗相关
         /// </summary>
         public static GameplayTag Event_Fight { get { return s_Event_Fight; } }
+
+        private static GameplayTag s_Event_Fight_Guard = new GameplayTag("Event.Fight.Guard");
+        /// <summary>
+        /// 格挡
+        /// </summary>
+        public static GameplayTag Event_Fight_Guard { get { return s_Event_Fight_Guard; } }
+
+        private static GameplayTag s_Event_Fight_SpecialAttack = new GameplayTag("Event.Fight.SpecialAttack");
+        /// <summary>
+        /// 特殊攻击
+        /// </summary>
+        public static GameplayTag Event_Fight_SpecialAttack { get { return s_Event_Fight_SpecialAttack; } }
 
         private static GameplayTag s_Event_Fight_AttackWindup = new GameplayTag("Event.Fight.AttackWindup");
         /// <summary>
@@ -132,11 +162,41 @@ namespace GAS.Runtime
         /// </summary>
         public static GameplayTag Ability { get { return s_Ability; } }
 
+        private static GameplayTag s_Ability_Action = new GameplayTag("Ability.Action");
+        /// <summary>
+        /// 行为
+        /// </summary>
+        public static GameplayTag Ability_Action { get { return s_Ability_Action; } }
+
+        private static GameplayTag s_Ability_Fight = new GameplayTag("Ability.Fight");
+        /// <summary>
+        /// 战斗
+        /// </summary>
+        public static GameplayTag Ability_Fight { get { return s_Ability_Fight; } }
+
+        private static GameplayTag s_Ability_Fight_Guard = new GameplayTag("Ability.Fight.Guard");
+        /// <summary>
+        /// 格挡
+        /// </summary>
+        public static GameplayTag Ability_Fight_Guard { get { return s_Ability_Fight_Guard; } }
+
+        private static GameplayTag s_Ability_Fight_Skill = new GameplayTag("Ability.Fight.Skill");
+        /// <summary>
+        /// 技能
+        /// </summary>
+        public static GameplayTag Ability_Fight_Skill { get { return s_Ability_Fight_Skill; } }
+
         private static GameplayTag s_Ability_Locomotion = new GameplayTag("Ability.Locomotion");
         /// <summary>
         /// 运动
         /// </summary>
         public static GameplayTag Ability_Locomotion { get { return s_Ability_Locomotion; } }
+
+        private static GameplayTag s_Ability_Locomotion_Sprint = new GameplayTag("Ability.Locomotion.Sprint");
+        /// <summary>
+        /// 冲刺
+        /// </summary>
+        public static GameplayTag Ability_Locomotion_Sprint { get { return s_Ability_Locomotion_Sprint; } }
 
         private static GameplayTag s_Ability_Locomotion_NotCancelled = new GameplayTag("Ability.Locomotion.NotCancelled");
         /// <summary>
@@ -157,10 +217,15 @@ namespace GAS.Runtime
         public static Dictionary<string, GameplayTag> TagMap = new Dictionary<string, GameplayTag>
         {
             ["Command"] = Command,
+            ["Command.BanCommand"] = Command_BanCommand,
+            ["Command.BanCommand.BanMoveCommand"] = Command_BanCommand_BanMoveCommand,
+            ["Command.Move"] = Command_Move,
             ["Command.Fight"] = Command_Fight,
             ["Command.Fight.Attack"] = Command_Fight_Attack,
             ["Event"] = Event,
             ["Event.Fight"] = Event_Fight,
+            ["Event.Fight.Guard"] = Event_Fight_Guard,
+            ["Event.Fight.SpecialAttack"] = Event_Fight_SpecialAttack,
             ["Event.Fight.AttackWindup"] = Event_Fight_AttackWindup,
             ["Event.Fight.AttackDelay"] = Event_Fight_AttackDelay,
             ["Event.Locomotion"] = Event_Locomotion,
@@ -176,7 +241,12 @@ namespace GAS.Runtime
             ["Camp.Enemy"] = Camp_Enemy,
             ["Camp.Friendly"] = Camp_Friendly,
             ["Ability"] = Ability,
+            ["Ability.Action"] = Ability_Action,
+            ["Ability.Fight"] = Ability_Fight,
+            ["Ability.Fight.Guard"] = Ability_Fight_Guard,
+            ["Ability.Fight.Skill"] = Ability_Fight_Skill,
             ["Ability.Locomotion"] = Ability_Locomotion,
+            ["Ability.Locomotion.Sprint"] = Ability_Locomotion_Sprint,
             ["Ability.Locomotion.NotCancelled"] = Ability_Locomotion_NotCancelled,
             ["Ability.Locomotion.SharpTurn"] = Ability_Locomotion_SharpTurn,
         };

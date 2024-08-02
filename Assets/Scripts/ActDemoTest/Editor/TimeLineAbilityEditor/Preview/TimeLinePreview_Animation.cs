@@ -20,7 +20,8 @@ namespace GAS.Editor
 
             public override void Dispose()
             {
-               
+                if (m_ClipPlayable.IsValid())
+                    m_ClipPlayable.Destroy();
             }
 
             public override void OnEnter()

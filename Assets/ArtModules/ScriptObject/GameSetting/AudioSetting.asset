@@ -12,10 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c99fbddddfe03542bc43101ba0fae44, type: 3}
   m_Name: AudioSetting
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 0}
   audioParam:
+  - trackName: Master
+    isLoop: 0
+    playMode: 0
   - trackName: BGAudio
-    isLoop: 1
+    isLoop: 0
+    playMode: 0
+  - trackName: TalkAudio
+    isLoop: 0
     playMode: 0
   - trackName: CityLoopAudio
-    isLoop: 1
+    isLoop: 0
+    playMode: 0
+  - trackName: CopyLoopAudio
+    isLoop: 0
+    playMode: 0
+  - trackName: EffectAudio
+    isLoop: 0
+    playMode: 0
+  - trackName: HitAudio
+    isLoop: 0
+    playMode: 0
+  - trackName: HurtAudio
+    isLoop: 0
+    playMode: 0
+  - trackName: OtherAudio
+    isLoop: 0
+    playMode: 0
+  - trackName: UiAudio
+    isLoop: 0
+    playMode: 0
+  - trackName: UiLoopAudio
+    isLoop: 0
+    playMode: 0
+  - trackName: UiEffectAudio
+    isLoop: 0
     playMode: 0

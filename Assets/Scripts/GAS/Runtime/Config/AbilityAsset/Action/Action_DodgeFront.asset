@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f2787ce3abd5e345a438fcecbb30695, type: 3}
+  m_Name: Action_DodgeFront
+  m_EditorClassIdentifier: 
+  Description: 
+  UID: Action_DodgeFront
+  FixedTags:
+  - m_FullName: Ability.Action
+    m_ShortName: Action
+    m_HashCode: -454250512
+    m_ParentHasCodes: b84ed1e0
+    m_ParentNames:
+    - Ability
+  ActivationTags:
+  - m_FullName: Event.Locomotion.Dodge
+    m_ShortName: Dodge
+    m_HashCode: -453312252
+    m_ParentHasCodes: 0276cb276f1c6a4a
+    m_ParentNames:
+    - Event
+    - Event.Locomotion
+  CancelTags:
+  - m_FullName: Ability.Fight.Skill
+    m_ShortName: Skill
+    m_HashCode: -448300069
+    m_ParentHasCodes: b84ed1e058a24c74
+    m_ParentNames:
+    - Ability
+    - Ability.Fight
+  BlockActiveTags:
+  - m_FullName: Event.Fight.SpecialAttack
+    m_ShortName: SpecialAttack
+    m_HashCode: -755422719
+    m_ParentHasCodes: 0276cb277ecb7b29
+    m_ParentNames:
+    - Event
+    - Event.Fight
+  - m_FullName: Event.Locomotion.Dodge
+    m_ShortName: Dodge
+    m_HashCode: -453312252
+    m_ParentHasCodes: 0276cb276f1c6a4a
+    m_ParentNames:
+    - Event
+    - Event.Locomotion
+  BlockInActiveTags: []
+  RequireTags: []
+  IsLoop: 0
+  m_AbilityTracks:
+  - rid: 90298519704305664
+  - rid: 90298519704305669
+  - rid: 90298519704305673
+  references:
+    version: 2
+    RefIds:
+    - rid: 90298519704305664
+      type: {class: CueAbilityTrack, ns: GAS.Runtime, asm: UnityChanAct}
+      data:
+        trackLabel: "\u52A8\u753B\u8F68\u9053"
+        m_Clips:
+        - rid: 90298519704305666
+    - rid: 90298519704305666
+      type: {class: AnimationCueClip, ns: UnityChanAct, asm: UnityChanAct}
+      data:
+        clipLabel: 
+        m_StartTick: 0
+        m_EndTick: 55
+        layer: 0
+        duration: 0
+        durationByScript: 0
+        rootMotion: 1
+        clip: {fileID: 7400000, guid: d925942051fdf16419cda285ab746d4f, type: 2}
+    - rid: 90298519704305669
+      type: {class: EffectAbilityTrack, ns: GAS.Runtime, asm: UnityChanAct}
+      data:
+        trackLabel: 
+        m_Clips:
+        - rid: 90298519704305670
+    - rid: 90298519704305670
+      type: {class: TimeLineEffectClip, ns: UnityChanAct, asm: UnityChanAct}
+      data:
+        clipLabel: 
+        m_StartTick: 0
+        m_EndTick: 43
+        gameplayEffect: {fileID: 11400000, guid: 75a7b103e031ad14e941cdd3c88ff676, type: 2}
+    - rid: 90298519704305673
+      type: {class: EffectAbilityTrack, ns: GAS.Runtime, asm: UnityChanAct}
+      data:
+        trackLabel: 
+        m_Clips:
+        - rid: 90298519704305675
+    - rid: 90298519704305675
+      type: {class: ComboEffectClip, ns: UnityChanAct, asm: UnityChanAct}
+      data:
+        clipLabel: 
+        m_StartTick: 43
+        m_EndTick: 55
+        gameplayEffect: {fileID: 11400000, guid: 0fe9108a20ddea2409f23941532505ad, type: 2}
+        comboName: Action_Sprint
+        condition: 2
+        type: 1
+        delayComboTick: 43

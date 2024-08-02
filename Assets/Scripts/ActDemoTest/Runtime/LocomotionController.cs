@@ -7,7 +7,8 @@ namespace UnityChanAct
 {
     public class LocomotionController : MonoBehaviour
     {
-        private Vector3 m_WorldMoveDirection, m_PreviousWorldMoveDirection, m_DirectionLerp;
+        private Vector3 m_WorldMoveDirection, m_DirectionLerp;
+        public Vector3 WorldMoveDirection { get { return m_WorldMoveDirection; } }
 
         private Transform m_Transform, m_RootBone;
 
@@ -21,7 +22,7 @@ namespace UnityChanAct
 
         private float m_ReturnTime, m_ReturnFadeTime;
 
-        private bool m_EnableLocomotion, m_EnableMove, m_EnableRotate;
+        private bool m_EnableLocomotion, m_EnableMove, m_EnableRotate, m_EnableDirectionCommand;
 
         private bool m_IsMoveing;
 
@@ -36,6 +37,23 @@ namespace UnityChanAct
         public bool IsReturnning { get { return m_ReturnTime > 0; } }
         public bool IsMoveCommand { get { return m_WorldMoveDirection.sqrMagnitude > 0; } }
         public bool IsMoveing { get { return m_IsMoveing; } }
+
+        public bool EnableDirectionCommand
+        {
+            get { return m_EnableDirectionCommand; }
+            set
+            {
+                if (m_EnableDirectionCommand == value)
+                    return;
+                m_EnableDirectionCommand = value;
+
+                if (m_EnableDirectionCommand)
+                    m_WorldMoveDirection = Vector3.zero;
+                else
+                    m_IsMoveing = false;
+
+            }
+        }
         public bool EnableLocomotion 
         { 
             get { return m_EnableLocomotion; } 
@@ -48,10 +66,7 @@ namespace UnityChanAct
                 if (m_EnableLocomotion)
                     m_WorldMoveDirection = Vector3.zero;
                 else
-                {
                     m_IsMoveing = false;
-                    ResetMoveTilt();
-                }
 
                 OnEnableLocomotion?.Invoke(m_EnableLocomotion);
             } 
@@ -161,7 +176,7 @@ namespace UnityChanAct
             {
                 m_CurveElapsedTime = 0;
                 m_ReturnTime = OnMoveReturnStart.Invoke();
-                m_ReturnFadeTime = m_ReturnTime - (float)(m_ReturnTime * 0.75f / 1.3f);
+                m_ReturnFadeTime = m_ReturnTime - (float)(m_ReturnTime * 0.9f / 1f);
             }
         }
 
@@ -170,14 +185,12 @@ namespace UnityChanAct
         /// </summary>
         public void UpdateMoveDirection(Vector3 direction)
         {
-            if (!EnableLocomotion)
-                return;
-
-            m_PreviousWorldMoveDirection = m_WorldMoveDirection;
             m_WorldMoveDirection = direction;
             m_WorldMoveDirection.y = 0f;
             m_WorldMoveDirection.Normalize();
 
+            if (!EnableLocomotion || !EnableDirectionCommand)
+                return;
             if (IsMoveCommand && !IsMoveing)
                 RequestMoveStart();
             else if (!IsMoveCommand && IsMoveing)
@@ -284,8 +297,13 @@ namespace UnityChanAct
         /// <param name="deltaTime"></param>
         private void MoveTiltCorrect(float deltaTime)
         {
-            if (StartMoveRotating || IsReturnning)
+            if (StartMoveRotating || IsReturnning || !IsMoveing)
+            {
+                var ceuler = m_RootBone.rotation.eulerAngles;
+                ceuler.z = 0f;
+                m_RootBone.rotation = Quaternion.Euler(ceuler);
                 return;
+            }
             var euler = m_RootBone.rotation.eulerAngles;
             float angularVelocity = Mathf.Clamp(CalculateAngularVelocity(deltaTime), -tiltAngle, tiltAngle);
 

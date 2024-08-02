@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layer: 0
   tag: 1
-  motion: {fileID: 7400000, guid: d51a057137d96d4489dfdc02090e7628, type: 2}
+  motion: {fileID: 7400000, guid: c70890df6f2c22d4eb5ab6a2fcdfa042, type: 2}
   speed: 1
   timeOffset: 0
   footIK: 0

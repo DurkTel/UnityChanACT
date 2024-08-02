@@ -232,6 +232,8 @@ namespace GAS.Editor
                 if (EditorGUI.EndChangeCheck())
                 {
                     m_ArchetypeAsset.AbilityAssets = m_DataList.ToArray();
+                    EditorUtility.SetDirty(m_ArchetypeAsset);
+
                 }
             }
         }

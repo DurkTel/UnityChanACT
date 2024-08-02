@@ -56,6 +56,7 @@ namespace UnityChanAct
         public int index;
         public string name;
         public float duration;
+        public bool rootMotion;
         public AnimationClip clip;
         public string[] queueNames;
         public ActionerEvent actionEvent;

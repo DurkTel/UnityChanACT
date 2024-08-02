@@ -36,14 +36,14 @@ namespace GAS.Runtime
                 if (gameplayEffect.DurationType != EffectDurationType.TimeLine) //挂在片段里用不能自己设值
                     gameplayEffect.DurationType = EffectDurationType.TimeLine;
 
-                gameplayEffect.ClipDuration = Duration * 0.02f;
+                //gameplayEffect.ClipDuration = Duration * 0.02f;
 
                 UnityEditor.EditorGUI.BeginChangeCheck();
                 m_AssetEditor.OnInspectorGUI();
                 if (UnityEditor.EditorGUI.EndChangeCheck())
                 {
                     isDirty = true;
-                    m_EndTick = m_StartTick + Mathf.RoundToInt(gameplayEffect.ClipDuration / 0.02f);
+                    //m_EndTick = m_StartTick + Mathf.RoundToInt(gameplayEffect.ClipDuration / 0.02f);
                 }
             }
             else

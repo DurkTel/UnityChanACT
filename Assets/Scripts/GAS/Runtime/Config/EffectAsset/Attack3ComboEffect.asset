@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Attack3ComboEffect
   m_EditorClassIdentifier: 
   Description: 
-  Type: 
-  DurationType: 0
+  Type: ComboEffect
+  DurationType: 3
   TriggerType: 0
   Duration: 0
   Period: 0
-  ClipDuration: 0
   StackingEffect:
     stackingType: 0
     durationRefreshType: 0

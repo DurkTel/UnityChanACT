@@ -1,5 +1,6 @@
+using Actioner.Runtime;
 using GAS.Runtime;
-using System;
+using LGameFramework.GameBase.Blackboard;
 using UnityEngine;
 
 namespace UnityChanAct
@@ -11,11 +12,25 @@ namespace UnityChanAct
 
         public float duration;
 
+        public bool durationByScript;
+
+        public bool rootMotion;
+
         public AnimationClip clip;
 
         public override void OnTrigger(AbilitySystemComponent asc)
         {
-            AnimationCue.Trigger<AnimationClipCue>(asc, new AnimationCueArg() { clip = clip, duration = duration, layer = layer });
+
+            var newDur = duration;
+            if (durationByScript && asc.TryGetComponent<GameBlackboard>(out var blackboard))
+            {
+                blackboard.TryGetValue(PlayerController.s_AnimationDurationKey, out newDur);
+                blackboard.SetValue<float>(PlayerController.s_AnimationDurationKey, ActionerPlayable.s_DefaultFadeSpeed);
+            }
+
+            AnimationCue.Trigger<AnimationClipCue>(asc, new AnimationCueArg() { clip = clip, duration = newDur, layer = layer, rootMotion = rootMotion });
+
+
         }
 
 #if UNITY_EDITOR
@@ -24,8 +39,6 @@ namespace UnityChanAct
         {
             bool isDirty = base.OnInspectorGUI();
 
-            layer = UnityEditor.EditorGUILayout.IntField("播放层级",layer);
-            duration = UnityEditor.EditorGUILayout.FloatField("过渡时间", duration);
             using (new UnityEditor.EditorGUILayout.HorizontalScope())
             {
                 clip = UnityEditor.EditorGUILayout.ObjectField("动画片段", clip, typeof(AnimationClip), false) as AnimationClip;
@@ -35,6 +48,14 @@ namespace UnityChanAct
                     isDirty = true;
                 }
             }
+
+
+            layer = UnityEditor.EditorGUILayout.IntField("播放层级", layer);
+            if (!durationByScript)
+                duration = UnityEditor.EditorGUILayout.FloatField("过渡时间", duration);
+
+            durationByScript = UnityEditor.EditorGUILayout.ToggleLeft("使用脚本赋值过渡时间", durationByScript);
+            rootMotion = UnityEditor.EditorGUILayout.ToggleLeft("应用RootMotion", rootMotion);
 
             return isDirty;
         }

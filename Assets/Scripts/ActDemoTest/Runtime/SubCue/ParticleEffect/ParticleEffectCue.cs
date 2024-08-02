@@ -54,6 +54,8 @@ namespace UnityChanAct
 
         private GameObject m_ParticleObj;
 
+        private ParticleCueArg m_ParticleArg;
+
         public override void Dispose()
         {
             GameObject.Destroy(m_ParticleObj);
@@ -64,13 +66,20 @@ namespace UnityChanAct
         {
             if (arg is ParticleCueArg actionArg)
             {
-                m_EndTimeStamp = DateTime.Now.Ticks + (long)(actionArg.duration * 10000000d);
-                m_ParticleObj = GameObject.Instantiate(actionArg.particleEffect);
+                m_ParticleArg = actionArg;
+                m_EndTimeStamp = DateTime.Now.Ticks + (long)(m_ParticleArg.duration * 10000000d);
+                m_ParticleObj = GameObject.Instantiate(m_ParticleArg.particleEffect);
 
-                m_ParticleObj.transform.rotation = m_ASC.transform.rotation * Quaternion.Euler(actionArg.rotation);
-                m_ParticleObj.transform.localPosition = GetTargetPos(actionArg.effectPointType) + actionArg.position;
-                m_ParticleObj.transform.localScale = actionArg.scale;
+                m_ParticleObj.transform.localScale = m_ParticleArg.scale;
             }
+        }
+
+        public override void OnUpdate(float deltaTime)
+        {
+            base.OnUpdate(deltaTime);
+
+            m_ParticleObj.transform.rotation = m_ASC.transform.rotation * Quaternion.Euler(m_ParticleArg.rotation);
+            m_ParticleObj.transform.localPosition = GetTargetPos(m_ParticleArg.effectPointType) + m_ParticleArg.position;
         }
 
         private Vector3 GetTargetPos(EffectPointType point)

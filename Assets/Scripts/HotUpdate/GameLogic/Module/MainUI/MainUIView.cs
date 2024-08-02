@@ -15,15 +15,15 @@ namespace LGameFramework.GameLogic.GUI
         {
             base.OnInit();
 
-            Injection.Get<Button>("JumpBtn").onClick.AddListener(() =>
-            {
-                InputUtility.DispatchEvent(InputActionArgs.InputAction_Jump, InputMode.Click);
-            });
+            //Injection.Get<Button>("JumpBtn").onClick.AddListener(() =>
+            //{
+            //    InputUtility.DispatchEvent(InputActionArgs.InputAction_Jump, InputMode.Click);
+            //});
 
-            Injection.Get<Button>("EscapeBtn").onClick.AddListener(() =>
-            {
-                InputUtility.DispatchEvent(InputActionArgs.InputAction_Escape, InputMode.Click);
-            });
+            //Injection.Get<Button>("EscapeBtn").onClick.AddListener(() =>
+            //{
+            //    InputUtility.DispatchEvent(InputActionArgs.InputAction_Escape, InputMode.Click);
+            //});
         }
     }
 }

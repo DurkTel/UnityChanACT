@@ -88,6 +88,7 @@ namespace LGameFramework.GameCore.Audio
                 AudioSource.outputAudioMixerGroup = null;
                 Pause = false;
                 Delay = 0f;
+                AudioSource.Stop();
             }
         }
     }

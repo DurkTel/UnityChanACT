@@ -75,21 +75,23 @@ namespace GAS.Runtime
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        private void AddEffect<T>(GameplayEffectAsset effectAsset, params object[] paramArgs) where T : GameplayEffect, new()
+        private GameplayEffect AddEffect<T>(GameplayEffectAsset effectAsset, params object[] paramArgs) where T : GameplayEffect, new()
         {
             T effect = new T();
             effect.OnInit(effectAsset);
+            effect.OnUpdateTime(paramArgs);
             effect.Source = m_ASC;
 
             m_GameplayEffects.Add(effect);
 
-            if (effect.DurationType != EffectDurationType.Instant)
+            //TimeLine类型走时间轴update移除
+            if (effect.DurationType != EffectDurationType.Instant && effect.DurationType != EffectDurationType.TimeLine)
                 m_PreUpdateEffects.Add(effect);
 
             ApplyEffect(effect, paramArgs);
             effect.Stacking++;
             m_ASC.AddTagFromDynamic(effect, effect.ConditionTags.ActivationTags);
-
+            return effect;
         }
 
         /// <summary>
@@ -104,7 +106,7 @@ namespace GAS.Runtime
 
             m_GameplayEffects.Remove(effect);
 
-            if (effect.DurationType != EffectDurationType.Instant)
+            if (effect.DurationType != EffectDurationType.Instant && effect.DurationType != EffectDurationType.TimeLine)
                 m_PreUpdateEffects.Remove(effect);
 
             m_ASC.RemoveTagFromDynamic(effect, effect.ConditionTags.ActivationTags);
@@ -116,8 +118,9 @@ namespace GAS.Runtime
         /// <typeparam name="T"></typeparam>
         /// <param name="effectAsset"></param>
         /// <returns></returns>
-        public bool TryAddEffect<T>(GameplayEffectAsset effectAsset, params object[] paramArgs) where T : GameplayEffect, new()
+        public bool TryAddEffect<T>(GameplayEffectAsset effectAsset, out GameplayEffect newEffect, params object[] paramArgs) where T : GameplayEffect, new()
         {
+            newEffect = null;
             if (!m_ASC.CheckTagCondition(effectAsset.BlockActiveTags, effectAsset.RequireTags))
                 return false;
 
@@ -126,7 +129,7 @@ namespace GAS.Runtime
             //持续类型是瞬时的或者是不堆叠 直接加一个 独立计算
             if (effectAsset.DurationType == EffectDurationType.Instant || stackingEffect.stackingType == StackingType.None)
             {
-                AddEffect<T>(effectAsset, paramArgs);
+                newEffect = AddEffect<T>(effectAsset, paramArgs);
                 return true;
             }
             else
@@ -136,6 +139,7 @@ namespace GAS.Runtime
                     //如果已经有了 重新应用一次 并刷新时间（如果要）
                     if (effect.EffectAsset.Equals(effectAsset))
                     {
+                        newEffect = effect;
                         ApplyEffect(effect, paramArgs);
                         if (stackingEffect.durationRefreshType == StackingDurationRefreshType.Refresh)
                             effect.UpdateEndTime();

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace Actioner.Runtime
 {
@@ -128,6 +129,18 @@ namespace Actioner.Runtime
             }
         }
 
+        private DirectorUpdateMode m_UpdateMode;
+        public DirectorUpdateMode UpdateMode
+        {
+            get { return m_UpdateMode; }
+            set
+            {
+                if (m_UpdateMode == value) return;
+                m_UpdateMode = value;
+                ActionerPlayable.Graph.SetTimeUpdateMode(m_UpdateMode);
+            }
+        }
+
         private void Awake()
         {
             m_ActionPlayable = ActionerUtility.Create(this);
@@ -138,6 +151,11 @@ namespace Actioner.Runtime
             m_ActionPlayable.Dispose();
             if (m_ActionPlayable != null && m_ActionPlayable.Graph.IsValid())
                 m_ActionPlayable.Graph.Destroy();
+        }
+
+        public void Evaluate(float deltaTime)
+        {
+            m_ActionPlayable.Graph.Evaluate(deltaTime);
         }
 
         /// <summary>

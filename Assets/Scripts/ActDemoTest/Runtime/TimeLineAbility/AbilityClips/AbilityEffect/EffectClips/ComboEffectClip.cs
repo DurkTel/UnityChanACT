@@ -1,4 +1,5 @@
 using GAS.Runtime;
+using System;
 
 namespace UnityChanAct
 {
@@ -6,14 +7,25 @@ namespace UnityChanAct
     public class ComboEffectClip : EffectAbilityClip
     {
 
+        [Flags]
         public enum ComboCondition
         { 
-            NormalAttack,
+            None = 0,
+            NormalAttack = 1,
+            MoveCommand = 2,
+        }
+
+        public enum ComboType
+        { 
+            Ability,
+            Action
         }
 
         public string comboName;
 
         public ComboCondition condition;
+
+        public ComboType type;
 
         public int delayComboTick;
 
@@ -23,9 +35,11 @@ namespace UnityChanAct
         {
             bool isDirty = base.OnCustomPropertyGUI();
 
-            condition = (ComboCondition)UnityEditor.EditorGUILayout.EnumPopup("触发条件", condition);
+            type = (ComboType)UnityEditor.EditorGUILayout.EnumPopup("派生类型", type);
 
-            comboName = UnityEditor.EditorGUILayout.TextField("派生技能名称", comboName);
+            condition = (ComboCondition)UnityEditor.EditorGUILayout.EnumFlagsField("触发条件", condition);
+
+            comboName = UnityEditor.EditorGUILayout.TextField("派生名称", comboName);
 
             delayComboTick = UnityEditor.EditorGUILayout.IntSlider("至少该帧之后才触发", delayComboTick, StartTick, EndTick);
 

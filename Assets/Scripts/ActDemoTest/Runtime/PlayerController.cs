@@ -3,7 +3,9 @@ using Actioner.Runtime;
 using LGameFramework.GameBase.Blackboard;
 using LGameFramework.GameCore;
 using UnityEngine;
+using UnityEngine.Playables;
 using static LGameFramework.GameCore.Input.GMInputManager;
+using static UnityEditor.Progress;
 
 namespace GAS.Runtime
 {
@@ -29,6 +31,7 @@ namespace GAS.Runtime
         public static readonly BlackboardKey s_WorldMoveDirectionKey = new BlackboardKey("WorldMoveDirectionKey");
         public static readonly BlackboardKey s_MoveCommandKey = new BlackboardKey("MoveCommandKey");
         public static readonly BlackboardKey s_SprintCommandKey = new BlackboardKey("SprintCommandKey");
+        public static readonly BlackboardKey s_AnimationDurationKey = new BlackboardKey("AnimationDurationKey");
 
         private void Start()
         {
@@ -37,9 +40,11 @@ namespace GAS.Runtime
             m_Blackboard = gameObject.TryAddComponent<GameBlackboard>();
 
             InputUtility.RegisterListener((InputActionArgs.InputAction_Move, InputMode.Direction), OnUpdateMoveInput);
-            InputUtility.RegisterListener((InputActionArgs.InputAction_Run, InputMode.Click), OnUpdateRunInput);
             InputUtility.RegisterListener((InputActionArgs.InputAction_Dodge, InputMode.Click), OnUpdateDodgeInput);
-            InputUtility.RegisterListener((InputActionArgs.InputAction_LightAttack, InputMode.Click), OnUpdateAttackInput);
+            InputUtility.RegisterListener((InputActionArgs.InputAction_Attack, InputMode.Click), OnUpdateAttackInput);
+            InputUtility.RegisterListener((InputActionArgs.InputAction_SpecialAttack, InputMode.Click), OnUpdateAttackInput);
+            InputUtility.RegisterListener((InputActionArgs.InputAction_Guard, InputMode.Click), OnUpdateGuardInput);
+            InputUtility.RegisterListener((InputActionArgs.InputAction_Guard, InputMode.Release), OnUpdateGuardInput);
 
             m_CameraTrans = GameFrameworkEntry.GetModule<GMOrbitCamera>().Transform;
 
@@ -50,8 +55,10 @@ namespace GAS.Runtime
         {
             m_ASC.Tags.UpdateDynamicTags(this, m_ActionerController.IsApplyRootMotion, GameplayTagsLib.Event_Animation_RootMotion);
             m_ASC.Tags.UpdateDynamicTags(this, m_LocomotionController.IsMoveing, GameplayTagsLib.Event_Locomotion_IsMoveing);
+            m_ASC.Tags.UpdateDynamicTags(this, m_LocomotionController.IsMoveCommand, GameplayTagsLib.Command_Move);
             m_ASC.Tags.UpdateDynamicTags(this, m_LocomotionController.IsReturnning, GameplayTagsLib.Ability_Locomotion_SharpTurn);
 
+            m_LocomotionController.EnableDirectionCommand = m_ASC.Tags.HasNoneTags(GameplayTagsLib.Command_BanCommand_BanMoveCommand);
             m_LocomotionController.EnableLocomotion = m_ASC.Tags.HasNoneTags(GameplayTagsLib.Event_Locomotion_BanLocomotion);
             m_LocomotionController.EnableMove = m_ASC.Tags.HasNoneTags(GameplayTagsLib.Event_Locomotion_BanMove);
             m_LocomotionController.EnableRotate = m_ASC.Tags.HasNoneTags(GameplayTagsLib.Event_Locomotion_BanRotate);
@@ -83,27 +90,40 @@ namespace GAS.Runtime
 
         }
 
-        private void OnUpdateRunInput(InputActionArgs arg)
-        {
-            m_Sprinting = !m_Sprinting;
-            m_Blackboard.SetValue(s_SprintCommandKey, m_Sprinting);
-            if (m_Sprinting)
-                m_ASC.Abilitys.TryActivateAbility<SprintAbility>();
-            else
-                m_ASC.Abilitys.TryInActivateAbility<SprintAbility>();
-        }
-
         private void OnUpdateDodgeInput(InputActionArgs arg)
         {
-            m_ASC.Abilitys.TryActivateAbility<DodgeAbility>();
+            //m_ASC.Abilitys.TryActivateAbility<DodgeAbility>();
+            var actionName = m_ASC.Tags.HasTag(GameplayTagsLib.Command_Move) ? "Action_DodgeFront" : "Action_DodgeBack";
+
+            m_ASC.Abilitys.TryActivateAbility<ActionAbility>(actionName);
 
         }
 
         private void OnUpdateAttackInput(InputActionArgs arg)
         {
-            m_ASC.Abilitys.TryActivateAbility("Skill_10000");
-            m_ASC.Tags.AddDynamicTags(this, GameplayTagsLib.Command_Fight_Attack);
+            if (arg.ActionName == InputActionArgs.InputAction_Attack)
+            {
+                if (m_ASC.Tags.HasTag(GameplayTagsLib.Event_Locomotion_Sprint))
+                    m_ASC.Abilitys.TryActivateAbility("Skill_10003");
+                else
+                    m_ASC.Abilitys.TryActivateAbility("Skill_10000");
+                m_ASC.Tags.AddDynamicTags(this, GameplayTagsLib.Command_Fight_Attack);
+            }
+            else if (arg.ActionName == InputActionArgs.InputAction_SpecialAttack)
+            {
+                m_ASC.Abilitys.TryActivateAbility("Skill_10004");
+            }
         }
+
+        private void OnUpdateGuardInput(InputActionArgs arg)
+        {
+            if (arg.InputMode == InputMode.Click)
+                m_ASC.Abilitys.TryActivateAbility<GuardAbility>();
+            else if (arg.InputMode == InputMode.Release)
+                m_ASC.Abilitys.TryInActivateAbility<GuardAbility>();
+        }
+
+        private ActionAbility actionAbility;
 
         private void OnGUI()
         {
@@ -126,6 +146,14 @@ namespace GAS.Runtime
             GUILayout.EndVertical();
 
             GUILayout.EndHorizontal();
+
+            actionAbility ??= m_ASC.Abilitys.GetAbility("ActionAbility") as ActionAbility;
+            if (actionAbility != null)
+            {
+                GUILayout.Label("µ±Ç°Action£º", style);
+                GUILayout.Label(actionAbility.CurrentAction.TimeLineAsset.UID, style);
+            }
+
         }
     }
 }

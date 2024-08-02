@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 776fc7fd57cbe894aa746a64751a0985, type: 3}
+  m_Name: ActionAbility
+  m_EditorClassIdentifier: 
+  Description: 
+  UID: ActionAbility
+  FixedTags: []
+  ActivationTags: []
+  CancelTags: []
+  BlockActiveTags: []
+  BlockInActiveTags: []
+  RequireTags: []
+  DefaultAction: {fileID: 11400000, guid: fea20a2f5ee18be45a718ccc2ade49ed, type: 2}
+  Actions:
+  - {fileID: 11400000, guid: fea20a2f5ee18be45a718ccc2ade49ed, type: 2}
+  - {fileID: 11400000, guid: f0f9496ff19d77545ae119c55b4cec95, type: 2}
+  - {fileID: 11400000, guid: 5328264e57a28a145841f1e39c704040, type: 2}
+  - {fileID: 11400000, guid: cd8551c757dc8f24a889e0b815f1c363, type: 2}
+  - {fileID: 11400000, guid: b7081edee513b8448b4b1501c2bbe28f, type: 2}
+  - {fileID: 11400000, guid: d71dc23b0ada56543956c57e12700195, type: 2}
+  - {fileID: 11400000, guid: d2c98d659cc69e44eb51c6889f724809, type: 2}
+  - {fileID: 11400000, guid: e51a3dc9099ebb6448e48458a5b240b1, type: 2}
+  - {fileID: 11400000, guid: 000e3f6366608a440b3bbf9ea1c38929, type: 2}

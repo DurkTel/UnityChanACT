@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: AttackDelayEffect
   m_EditorClassIdentifier: 
   Description: "\u901A\u7528\u653B\u51FB\u524D\u6447"
-  Type: 
+  Type: TimeLineEffect
   DurationType: 3
   TriggerType: 0
   Duration: 0.44
   Period: 0
-  ClipDuration: 1.02
   StackingEffect:
     stackingType: 0
     durationRefreshType: 0
@@ -33,13 +32,13 @@ MonoBehaviour:
     m_ParentNames:
     - Event
     - Event.Fight
-  - m_FullName: Event.Locomotion.BanMove
-    m_ShortName: BanMove
-    m_HashCode: -76205235
-    m_ParentHasCodes: 0276cb276f1c6a4a
+  - m_FullName: Command.BanCommand.BanMoveCommand
+    m_ShortName: BanMoveCommand
+    m_HashCode: 1276318996
+    m_ParentHasCodes: 1bf50a1bef87e7e1
     m_ParentNames:
-    - Event
-    - Event.Locomotion
+    - Command
+    - Command.BanCommand
   CancelTags: []
   BlockActiveTags: []
   RequireTags: []

@@ -46,7 +46,7 @@ public class AudioSettingEditor : Editor
         }
 
         serializedObject.ApplyModifiedProperties();
-
+        EditorUtility.SetDirty(m_AudioSetting);
     }
 
     private void DrawFrameList()

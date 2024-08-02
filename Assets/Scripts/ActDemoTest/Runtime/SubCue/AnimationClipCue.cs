@@ -1,4 +1,5 @@
 using Actioner.Runtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace UnityChanAct
         protected override ActionerAction PlayAction(AnimationCueArg arg)
         {
             var action = m_ActionerController.CrossFade(arg.clip, arg.duration, arg.layer);
+            if (arg.rootMotion)
+                action.ApplyRootMotion = true;
 
             if (!arg.actionEvent.IsEmptyOrNull())
                 action.EventSequence.AddEvent(arg.actionEvent);
@@ -22,5 +25,6 @@ namespace UnityChanAct
 
             return action;
         }
+
     }
 }
