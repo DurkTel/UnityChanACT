@@ -18,35 +18,35 @@ MonoBehaviour:
     isLoop: 0
     playMode: 0
   - trackName: BGAudio
-    isLoop: 0
-    playMode: 0
+    isLoop: 1
+    playMode: 1
   - trackName: TalkAudio
     isLoop: 0
-    playMode: 0
+    playMode: 2
   - trackName: CityLoopAudio
-    isLoop: 0
-    playMode: 0
+    isLoop: 1
+    playMode: 1
   - trackName: CopyLoopAudio
-    isLoop: 0
-    playMode: 0
+    isLoop: 1
+    playMode: 1
   - trackName: EffectAudio
     isLoop: 0
-    playMode: 0
+    playMode: 2
   - trackName: HitAudio
     isLoop: 0
-    playMode: 0
+    playMode: 2
   - trackName: HurtAudio
     isLoop: 0
-    playMode: 0
+    playMode: 2
   - trackName: OtherAudio
     isLoop: 0
-    playMode: 0
+    playMode: 2
   - trackName: UiAudio
     isLoop: 0
-    playMode: 0
+    playMode: 2
   - trackName: UiLoopAudio
-    isLoop: 0
-    playMode: 0
+    isLoop: 1
+    playMode: 1
   - trackName: UiEffectAudio
     isLoop: 0
-    playMode: 0
+    playMode: 2

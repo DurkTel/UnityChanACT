@@ -1,0 +1,45 @@
+{
+    "frameRate": 60,
+    "gameSpeed": 1.0,
+    "runInBackground": true,
+    "neverSleep": true,
+    "assetLoadMode": 1,
+    "buildingFileName": "buildingFile.json",
+    "assetManifestFileName": "assetManifest.json",
+    "versionFileName": "version.txt",
+    "downloadDataPath": {
+        "pathPrefix": 1,
+        "path": "/../A_AssetBundles/"
+    },
+    "serverDataPath": {
+        "pathPrefix": 0,
+        "path": "E:/UnityBuild/AssetBundle/StandaloneWindows64/"
+    },
+    "buildingPath": {
+        "pathPrefix": 2,
+        "path": "/A_AssetBundles/"
+    },
+    "hotUpdateDllPath": {
+        "pathPrefix": 1,
+        "path": "/../A_AssetBundles/SupplementDlls"
+    },
+    "hotUpdateDll": [
+        "Assembly-GameCore.dll",
+        "Assembly-GameNet.dll",
+        "Actioner.Runtime.dll",
+        "GAS.Runtime.dll",
+        "Assembly-GameLogic.dll"
+    ],
+    "aotGenericDll": [
+        "Assembly-GameBase.dll",
+        "System.Core.dll",
+        "System.dll",
+        "UnityEngine.CoreModule.dll",
+        "mscorlib.dll",
+        "UniTask.dll",
+        "Google.Protobuf.dll",
+        "UnityEngine.AnimationModule.dll",
+        "DOTween.dll",
+        "Unity.Postprocessing.Runtime.dll"
+    ]
+}

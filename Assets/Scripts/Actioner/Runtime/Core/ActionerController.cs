@@ -21,7 +21,7 @@ namespace Actioner.Runtime
         { 
             get 
             {
-                m_Animator ??= GetComponent<Animator>();
+                m_Animator ??= GetComponentInChildren<Animator>();
                 return m_Animator; 
             } 
         }
@@ -164,7 +164,7 @@ namespace Actioner.Runtime
         /// <param name="layer"></param>
         /// <returns></returns>
         public ActionerLayer TryAddLayer(int layer)
-        { 
+        {
             return m_ActionPlayable.LayerMixer.TryAddLayer(layer);
         }
 

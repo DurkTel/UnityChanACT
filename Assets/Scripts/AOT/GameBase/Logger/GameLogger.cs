@@ -204,7 +204,7 @@ namespace LGameFramework.GameBase
 
             //发生严重错误 记录信息
             string str = string.Format("错误信息：{0}, 调用堆栈：[{1}]", message.ToString(), new System.Diagnostics.StackTrace().ToString());
-            RECORD_LOG(GamePathSetting.Get().CurrentPlatform().downloadDataPath.AssetPath + "fatalError.log", str, GameLoggerLevel.Fatal);
+            RECORD_LOG(GameConfig.Instance.downloadDataPath.AssetPath + "fatalError.log", str, GameLoggerLevel.Fatal);
         }
 
         /// <summary>

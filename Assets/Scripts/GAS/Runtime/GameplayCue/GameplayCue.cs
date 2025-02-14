@@ -8,12 +8,12 @@ namespace GAS.Runtime
     /// </summary>
     public abstract class GameplayCue : IDisposable
     {
-        protected AbilitySystemComponent m_ASC;
-        public AbilitySystemComponent ASC { get { return m_ASC; } }
+        protected IAbilitySystemComponent m_ASC;
+        public IAbilitySystemComponent ASC { get { return m_ASC; } }
 
         public float triggerTime;
 
-        public virtual void OnInit(AbilitySystemComponent asc)
+        public virtual void OnInit(IAbilitySystemComponent asc)
         { 
             m_ASC = asc;
         }

@@ -12,6 +12,60 @@ namespace GAS.Runtime
 {
     public static class GameplayTagsLib
     {
+        private static GameplayTag s_Buff = new GameplayTag("Buff");
+        /// <summary>
+        /// 增益效果
+        /// </summary>
+        public static GameplayTag Buff { get { return s_Buff; } }
+
+        private static GameplayTag s_Buff_DodgeBuff = new GameplayTag("Buff.DodgeBuff");
+        /// <summary>
+        /// 极限闪避成功
+        /// </summary>
+        public static GameplayTag Buff_DodgeBuff { get { return s_Buff_DodgeBuff; } }
+
+        private static GameplayTag s_Action = new GameplayTag("Action");
+        /// <summary>
+        /// 动作分类
+        /// </summary>
+        public static GameplayTag Action { get { return s_Action; } }
+
+        private static GameplayTag s_Action_PerfectGuard = new GameplayTag("Action.PerfectGuard");
+        /// <summary>
+        /// 完美格挡
+        /// </summary>
+        public static GameplayTag Action_PerfectGuard { get { return s_Action_PerfectGuard; } }
+
+        private static GameplayTag s_Action_Move = new GameplayTag("Action.Move");
+        /// <summary>
+        /// 移动动作
+        /// </summary>
+        public static GameplayTag Action_Move { get { return s_Action_Move; } }
+
+        private static GameplayTag s_Action_Guard = new GameplayTag("Action.Guard");
+        /// <summary>
+        /// 防御动作
+        /// </summary>
+        public static GameplayTag Action_Guard { get { return s_Action_Guard; } }
+
+        private static GameplayTag s_Action_HandOffSkill = new GameplayTag("Action.HandOffSkill");
+        /// <summary>
+        /// 脱手技能
+        /// </summary>
+        public static GameplayTag Action_HandOffSkill { get { return s_Action_HandOffSkill; } }
+
+        private static GameplayTag s_Action_Dodge = new GameplayTag("Action.Dodge");
+        /// <summary>
+        /// 闪避动作
+        /// </summary>
+        public static GameplayTag Action_Dodge { get { return s_Action_Dodge; } }
+
+        private static GameplayTag s_Action_Attack = new GameplayTag("Action.Attack");
+        /// <summary>
+        /// 攻击动作
+        /// </summary>
+        public static GameplayTag Action_Attack { get { return s_Action_Attack; } }
+
         private static GameplayTag s_Command = new GameplayTag("Command");
         /// <summary>
         /// 输入命令
@@ -59,6 +113,12 @@ namespace GAS.Runtime
         /// 战斗相关
         /// </summary>
         public static GameplayTag Event_Fight { get { return s_Event_Fight; } }
+
+        private static GameplayTag s_Event_Fight_TickFreeze = new GameplayTag("Event.Fight.TickFreeze");
+        /// <summary>
+        /// 帧冻结
+        /// </summary>
+        public static GameplayTag Event_Fight_TickFreeze { get { return s_Event_Fight_TickFreeze; } }
 
         private static GameplayTag s_Event_Fight_Guard = new GameplayTag("Event.Fight.Guard");
         /// <summary>
@@ -144,23 +204,77 @@ namespace GAS.Runtime
         /// </summary>
         public static GameplayTag Camp { get { return s_Camp; } }
 
-        private static GameplayTag s_Camp_Enemy = new GameplayTag("Camp.Enemy");
+        private static GameplayTag s_Camp_Camp2 = new GameplayTag("Camp.Camp2");
         /// <summary>
-        /// 敌方阵营
+        /// 阵营2
         /// </summary>
-        public static GameplayTag Camp_Enemy { get { return s_Camp_Enemy; } }
+        public static GameplayTag Camp_Camp2 { get { return s_Camp_Camp2; } }
 
-        private static GameplayTag s_Camp_Friendly = new GameplayTag("Camp.Friendly");
+        private static GameplayTag s_Camp_Camp1 = new GameplayTag("Camp.Camp1");
         /// <summary>
-        /// 友方阵营
+        /// 阵营1
         /// </summary>
-        public static GameplayTag Camp_Friendly { get { return s_Camp_Friendly; } }
+        public static GameplayTag Camp_Camp1 { get { return s_Camp_Camp1; } }
+
+        private static GameplayTag s_Camp_Local = new GameplayTag("Camp.Local");
+        /// <summary>
+        /// 自己
+        /// </summary>
+        public static GameplayTag Camp_Local { get { return s_Camp_Local; } }
 
         private static GameplayTag s_Ability = new GameplayTag("Ability");
         /// <summary>
         /// 能力标签
         /// </summary>
         public static GameplayTag Ability { get { return s_Ability; } }
+
+        private static GameplayTag s_Ability_AutoActive = new GameplayTag("Ability.AutoActive");
+        /// <summary>
+        /// 自动激活
+        /// </summary>
+        public static GameplayTag Ability_AutoActive { get { return s_Ability_AutoActive; } }
+
+        private static GameplayTag s_Ability_Avatar = new GameplayTag("Ability.Avatar");
+        /// <summary>
+        /// 模型
+        /// </summary>
+        public static GameplayTag Ability_Avatar { get { return s_Ability_Avatar; } }
+
+        private static GameplayTag s_Ability_Avatar_AvatarComplete = new GameplayTag("Ability.Avatar.AvatarComplete");
+        /// <summary>
+        /// 整个模型加载完成
+        /// </summary>
+        public static GameplayTag Ability_Avatar_AvatarComplete { get { return s_Ability_Avatar_AvatarComplete; } }
+
+        private static GameplayTag s_Ability_Avatar_HairComplete = new GameplayTag("Ability.Avatar.HairComplete");
+        /// <summary>
+        /// 头发加载完成
+        /// </summary>
+        public static GameplayTag Ability_Avatar_HairComplete { get { return s_Ability_Avatar_HairComplete; } }
+
+        private static GameplayTag s_Ability_Avatar_HeadComplete = new GameplayTag("Ability.Avatar.HeadComplete");
+        /// <summary>
+        /// 头部加载完成
+        /// </summary>
+        public static GameplayTag Ability_Avatar_HeadComplete { get { return s_Ability_Avatar_HeadComplete; } }
+
+        private static GameplayTag s_Ability_Avatar_ClothingComplete = new GameplayTag("Ability.Avatar.ClothingComplete");
+        /// <summary>
+        /// 衣服加载完成
+        /// </summary>
+        public static GameplayTag Ability_Avatar_ClothingComplete { get { return s_Ability_Avatar_ClothingComplete; } }
+
+        private static GameplayTag s_Ability_Avatar_BodyComplete = new GameplayTag("Ability.Avatar.BodyComplete");
+        /// <summary>
+        /// 身体加载完成
+        /// </summary>
+        public static GameplayTag Ability_Avatar_BodyComplete { get { return s_Ability_Avatar_BodyComplete; } }
+
+        private static GameplayTag s_Ability_Avatar_SkeletonComplete = new GameplayTag("Ability.Avatar.SkeletonComplete");
+        /// <summary>
+        /// 骨骼加载完成
+        /// </summary>
+        public static GameplayTag Ability_Avatar_SkeletonComplete { get { return s_Ability_Avatar_SkeletonComplete; } }
 
         private static GameplayTag s_Ability_Action = new GameplayTag("Ability.Action");
         /// <summary>
@@ -216,6 +330,15 @@ namespace GAS.Runtime
         /// </summary>
         public static Dictionary<string, GameplayTag> TagMap = new Dictionary<string, GameplayTag>
         {
+            ["Buff"] = Buff,
+            ["Buff.DodgeBuff"] = Buff_DodgeBuff,
+            ["Action"] = Action,
+            ["Action.PerfectGuard"] = Action_PerfectGuard,
+            ["Action.Move"] = Action_Move,
+            ["Action.Guard"] = Action_Guard,
+            ["Action.HandOffSkill"] = Action_HandOffSkill,
+            ["Action.Dodge"] = Action_Dodge,
+            ["Action.Attack"] = Action_Attack,
             ["Command"] = Command,
             ["Command.BanCommand"] = Command_BanCommand,
             ["Command.BanCommand.BanMoveCommand"] = Command_BanCommand_BanMoveCommand,
@@ -224,6 +347,7 @@ namespace GAS.Runtime
             ["Command.Fight.Attack"] = Command_Fight_Attack,
             ["Event"] = Event,
             ["Event.Fight"] = Event_Fight,
+            ["Event.Fight.TickFreeze"] = Event_Fight_TickFreeze,
             ["Event.Fight.Guard"] = Event_Fight_Guard,
             ["Event.Fight.SpecialAttack"] = Event_Fight_SpecialAttack,
             ["Event.Fight.AttackWindup"] = Event_Fight_AttackWindup,
@@ -238,9 +362,18 @@ namespace GAS.Runtime
             ["Event.Animation"] = Event_Animation,
             ["Event.Animation.RootMotion"] = Event_Animation_RootMotion,
             ["Camp"] = Camp,
-            ["Camp.Enemy"] = Camp_Enemy,
-            ["Camp.Friendly"] = Camp_Friendly,
+            ["Camp.Camp2"] = Camp_Camp2,
+            ["Camp.Camp1"] = Camp_Camp1,
+            ["Camp.Local"] = Camp_Local,
             ["Ability"] = Ability,
+            ["Ability.AutoActive"] = Ability_AutoActive,
+            ["Ability.Avatar"] = Ability_Avatar,
+            ["Ability.Avatar.AvatarComplete"] = Ability_Avatar_AvatarComplete,
+            ["Ability.Avatar.HairComplete"] = Ability_Avatar_HairComplete,
+            ["Ability.Avatar.HeadComplete"] = Ability_Avatar_HeadComplete,
+            ["Ability.Avatar.ClothingComplete"] = Ability_Avatar_ClothingComplete,
+            ["Ability.Avatar.BodyComplete"] = Ability_Avatar_BodyComplete,
+            ["Ability.Avatar.SkeletonComplete"] = Ability_Avatar_SkeletonComplete,
             ["Ability.Action"] = Ability_Action,
             ["Ability.Fight"] = Ability_Fight,
             ["Ability.Fight.Guard"] = Ability_Fight_Guard,

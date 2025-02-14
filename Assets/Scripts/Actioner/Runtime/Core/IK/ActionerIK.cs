@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -234,11 +233,12 @@ namespace Actioner.Runtime
             UpdateFootIK(m_RightFoot, AvatarIKHandle.RightFoot, rightFootIKWeight, BindingAnimator.rightFeetBottomHeight);
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             if (!showGizmos) return;
 
-            if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponentInParent<ActionerIK>() != null)
+            if (UnityEditor.Selection.activeGameObject != null && UnityEditor.Selection.activeGameObject.GetComponentInParent<ActionerIK>() != null)
             {
                 float weight = (LookAtEffector.eyesWeight + LookAtEffector.headWeight + LookAtEffector.bodyWeight + LookAtEffector.clampWeight) / 4.0f;
                 DebugHelper.DrawSphere(m_LookAtHandle.position, 0.05f, Color.Lerp(Color.red, Color.green, weight), 0, false);
@@ -264,5 +264,6 @@ namespace Actioner.Runtime
             }
 
         }
+#endif
     }
 }

@@ -2,10 +2,12 @@
     "name": "GAS.Editor",
     "rootNamespace": "GAS.Editor",
     "references": [
-        "GUID:bae78366e394df143a7dea7fd51d233b",
-        "GUID:eda8e593c05771a44a287a807452c54b"
+        "GUID:883e5d04a88f1b04896288d419b1e0c0",
+        "GUID:6db4803a0b46990479475df701b86404"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": true,
     "overrideReferences": false,

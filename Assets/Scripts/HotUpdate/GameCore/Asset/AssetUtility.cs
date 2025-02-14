@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using LGameFramework.GameBase;
 using LGameFramework.GameCore.Asset;
 using System;
@@ -89,6 +90,16 @@ namespace LGameFramework.GameCore
         public static Coroutine LoadAssetBundleAsync(string abName)
         {
             return Instance.LoadAssetBundleAsync(abName);
+        }
+
+        /// <summary>
+        /// 是否存在该资源
+        /// </summary>
+        /// <param name="assetName"></param>
+        /// <returns></returns>
+        public static bool Contains(string assetName)
+        {
+            return GetAssetManifest_Bundle().Contains(assetName);
         }
 
         /// <summary>

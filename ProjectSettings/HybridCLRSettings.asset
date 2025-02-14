@@ -18,13 +18,25 @@ MonoBehaviour:
   il2cppPlusRepoURL: https://gitee.com/focus-creative-games/il2cpp_plus
   hotUpdateAssemblyDefinitions:
   - {fileID: 5897886265953266890, guid: 04e9319ff17548540a73e7686f58ebb0, type: 3}
-  - {fileID: 5897886265953266890, guid: a4890475bdba13e42b150b716203d33f, type: 3}
+  - {fileID: 5897886265953266890, guid: ad2d69172412be9478ae174a1bae67cd, type: 3}
+  - {fileID: 5897886265953266890, guid: 883e5d04a88f1b04896288d419b1e0c0, type: 3}
+  - {fileID: 5897886265953266890, guid: 9a204b34d90214042b81a42080b76a57, type: 3}
+  - {fileID: 5897886265953266890, guid: 937be10f8ba6f1d49aabba474fdcfc64, type: 3}
   hotUpdateAssemblies: []
   preserveHotUpdateAssemblies: []
   hotUpdateDllCompileOutputRootDir: HybridCLRData/HotUpdateDlls
   externalHotUpdateAssembliyDirs: []
   strippedAOTDllOutputRootDir: HybridCLRData/AssembliesPostIl2CppStrip
-  patchAOTAssemblies: []
+  patchAOTAssemblies:
+  - Assembly-GameBase.dll
+  - System.Core.dll
+  - System.dll
+  - UnityEngine.CoreModule.dll
+  - mscorlib.dll
+  - UniTask.dll
+  - Google.Protobuf.dll
+  - UnityEngine.AnimationModule.dll
+  - DOTween.dll
   outputLinkFile: HybridCLRGenerate/link.xml
   outputAOTGenericReferenceFile: HybridCLRGenerate/AOTGenericReferences.cs
   maxGenericReferenceIteration: 10

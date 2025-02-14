@@ -7,14 +7,14 @@ namespace GAS.Runtime
 {
     public class GameplayEffectContainer
     {
-        private readonly AbilitySystemComponent m_ASC;
+        private readonly IAbilitySystemComponent m_ASC;
 
         private readonly List<GameplayEffect> m_GameplayEffects;
 
         private readonly List<GameplayEffect> m_PreUpdateEffects;
 
         private readonly List<GameplayEffect> m_UpdateEffects;
-        public GameplayEffectContainer(AbilitySystemComponent asc)
+        public GameplayEffectContainer(IAbilitySystemComponent asc)
         {
             m_ASC = asc;
             m_GameplayEffects = new List<GameplayEffect>();
@@ -75,12 +75,12 @@ namespace GAS.Runtime
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        private GameplayEffect AddEffect<T>(GameplayEffectAsset effectAsset, params object[] paramArgs) where T : GameplayEffect, new()
+        private T AddEffect<T>(GameplayEffectAsset effectAsset, params object[] paramArgs) where T : GameplayEffect, new()
         {
             T effect = new T();
+            effect.Source = m_ASC;
             effect.OnInit(effectAsset);
             effect.OnUpdateTime(paramArgs);
-            effect.Source = m_ASC;
 
             m_GameplayEffects.Add(effect);
 
@@ -90,7 +90,7 @@ namespace GAS.Runtime
 
             ApplyEffect(effect, paramArgs);
             effect.Stacking++;
-            m_ASC.AddTagFromDynamic(effect, effect.ConditionTags.ActivationTags);
+            m_ASC.Tags.AddDynamicTags(effect, effect.ConditionTags.ActivationTags);
             return effect;
         }
 
@@ -109,7 +109,7 @@ namespace GAS.Runtime
             if (effect.DurationType != EffectDurationType.Instant && effect.DurationType != EffectDurationType.TimeLine)
                 m_PreUpdateEffects.Remove(effect);
 
-            m_ASC.RemoveTagFromDynamic(effect, effect.ConditionTags.ActivationTags);
+            m_ASC.Tags.RemoveDynamicTags(effect, effect.ConditionTags.ActivationTags);
         }
 
         /// <summary>
@@ -118,10 +118,10 @@ namespace GAS.Runtime
         /// <typeparam name="T"></typeparam>
         /// <param name="effectAsset"></param>
         /// <returns></returns>
-        public bool TryAddEffect<T>(GameplayEffectAsset effectAsset, out GameplayEffect newEffect, params object[] paramArgs) where T : GameplayEffect, new()
+        public bool TryAddEffect<T>(GameplayEffectAsset effectAsset, out T newEffect, params object[] paramArgs) where T : GameplayEffect, new()
         {
             newEffect = null;
-            if (!m_ASC.CheckTagCondition(effectAsset.BlockActiveTags, effectAsset.RequireTags))
+            if (!m_ASC.Tags.CheckTagCondition(effectAsset.BlockActiveTags, effectAsset.RequireTags))
                 return false;
 
             var stackingEffect = effectAsset.StackingEffect;
@@ -130,6 +130,7 @@ namespace GAS.Runtime
             if (effectAsset.DurationType == EffectDurationType.Instant || stackingEffect.stackingType == StackingType.None)
             {
                 newEffect = AddEffect<T>(effectAsset, paramArgs);
+                RemoveEffect(newEffect, false); //因为不叠加 用完就删
                 return true;
             }
             else
@@ -139,17 +140,19 @@ namespace GAS.Runtime
                     //如果已经有了 重新应用一次 并刷新时间（如果要）
                     if (effect.EffectAsset.Equals(effectAsset))
                     {
-                        newEffect = effect;
-                        ApplyEffect(effect, paramArgs);
+                        newEffect = effect as T;
+                        //ApplyEffect(effect, paramArgs);
                         if (stackingEffect.durationRefreshType == StackingDurationRefreshType.Refresh)
                             effect.UpdateEndTime();
 
                         if (stackingEffect.maxStackNum < effect.Stacking)
                             effect.Stacking++;
 
-                        break;
+                        return true;
                     }
                 }
+
+                newEffect = AddEffect<T>(effectAsset, paramArgs);
             }
 
             return true;

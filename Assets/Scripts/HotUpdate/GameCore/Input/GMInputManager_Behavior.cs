@@ -1,5 +1,3 @@
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,9 +33,9 @@ namespace LGameFramework.GameCore.Input
 
             public double startTime;
             public bool OnPressed { get { return InputAction.phase == InputActionPhase.Started; } }
-            public bool OnRelease { get { return InputAction.phase == InputActionPhase.Performed; } }
+            public bool OnRelease { get { return InputAction.phase == InputActionPhase.Canceled; } }
+            public bool OnHold { get { return InputAction.phase == InputActionPhase.Performed; } }
             public bool OnMulti { get; set; }
-            public bool OnHold { get; set; }
 
             public InputBehaviour(string actionName, InputAction inputAction)
             {

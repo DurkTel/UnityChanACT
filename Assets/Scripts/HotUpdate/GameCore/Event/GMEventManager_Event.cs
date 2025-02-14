@@ -3,41 +3,41 @@ using System;
 
 namespace LGameFramework.GameCore
 {
-    public sealed partial class GMEventManager
+
+    /// <summary>
+    /// 事件 中转器
+    /// </summary>
+    public sealed class GameEvent
     {
-        /// <summary>
-        /// 事件 中转器
-        /// </summary>
-        private sealed class GameEvent
+        private int m_Id;
+        public int Id { get { return m_Id; } }
+
+        private object m_Sender;
+        public object Sender { get { return m_Sender; } }
+
+        private GameEventArg m_EventArgs;
+        public GameEventArg EventArgs { get { return m_EventArgs; } }
+
+        public static GameEvent Get(int id, object sender, GameEventArg e)
         {
-            private GMEventRegister m_Id;
-            public GMEventRegister Id { get { return m_Id; } }
-
-            private object m_Sender;
-            public object Sender { get { return m_Sender; } }
-
-            private GameEventArg m_EventArgs;
-            public GameEventArg EventArgs { get { return m_EventArgs; } }
-
-            public static GameEvent Get(GMEventRegister id, object sender, GameEventArg e)
-            {
-                GameEvent eventNode = Pool.Get<GameEvent>();
-                eventNode.m_Id = id;
-                eventNode.m_Sender = sender;
-                eventNode.m_EventArgs = e;
-                return eventNode;
-            }
-
-            public void Dispose()
-            {
-                m_Id = GMEventRegister.NONE;
-                m_Sender = null;
-                m_EventArgs.Dispose();
-                m_EventArgs = null;
-                Pool.Release(this);
-            }
+            GameEvent eventNode = Pool.Get<GameEvent>();
+            eventNode.m_Id = id;
+            eventNode.m_Sender = sender;
+            eventNode.m_EventArgs = e;
+            return eventNode;
         }
 
+        public void Dispose()
+        {
+            m_Id = -1;
+            m_Sender = null;
+            if (m_EventArgs != null)
+            {
+                m_EventArgs.Dispose();
+                m_EventArgs = null;
+            }
+            Pool.Release(this);
+        }
     }
 
     public abstract class GameEventArg : EventArgs, IDisposable

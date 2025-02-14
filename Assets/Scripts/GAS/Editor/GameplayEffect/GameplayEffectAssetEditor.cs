@@ -22,6 +22,26 @@ namespace GAS.Editor
 
         private int m_CurrentSelectSubClass;
 
+        //父类的字段 全部隐藏
+        private readonly HashSet<string> m_IgnoreProperty = new HashSet<string>()
+        {
+            "m_Script",
+            "Description",
+            "Type",
+            "DurationType",
+            "TriggerType",
+            "Duration",
+            "Period",
+            "StackingEffect",
+            "MMCAsset",
+            "FixedTags",
+            "ActivationTags",
+            "CancelTags",
+            "BlockActiveTags",
+            "BlockInActiveTags",
+            "RequireTags",
+        };
+
         private void OnEnable()
         {
             m_EffectAsset = target as GameplayEffectAsset;
@@ -32,8 +52,8 @@ namespace GAS.Editor
             for (int i = 0; i < m_AllEffectSubClass.Count; i++)
                 m_AllEffectSubName[i] = m_AllEffectSubClass[i].Name;
 
-            m_CurrentSelectSubClass = Array.IndexOf<string>(m_AllEffectSubName, m_EffectAsset.Type);
-            m_CurrentSelectSubClass = m_CurrentSelectSubClass < 0 ? 0 : m_CurrentSelectSubClass;
+            //m_CurrentSelectSubClass = Array.IndexOf<string>(m_AllEffectSubName, m_EffectAsset.Type);
+            //m_CurrentSelectSubClass = m_CurrentSelectSubClass < 0 ? 0 : m_CurrentSelectSubClass;
 
         }
 
@@ -42,10 +62,32 @@ namespace GAS.Editor
             m_ContentRect = GUILayoutUtility.GetRect(680, 500);
             //base.OnInspectorGUI();
             OnDrawDescription();
-            m_TagsArrayInspector.OnDrawGameplayTags(m_ContentRect);
+            Rect tagRect = m_TagsArrayInspector.OnDrawGameplayTags(m_ContentRect);
             OnDrawEffectType();
 
-            GUILayout.Space(600);
+            Rect subTitleRect = new Rect(10, tagRect.y + tagRect.height + 300, 620, 20);
+            GUI.Box(subTitleRect, "", EditorStyles.helpBox);
+            subTitleRect.x += 280;
+            EditorGUI.LabelField(subTitleRect, "派生类字段");
+            subTitleRect.x -= 280;
+            GUILayout.Space(1000);
+
+            subTitleRect.height = 1000;
+            subTitleRect.y += 25;
+            serializedObject.UpdateIfRequiredOrScript();
+            SerializedProperty iterator = serializedObject.GetIterator();
+            GUILayout.BeginArea(subTitleRect);
+            bool enterChildren = true;
+            while (iterator.NextVisible(enterChildren))
+            {
+                //将不是父类的字段全部按照默认的显示出来
+                if (!m_IgnoreProperty.Contains(iterator.propertyPath))
+                    EditorGUILayout.PropertyField(iterator, true);
+
+                enterChildren = false;
+            }
+            GUILayout.EndArea();
+            serializedObject.ApplyModifiedProperties();
         }
 
         private void OnDrawDescription()
@@ -60,24 +102,24 @@ namespace GAS.Editor
             GUI.skin.label.alignment = TextAnchor.MiddleCenter;
             EditorGUI.LabelField(titleRect, "基本信息", GUI.skin.label);
             GUI.skin.label.alignment = oriAlig;
-            titleRect.x += 5;
-            titleRect.y += 20;
-            titleRect.height = 20;
-            titleRect.width = 70;
-            EditorGUI.LabelField(titleRect, "要应用的类");
-            titleRect.x += titleRect.width;
-            titleRect.width = 220;
-            EditorGUI.BeginChangeCheck();
-            m_CurrentSelectSubClass = EditorGUI.Popup(titleRect, m_CurrentSelectSubClass, m_AllEffectSubName);
-            if (EditorGUI.EndChangeCheck())
-            {
-                m_EffectAsset.Type = m_AllEffectSubName[m_CurrentSelectSubClass];
-                EditorUtility.SetDirty(m_EffectAsset);
-            }
+            //titleRect.x += 5;
+            //titleRect.y += 20;
+            //titleRect.height = 20;
+            //titleRect.width = 70;
+            //EditorGUI.LabelField(titleRect, "要应用的类");
+            //titleRect.x += titleRect.width;
+            //titleRect.width = 220;
+            //EditorGUI.BeginChangeCheck();
+            //m_CurrentSelectSubClass = EditorGUI.Popup(titleRect, m_CurrentSelectSubClass, m_AllEffectSubName);
+            //if (EditorGUI.EndChangeCheck())
+            //{
+            //    m_EffectAsset.Type = m_AllEffectSubName[m_CurrentSelectSubClass];
+            //    EditorUtility.SetDirty(m_EffectAsset);
+            //}
             titleRect.x = m_ContentRect.x + 5;
             titleRect.y += 20;
             titleRect.width = 290;
-            titleRect.height = 100;
+            titleRect.height = 120;
             string empty = "对于特效的描述\n目前未填写该特效的描述哦~";
             bool isEmpty = string.IsNullOrEmpty(m_EffectAsset.Description);
 
@@ -147,9 +189,17 @@ namespace GAS.Editor
                     EditorGUI.LabelField(titleRect, "周期时间");
                     titleRect.y += 25;
                     m_EffectAsset.Period = EditorGUI.FloatField(titleRect, m_EffectAsset.Period);
+                    titleRect.y -= 25;
                 }
+
             }
 
+            titleRect.x += 90;
+            EditorGUI.LabelField(titleRect, "触发修改器");
+            titleRect.y += 25;
+            titleRect.width = 100;
+            m_EffectAsset.MMCAsset = (ModifierMagnitudeCalculation)EditorGUI.ObjectField(titleRect, m_EffectAsset.MMCAsset, typeof(ModifierMagnitudeCalculation), false);
+            titleRect.y -= 25;
 
             titleRect.x = x1;
             titleRect.y = m_ContentRect.y + 325;

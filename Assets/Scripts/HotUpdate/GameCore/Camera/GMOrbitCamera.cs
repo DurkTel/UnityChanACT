@@ -1,6 +1,8 @@
 ﻿using LGameFramework.GameBase.Culling;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
+#if UNITY_PIPELINE_URP
+using UnityEngine.Rendering.Universal;
+#endif
 
 namespace LGameFramework.GameCore
 {
@@ -106,6 +108,12 @@ namespace LGameFramework.GameCore
         private bool m_DisableInput;
         public bool DisableInput { get { return m_DisableInput; } set { m_DisableInput = value; } }
 
+        /// <summary>
+        /// 相机
+        /// </summary>
+        private Transform m_CameraTran;
+        public Transform CameraTran { get { return m_CameraTran; } }
+
         [SerializeField]
         private bool m_InvertYAxis = true;
         [SerializeField]
@@ -122,7 +130,21 @@ namespace LGameFramework.GameCore
         protected LayerMask m_LockonLayer;
         public override int Priority => 999;
 
-        private PostProcessLayer m_PostProcessLayer;
+        //private PostProcessLayer m_PostProcessLayer;
+
+        private GMCameraShake m_CameraShake;
+        public GMCameraShake CameraShake 
+        { 
+            get 
+            { 
+                if (m_CameraShake == null)
+                {
+                    m_CameraShake = GameObject.AddComponent<GMCameraShake>();
+                    m_CameraShake.CameraTran = Transform;
+                }
+                return m_CameraShake; 
+            }
+        }
         private Vector3 CameraHalfExtends
         {
             get
@@ -137,26 +159,35 @@ namespace LGameFramework.GameCore
 
         public override void OnInit()
         {
-            GameObject.TryAddComponent<AudioListener>();
-            GameObject.tag = "MainCamera";
-            m_RegularCamera = GameObject.TryAddComponent<Camera>();
-            Transform.localRotation = Quaternion.Euler(m_OrbitAngles);
+            var go = new GameObject("Camera");
+            go.transform.SetParent(Transform);
+            go.TryAddComponent<AudioListener>();
+            go.tag = "MainCamera";
+            m_CameraTran = go.transform;
+            m_RegularCamera = go.TryAddComponent<Camera>();
+            m_CameraTran.localRotation = Quaternion.Euler(m_OrbitAngles);
 
-            var postProcess = AssetUtility.LoadAsset<PostProcessResources>("PostProcessResources.asset");
-            if (postProcess != null)
-            {
-                m_PostProcessLayer = GameObject.TryAddComponent<PostProcessLayer>();
-                m_PostProcessLayer.Init(postProcess);
-                m_PostProcessLayer.antialiasingMode = PostProcessLayer.Antialiasing.SubpixelMorphologicalAntialiasing;
-                m_PostProcessLayer.volumeLayer = 1;
-                m_PostProcessLayer.volumeTrigger = Transform;
-            }
+            //var postProcess = AssetUtility.LoadAsset<PostProcessResources>("PostProcessResources.asset");
+            //if (postProcess != null)
+            //{
+            //    m_PostProcessLayer = GameObject.TryAddComponent<PostProcessLayer>();
+            //    m_PostProcessLayer.Init(postProcess);
+            //    m_PostProcessLayer.antialiasingMode = PostProcessLayer.Antialiasing.SubpixelMorphologicalAntialiasing;
+            //    m_PostProcessLayer.volumeLayer = 1;
+            //    m_PostProcessLayer.volumeTrigger = Transform;
+            //}
             m_DisableInput = false;
 
             m_ObjectCullingGroup = new ObjectCullingGroup();
             m_ObjectCullingGroup.TargetCamera = m_RegularCamera;
 
             //Cursor.lockState = CursorLockMode.Locked;
+
+#if UNITY_PIPELINE_URP
+            var urpData = m_RegularCamera.TryAddComponent<UniversalAdditionalCameraData>();
+            urpData.renderPostProcessing = true;
+            urpData.renderShadows = true;
+#endif
         }
 
         public override void LateUpdate(float deltaTime, float unscaleDeltaTime)
@@ -170,7 +201,7 @@ namespace LGameFramework.GameCore
                 lookRotation = Quaternion.Euler(m_OrbitAngles);
             }
             else
-                lookRotation = Transform.localRotation;
+                lookRotation = m_CameraTran.localRotation;
 
             Vector3 lookDirection = lookRotation * Vector3.forward;
             Vector3 lookPosition = m_FocusPoint - lookDirection * m_Distance;
@@ -189,7 +220,7 @@ namespace LGameFramework.GameCore
                 lookPosition = rectPosition - rectOffset;
             }
 
-            Transform.SetPositionAndRotation(lookPosition, lookRotation);
+            m_CameraTran.SetPositionAndRotation(lookPosition, lookRotation);
         }
 
         public override void OnDestroy()
@@ -329,6 +360,11 @@ namespace LGameFramework.GameCore
 
             int id = -1;
             if (id == -1) return;
+        }
+
+        public Vector3 TransformDirection(Vector2 direction)
+        {
+            return m_CameraTran.TransformDirection(new Vector3(direction.x, 0f, direction.y));
         }
 
         /// <summary>

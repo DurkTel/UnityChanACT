@@ -12,17 +12,17 @@ namespace LGameFramework.GameLogic
         private Transform m_GameRoot;
         public override Transform GameRoot { get { return m_GameRoot; } }
 
+        public static void Instantiate()
+        {
+            GameObject go = new GameObject("GameLogicEntry", typeof(GameLogicEntry));
+            DontDestroyOnLoad(go);
+            GameLogger.INFO("游戏逻辑实例化完成");
+        }
+
         protected virtual void Awake()
         {
             m_Entry = this;
-        }
-        public static void Instantiate()
-        {
-            GameObject go = new GameObject("GameLogicEntry");
-            var entry = go.AddComponent<GameLogicEntry>();
-            entry.m_GameRoot = go.transform;
-            DontDestroyOnLoad(go);
-            GameLogger.INFO("游戏逻辑实例化完成");
+            m_GameRoot = transform;
         }
 
         /// <summary>

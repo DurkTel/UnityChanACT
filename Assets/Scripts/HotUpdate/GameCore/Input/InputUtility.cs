@@ -42,5 +42,35 @@ namespace LGameFramework.GameCore
         {
             Instance.DispatchEvent(name, behaviour, action);
         }
+
+        public static InputBehaviour GetBehaviour(string name)
+        {
+            return Instance.GetBehaviour(name);
+        }
+
+        public static bool GetButton(string name)
+        {
+            return Instance.GetButton(name);
+        }
+
+        public static bool GetButtonDown(string name)
+        {
+            return Instance.GetButtonDown(name);
+        }
+
+        public static bool GetButtonUp(string name)
+        {
+            return Instance.GetButtonUp(name);
+        }
+
+        public static bool GetButtonMulti(string name)
+        {
+            return Instance.GetButtonMulti(name);
+        }
+
+        public static Vector2 GetAxis(string name)
+        {
+            return Instance.GetAxis(name);
+        }
     }
 }

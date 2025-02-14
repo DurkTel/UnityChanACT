@@ -87,23 +87,25 @@ namespace GAS.Runtime
         /// </summary>
         public int Stacking { get { return m_Stacking; } set { m_Stacking = value; } }
 
-        private AbilitySystemComponent m_Source;
+        private IAbilitySystemComponent m_Source;
         /// <summary>
         /// 发起者
         /// </summary>
-        public AbilitySystemComponent Source { get {  return m_Source; } set { m_Source = value; } }
+        public IAbilitySystemComponent Source { get {  return m_Source; } set { m_Source = value; } }
 
-        private AbilitySystemComponent m_Target;
+        private IAbilitySystemComponent m_Target;
         /// <summary>
         /// 目标者
         /// </summary>
-        public AbilitySystemComponent Target { get {  return m_Target; } set { m_Target = value; } }
+        public IAbilitySystemComponent Target { get {  return m_Target; } set { m_Target = value; } }
 
-        private Dictionary<string, float> m_AttributeSnapshot;
+        protected Dictionary<string, float> m_AttributeSnapshot;
         /// <summary>
         /// 属性快照
         /// </summary>
         public Dictionary<string, float> AttributeSnapshot { get {  return m_AttributeSnapshot; } }
+
+        private float m_MMCValueMark;
 
         public bool IsActive => true;
 
@@ -120,6 +122,9 @@ namespace GAS.Runtime
             m_ConditionTags.CancelTags = new GameplayTagSet(effectAsset.CancelTags);
             m_ConditionTags.BlockActiveTags = new GameplayTagSet(effectAsset.BlockActiveTags);
             m_ConditionTags.RequireTags = new GameplayTagSet(effectAsset.RequireTags);
+
+            m_AttributeSnapshot ??= new Dictionary<string, float>();
+            Source.Attributes.GetSnapshot(m_AttributeSnapshot);
 
         }
 
@@ -144,7 +149,7 @@ namespace GAS.Runtime
         /// </summary>
         public virtual void OnApply(params object[] paramArgs)
         {
-            
+            OnApplyMMC();
         }
 
         /// <summary>
@@ -152,7 +157,77 @@ namespace GAS.Runtime
         /// </summary>
         public virtual void DisApply(bool canceled)
         {
+            OnDisApplyMMC();
+        }
 
+        /// <summary>
+        /// 应用修改器
+        /// </summary>
+        public virtual void OnApplyMMC()
+        {
+            if (m_EffectAsset.MMCAsset != null)
+            {
+                var mmc = m_EffectAsset.MMCAsset;
+                if (mmc.ToTarget == AttributeFrom.None)
+                    return;
+
+                IAbilitySystemComponent asc = mmc.ToTarget == AttributeFrom.Source ? Source : Target;
+                if (asc == null)
+                    return;
+
+                var attr = asc.Attributes.GetAttribute(mmc.AttributeSetName, mmc.AttributeName);
+                if (attr == null)
+                    return;
+
+                m_MMCValueMark = mmc.CalculateMagnitude(this);
+                var current = attr.CurrentValue;
+                switch (mmc.Operation)
+                {
+                    case ModifierOperation.Add:
+                        attr.SetCurrentValue(current + m_MMCValueMark);
+                        break;
+                    case ModifierOperation.Multiply:
+                        attr.SetCurrentValue(current * m_MMCValueMark);
+                        break;
+                    case ModifierOperation.Override:
+                        attr.SetCurrentValue(m_MMCValueMark);
+                        break;
+                }
+            }
+        }
+
+
+        public virtual void OnDisApplyMMC()
+        {
+            if (m_EffectAsset.MMCAsset != null && m_MMCValueMark != 0)
+            {
+                var mmc = m_EffectAsset.MMCAsset;
+                if (mmc.ToTarget == AttributeFrom.None)
+                    return;
+
+                IAbilitySystemComponent asc = mmc.ToTarget == AttributeFrom.Source ? Source : Target;
+                if (asc == null)
+                    return;
+
+                var attr = asc.Attributes.GetAttribute(mmc.AttributeSetName, mmc.AttributeName);
+                if (attr == null)
+                    return;
+
+                var current = attr.CurrentValue;
+                switch (mmc.Operation)
+                {
+                    case ModifierOperation.Add:
+                        attr.SetCurrentValue(current - m_MMCValueMark);
+                        break;
+                    case ModifierOperation.Multiply:
+                        attr.SetCurrentValue(current / m_MMCValueMark);
+                        break;
+                    //case ModifierOperation.Override:
+                    //    attr.SetCurrentValue(m_MMCValueMark);
+                    //    break;
+                }
+                m_MMCValueMark = 0f;
+            }
         }
 
         public virtual void Dispose()

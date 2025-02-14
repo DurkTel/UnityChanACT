@@ -10,10 +10,6 @@ namespace LGameFramework.GameBase.RangeDetection
     public struct Fanshaped
     {
         /// <summary>
-        /// 起始点
-        /// </summary>
-        public Transform transform;
-        /// <summary>
         /// 角度
         /// </summary>
         public float angel;
@@ -22,9 +18,8 @@ namespace LGameFramework.GameBase.RangeDetection
         /// </summary>
         public float radius;
 
-        public Fanshaped(Transform transform, float angel, float radius)
+        public Fanshaped(float angel, float radius)
         {
-            this.transform = transform;
             this.angel = angel;
             this.radius = radius;
         }
@@ -32,13 +27,15 @@ namespace LGameFramework.GameBase.RangeDetection
         /// <summary>
         /// 是否在范围内
         /// </summary>
-        /// <param name="position"></param>
+        /// <param name="start">起始点</param>
+        /// <param name="dir">方向</param>
+        /// <param name="position">判断点的位置</param>
         /// <returns></returns>
-        public bool IsInZone(Vector3 position)
+        public bool IsInZone(Vector3 start, Vector3 dir, Vector3 position)
         {
             //计算方向
-            Vector3 direction = position - transform.position;
-            float dot = Vector3.Dot(direction.normalized, transform.forward);
+            Vector3 direction = position - start;
+            float dot = Vector3.Dot(direction.normalized, dir);
             //计算角度
             float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
             return angle < angel * 0.5f && direction.magnitude < radius;

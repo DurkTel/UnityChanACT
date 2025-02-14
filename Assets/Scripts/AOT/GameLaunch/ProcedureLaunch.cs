@@ -1,23 +1,20 @@
 using LGameFramework.GameBase.FSM;
 using LGameFramework.GameBase;
 using UnityEngine;
-using LGameFramework.GameCore.Asset;
 
 public class ProcedureLaunch : FSM_Status<ProcedureLaunchProcess>
 {
-    private GameLaunchSetting m_Setting;
-
     public override void OnAction()
     {
-        switch (m_Setting.assetLoadMode)
+        switch (GameConfig.Instance.assetLoadMode)
         {
-            case GameLaunchSetting.AssetLoadMode.Editor:
+            case 0:
 #if UNITY_EDITOR
-                AssetManifest_Editor.RefreshEditorAssetsManifest();
+                //AssetManifest_Editor.RefreshEditorAssetsManifest();
 #endif
                 subMachine.ChangeState(ProcedureLaunchProcess.GameEntry);
                 break;
-            case GameLaunchSetting.AssetLoadMode.AssetBundle:
+            case 1:
                 subMachine.ChangeState(ProcedureLaunchProcess.CheckVersion);
                 break;
             default:
@@ -27,12 +24,11 @@ public class ProcedureLaunch : FSM_Status<ProcedureLaunchProcess>
 
     public override void OnEnter()
     {
-        m_Setting = GameLaunchSetting.Get();
+        Application.targetFrameRate = GameConfig.Instance.frameRate;
+        Time.timeScale = GameConfig.Instance.gameSpeed;
+        Application.runInBackground = GameConfig.Instance.runInBackground;
+        Screen.sleepTimeout = GameConfig.Instance.neverSleep ? SleepTimeout.NeverSleep : SleepTimeout.SystemSetting;
 
-        Application.targetFrameRate = m_Setting.frameRate;
-        Time.timeScale = m_Setting.gameSpeed;
-        Application.runInBackground = m_Setting.runInBackground;
-        Screen.sleepTimeout = m_Setting.neverSleep ? SleepTimeout.NeverSleep : SleepTimeout.SystemSetting;
     }
 
     public override void OnExit()

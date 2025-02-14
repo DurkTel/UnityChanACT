@@ -17,6 +17,16 @@ namespace GAS.Runtime
         public const string MP = "MP";
 
         /// <summary>
+        /// 生命值
+        /// </summary>
+        public const string HP = "HP";
+
+        /// <summary>
+        /// 最大生命值
+        /// </summary>
+        public const string MaxHP = "MaxHP";
+
+        /// <summary>
         /// 旋转速度
         /// </summary>
         public const string RotateSpeed = "RotateSpeed";
@@ -32,14 +42,14 @@ namespace GAS.Runtime
         public const string AttackPow = "AttackPow";
 
         /// <summary>
+        /// 防御力
+        /// </summary>
+        public const string Defense = "Defense";
+
+        /// <summary>
         /// 移动速度
         /// </summary>
         public const string MoveSpeed = "MoveSpeed";
-
-        /// <summary>
-        /// 生命值
-        /// </summary>
-        public const string HP = "HP";
 
         /// <summary>
         /// 旋转倾斜速度
@@ -57,18 +67,62 @@ namespace GAS.Runtime
         public const string TargetDeg = "TargetDeg";
 
         /// <summary>
+        /// 耐久度
+        /// </summary>
+        public const string Durability = "Durability";
+
+        /// <summary>
+        /// 暴击率
+        /// </summary>
+        public const string CriticalHitRate = "CriticalHitRate";
+
+        /// <summary>
+        /// 暴击伤害
+        /// </summary>
+        public const string CriticalHitPow = "CriticalHitPow";
+
+        /// <summary>
+        /// 等级
+        /// </summary>
+        public const string Level = "Level";
+
+        /// <summary>
+        /// 防御穿透
+        /// </summary>
+        public const string Penetrating = "Penetrating";
+
+        /// <summary>
+        /// 减少防御
+        /// </summary>
+        public const string ReduceDefense = "ReduceDefense";
+
+        /// <summary>
+        /// 伤害加成
+        /// </summary>
+        public const string DamageBonus = "DamageBonus";
+
+        /// <summary>
         /// 所有的属性列表
         /// </summary>
         public static List<string> AttributeNames = new List<string>()
         {
             MP,
+            HP,
+            MaxHP,
             RotateSpeed,
             TiltAngle,
             AttackPow,
+            Defense,
             MoveSpeed,
-            HP,
             TiltSpeed,
             AngularVelocity,
             TargetDeg,
+            Durability,
+            CriticalHitRate,
+            CriticalHitPow,
+            Level,
+            Penetrating,
+            ReduceDefense,
+            DamageBonus,
         };
     }}

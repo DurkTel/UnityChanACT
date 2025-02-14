@@ -53,17 +53,53 @@ MonoBehaviour:
         fullName: Ability.Action
         description: "\u884C\u4E3A"
         childs: []
+      - name: Avatar
+        fullName: Ability.Avatar
+        description: "\u6A21\u578B"
+        childs:
+        - name: SkeletonComplete
+          fullName: Ability.Avatar.SkeletonComplete
+          description: "\u9AA8\u9ABC\u52A0\u8F7D\u5B8C\u6210"
+          childs: []
+        - name: BodyComplete
+          fullName: Ability.Avatar.BodyComplete
+          description: "\u8EAB\u4F53\u52A0\u8F7D\u5B8C\u6210"
+          childs: []
+        - name: ClothingComplete
+          fullName: Ability.Avatar.ClothingComplete
+          description: "\u8863\u670D\u52A0\u8F7D\u5B8C\u6210"
+          childs: []
+        - name: HeadComplete
+          fullName: Ability.Avatar.HeadComplete
+          description: "\u5934\u90E8\u52A0\u8F7D\u5B8C\u6210"
+          childs: []
+        - name: HairComplete
+          fullName: Ability.Avatar.HairComplete
+          description: "\u5934\u53D1\u52A0\u8F7D\u5B8C\u6210"
+          childs: []
+        - name: AvatarComplete
+          fullName: Ability.Avatar.AvatarComplete
+          description: "\u6574\u4E2A\u6A21\u578B\u52A0\u8F7D\u5B8C\u6210"
+          childs: []
+      - name: AutoActive
+        fullName: Ability.AutoActive
+        description: "\u81EA\u52A8\u6FC0\u6D3B"
+        childs: []
     - name: Camp
       fullName: Camp
       description: "\u9635\u8425"
       childs:
-      - name: Friendly
-        fullName: Camp.Friendly
-        description: "\u53CB\u65B9\u9635\u8425"
+      - name: Local
+        fullName: Camp.Local
+        description: "\u81EA\u5DF1"
         childs: []
-      - name: Enemy
-        fullName: Camp.Enemy
-        description: "\u654C\u65B9\u9635\u8425"
+      - name: Camp1
+        fullName: Camp.Camp1
+        description: "\u9635\u84251"
+        childs: []
+      - name: Camp2
+        fullName: Camp.Camp2
+        description: "\u9635\u84252"
         childs: []
     - name: Event
       fullName: Event
@@ -125,6 +161,10 @@ MonoBehaviour:
           fullName: Event.Fight.Guard
           description: "\u683C\u6321"
           childs: []
+        - name: TickFreeze
+          fullName: Event.Fight.TickFreeze
+          description: "\u5E27\u51BB\u7ED3"
+          childs: []
     - name: Command
       fullName: Command
       description: "\u8F93\u5165\u547D\u4EE4"
@@ -149,3 +189,39 @@ MonoBehaviour:
           fullName: Command.BanCommand.BanMoveCommand
           description: "\u7981\u6B62\u79FB\u52A8\u547D\u4EE4"
           childs: []
+    - name: Action
+      fullName: Action
+      description: "\u52A8\u4F5C\u5206\u7C7B"
+      childs:
+      - name: Attack
+        fullName: Action.Attack
+        description: "\u653B\u51FB\u52A8\u4F5C"
+        childs: []
+      - name: Dodge
+        fullName: Action.Dodge
+        description: "\u95EA\u907F\u52A8\u4F5C"
+        childs: []
+      - name: HandOffSkill
+        fullName: Action.HandOffSkill
+        description: "\u8131\u624B\u6280\u80FD"
+        childs: []
+      - name: Guard
+        fullName: Action.Guard
+        description: "\u9632\u5FA1\u52A8\u4F5C"
+        childs: []
+      - name: Move
+        fullName: Action.Move
+        description: "\u79FB\u52A8\u52A8\u4F5C"
+        childs: []
+      - name: PerfectGuard
+        fullName: Action.PerfectGuard
+        description: "\u5B8C\u7F8E\u683C\u6321"
+        childs: []
+    - name: Buff
+      fullName: Buff
+      description: "\u589E\u76CA\u6548\u679C"
+      childs:
+      - name: DodgeBuff
+        fullName: Buff.DodgeBuff
+        description: "\u6781\u9650\u95EA\u907F\u6210\u529F"
+        childs: []

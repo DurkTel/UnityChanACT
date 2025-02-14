@@ -2,16 +2,17 @@
     "name": "Assembly-GameCore",
     "rootNamespace": "LGameFramework.GameCore",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
         "GUID:3072bfba8acc8ff4ca4c09cf933bdd1e",
-        "GUID:d60799ab2a985554ea1a39cd38695018"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:15fc0a57446b3144c949da3e2b9737a9",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": true,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

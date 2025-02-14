@@ -1,9 +1,7 @@
 using LGameFramework.GameBase.FSM;
 using LGameFramework.GameBase;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine.Networking;
-using LGameFramework.GameCore.Asset;
 using UnityEngine;
 
 public class ProcedureCheckLocalFile : FSM_Status<ProcedureLaunchProcess>
@@ -19,8 +17,6 @@ public class ProcedureCheckLocalFile : FSM_Status<ProcedureLaunchProcess>
     private UnityWebRequest m_WebRequest;
 
     private UnityWebRequestAsyncOperation m_WebRequestAsync;
-
-    private GamePathSetting.FilePathStruct m_GamePath;
 
     public override void OnAction()
     {
@@ -75,14 +71,14 @@ public class ProcedureCheckLocalFile : FSM_Status<ProcedureLaunchProcess>
             else
                 subMachine.ChangeState(ProcedureLaunchProcess.GameEntry);
         }
+
     }
 
     public override void OnEnter()
     {
-        m_GamePath = GamePathSetting.Get().CurrentPlatform();
-        string buildPath = m_GamePath.downloadDataPath.AssetPath + m_GamePath.buildingFileName;
+        string buildPath = GameConfig.Instance.downloadDataPath.AssetPath + GameConfig.Instance.buildingFileName;
         if (!File.Exists(buildPath))
-            buildPath = Path.Combine(m_GamePath.buildingPath.AssetPath, m_GamePath.buildingFileName);
+            buildPath = Path.Combine(GameConfig.Instance.buildingPath.AssetPath, GameConfig.Instance.buildingFileName);
 
         if (File.Exists(buildPath))
         {
@@ -96,9 +92,8 @@ public class ProcedureCheckLocalFile : FSM_Status<ProcedureLaunchProcess>
 
         dataBase.SetData(ProcedureLauncher.procedureMarkHead + localFilesName, m_LocalFiles);
 
-        m_WebRequest = UnityWebRequest.Get(m_GamePath.serverDataPath.AssetPath + m_GamePath.buildingFileName);
+        m_WebRequest = UnityWebRequest.Get(GameConfig.Instance.serverDataPath.AssetPath + GameConfig.Instance.buildingFileName);
         m_WebRequestAsync = m_WebRequest.SendWebRequest();
-
     }
 
     public override void OnExit()

@@ -43,7 +43,7 @@ namespace LGameFramework.GameCore.Audio
                 }
 
                 Loader loader = AssetUtility.LoadAssetAsync<AudioClip>(assetName);
-                loader.onComplete = (p) =>
+                loader.onComplete += (p) =>
                 {
                     PlayInternal(p.GetRawObject<AudioClip>());
                 };

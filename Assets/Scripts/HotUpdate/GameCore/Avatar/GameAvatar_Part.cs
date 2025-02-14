@@ -22,6 +22,9 @@ namespace LGameFramework.GameCore.Avatar
                 get { return m_AssetName; } 
                 set 
                 {
+                    if (value == null || string.IsNullOrEmpty(value))
+                        return;
+
                     if (m_AssetName != value && string.IsNullOrEmpty(m_AssetName))
                     {
                         m_AssetName = value;

@@ -62,7 +62,7 @@ namespace LGameFramework.GameCore.Input
             public const string InputAction_Guard       = "Guard";
             public const string InputAction_Lock        = "Lock";
             public const string InputAction_Escape      = "Escape";
-            public const string InputAction_Attack = "Attack";
+            public const string InputAction_Attack      = "Attack";
             public const string InputAction_SpecialAttack = "SpecialAttack";
             public const string InputAction_Revenges    = "Revenges";
             public const string InputAction_Move        = "Move";

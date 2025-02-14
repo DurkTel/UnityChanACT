@@ -1,6 +1,5 @@
 using LGameFramework.GameBase.RangeDetection;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class DebugHelper : MonoBehaviour
@@ -12,11 +11,12 @@ public class DebugHelper : MonoBehaviour
         DrawSphereGizmois();
         DrawCapsuleGizmois();
         DrawLineGizmois();
+        DrawCubeGizmois();
         DrawRectangleGizmois();
         DrawCircleGizmois();
         DrawTriangleGizmois();
         DrawFanshapedGizmois();
-
+        DrawMatrixGizmois();
 
     }
 
@@ -46,7 +46,7 @@ public class DebugHelper : MonoBehaviour
             style.normal.textColor = label.color;
             style.fontSize = 20;
 
-            Handles.Label(label.center, label.label, style);
+            UnityEditor.Handles.Label(label.center, label.label, style);
             if (label.remainingTime > 0)
             {
                 label.remainingTime -= Time.deltaTime;
@@ -206,6 +206,51 @@ public class DebugHelper : MonoBehaviour
     }
     #endregion
 
+    #region 绘制立方体
+    private static Queue<Cube> m_CubeGizmosQueue = new Queue<Cube>();
+    public static void DrawCube(Vector3 center, Vector3 size, Color color, float duration = 0, bool isWire = true)
+    {
+        Cube cube = new Cube();
+        cube.center = center;
+        cube.size = size;
+        cube.color = color;
+        cube.isWire = isWire;
+        cube.remainingTime = duration;
+
+        m_CubeGizmosQueue.Enqueue(cube);
+    }
+
+    private void DrawCubeGizmois()
+    {
+        int count = m_CubeGizmosQueue.Count;
+        for (int i = 0; i < count; i++)
+        {
+            Cube cube = m_CubeGizmosQueue.Dequeue();
+
+            Gizmos.color = cube.color;
+            if (cube.isWire)
+                Gizmos.DrawWireCube(cube.center, cube.size);
+            else
+                Gizmos.DrawCube(cube.center, cube.size);
+
+            if (cube.remainingTime > 0)
+            {
+                cube.remainingTime -= Time.deltaTime;
+                m_CubeGizmosQueue.Enqueue(cube);
+            }
+        }
+    }
+
+    public struct Cube
+    {
+        public Vector3 center;
+        public Vector3 size;
+        public Color color;
+        public float remainingTime;
+        public bool isWire;
+    }
+    #endregion
+
     #region 绘制矩形
     private static Queue<Line[]> m_RectangleGizmos = new Queue<Line[]>();
     public static void DrawRectangle(Rectangle rectangle, Color color, float duration = 0)
@@ -335,11 +380,12 @@ public class DebugHelper : MonoBehaviour
 
     #region 绘制扇形
     private static Queue<FanshapedGizmos> m_FanshapedGizmos = new Queue<FanshapedGizmos>();
-    public static void DrawFanshaped(Fanshaped fanshaped, Color color, float duration = 0)
+    public static void DrawFanshaped(Fanshaped fanshaped, Vector3 start, Vector3 dir, Color color, float duration = 0)
     {
         FanshapedGizmos tr = new FanshapedGizmos();
         tr.color = color;
-        tr.tran = fanshaped.transform;
+        tr.start = start;
+        tr.dir = dir;
         tr.angel = fanshaped.angel;
         tr.radius = fanshaped.radius;
 
@@ -356,12 +402,12 @@ public class DebugHelper : MonoBehaviour
             Gizmos.color = triangle.color;
             float x = triangle.radius * Mathf.Sin(triangle.angel / 2 * Mathf.Deg2Rad);
             float y = Mathf.Sqrt(Mathf.Pow(triangle.radius, 2) - Mathf.Pow(x, 2f));
-            float dir = triangle.tran.forward.z > 0 ? 1f : -1f;   
-            Vector3 a = new Vector3(triangle.tran.position.x - x, 0, (triangle.tran.position.z + y * dir));
-            Vector3 b = new Vector3(triangle.tran.position.x + x, 0, triangle.tran.position.z + y * dir);
+            float dir = triangle.dir.z > 0 ? 1f : -1f;   
+            Vector3 a = new Vector3(triangle.start.x - x, 0, (triangle.start.z + y * dir));
+            Vector3 b = new Vector3(triangle.start.x + x, 0, triangle.start.z + y * dir);
 
-            Gizmos.DrawLine(triangle.tran.position, a);
-            Gizmos.DrawLine(triangle.tran.position, b);
+            Gizmos.DrawLine(triangle.start, a);
+            Gizmos.DrawLine(triangle.start, b);
 
             float half = triangle.angel / 2;
             int num = 10;
@@ -371,11 +417,11 @@ public class DebugHelper : MonoBehaviour
                 temp *= j;
                 x = triangle.radius * Mathf.Sin(temp * Mathf.Deg2Rad);
                 y = Mathf.Sqrt(Mathf.Pow(triangle.radius, 2) - Mathf.Pow(x, 2f));
-                a = new Vector3(triangle.tran.position.x - x, 0, triangle.tran.position.z + y * dir);
+                a = new Vector3(triangle.start.x - x, 0, triangle.start.z + y * dir);
                 Gizmos.DrawSphere(a, 0.05f);
                 x = triangle.radius * Mathf.Sin(-temp * Mathf.Deg2Rad);
                 y = Mathf.Sqrt(Mathf.Pow(triangle.radius, 2) - Mathf.Pow(x, 2f));
-                a = new Vector3(triangle.tran.position.x - x, 0, triangle.tran.position.z + y * dir);
+                a = new Vector3(triangle.start.x - x, 0, triangle.start.z + y * dir);
                 Gizmos.DrawSphere(a, 0.05f);
             }
 
@@ -389,11 +435,58 @@ public class DebugHelper : MonoBehaviour
 
     public struct FanshapedGizmos
     {
-        public Transform tran;
+        public Vector3 start;
+        public Vector3 dir;
         public float angel;
         public float radius;
         public Color color;
         public float remainingTime;
     }
+    #endregion
+
+    #region 绘制矩阵
+    private static Queue<GizmoisMatrix> m_MatrixGizmosQueue = new Queue<GizmoisMatrix>();
+    public static void DrawMatrix(Matrix4x4 matrix, Color color, float duration = 0, bool isWire = true)
+    {
+        GizmoisMatrix cube = new GizmoisMatrix();
+        cube.matrix = matrix;
+        cube.color = color;
+        cube.isWire = isWire;
+        cube.remainingTime = duration;
+
+        m_MatrixGizmosQueue.Enqueue(cube);
+    }
+
+    private void DrawMatrixGizmois()
+    {
+        int count = m_MatrixGizmosQueue.Count;
+        for (int i = 0; i < count; i++)
+        {
+            GizmoisMatrix cube = m_MatrixGizmosQueue.Dequeue();
+
+            Gizmos.color = cube.color;
+            Gizmos.matrix = cube.matrix;
+
+            if (cube.isWire)
+                Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
+            else
+                Gizmos.DrawCube(Vector3.zero, Vector3.one);
+
+            if (cube.remainingTime > 0)
+            {
+                cube.remainingTime -= Time.deltaTime;
+                m_MatrixGizmosQueue.Enqueue(cube);
+            }
+        }
+    }
+
+    public struct GizmoisMatrix
+    {
+        public Matrix4x4 matrix;
+        public Color color;
+        public bool isWire;
+        public float remainingTime;
+    }
+
     #endregion
 }

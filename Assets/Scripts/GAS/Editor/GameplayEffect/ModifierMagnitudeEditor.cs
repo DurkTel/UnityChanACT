@@ -22,6 +22,8 @@ namespace GAS.Editor
         private void OnEnable()
         {
             m_MMCAsset = target as ModifierMagnitudeCalculation;
+            if (m_MMCAsset == null)
+                return;
 
             m_AllAttributeSetName.Clear();
             foreach (var item in GameplayAttributeSetLib.AttributeSetMap.Keys)
@@ -37,17 +39,19 @@ namespace GAS.Editor
             for (int i = 0; i < m_MMCAsset.ParameterCount; i++)
             {
                 m_AllParametAttributeName[i] ??= new List<string>();
-                OnUpdateAllAttributeName(m_AllParametAttributeName[i], m_MMCAsset.Parameter[i].AttributeSetName);
+                OnUpdateAllAttributeName(m_AllParametAttributeName[i], m_MMCAsset.Parameter[i].attributeSetName);
             }
         }
 
         public override void OnInspectorGUI()
         {
             //base.OnInspectorGUI();
-
+            EditorGUI.BeginChangeCheck();
             OnDrawDescriptionTags();
             OnDrawMMC();
             OnDrawMMCParameter();
+            if (EditorGUI.EndChangeCheck())
+                EditorUtility.SetDirty(m_MMCAsset);
 
             GUILayout.Space(1000);
         }
@@ -102,7 +106,7 @@ namespace GAS.Editor
 
         private void OnDrawMMC()
         {
-            Rect titleRect = new Rect(330, 15, 300, 100);
+            Rect titleRect = new Rect(330, 15, 300, 130);
             GUI.Box(titleRect, "", EditorStyles.helpBox);
 
             titleRect.width = 290;
@@ -114,6 +118,14 @@ namespace GAS.Editor
             titleRect.x += 20;
 
             titleRect.y += 20;
+            titleRect.x -= 15;
+            GUI.Box(titleRect, "", EditorStyles.helpBox);
+            titleRect.x += 15;
+
+            EditorGUI.LabelField(titleRect, "修改目标：");
+            m_MMCAsset.ToTarget = (AttributeFrom)EditorGUI.EnumPopup(new Rect(titleRect.x + 80, titleRect.y, 195, 20), m_MMCAsset.ToTarget);
+
+            titleRect.y += 25;
             titleRect.x -= 15;
             GUI.Box(titleRect, "", EditorStyles.helpBox);
             titleRect.x += 15;
@@ -203,6 +215,7 @@ namespace GAS.Editor
 
             Rect bg = new Rect(10, 180, 620, m_MMCAsset.ParameterCount * 75);
             GUI.Box(bg, "", EditorStyles.helpBox);
+            m_MMCAsset.AnswerNegation = EditorGUI.ToggleLeft(new Rect(15, m_MMCAsset.ParameterCount * 75 + 160, 610, 60), "结果取反", m_MMCAsset.AnswerNegation);
         }
 
         private void OnDrawMMCSingleParameter(Rect rect, int index)
@@ -211,15 +224,14 @@ namespace GAS.Editor
             rect.height = 20;
             GUI.Box(new Rect(rect.x + 5, rect.y, 30, 60), "\n" + m_MMCAsset.GetParameterStr(index));
 
-            rect.x += 55;
+            rect.x += 40;
             rect.y += 5;
             rect.width = 130;
-            m_MMCAsset.Parameter[index].useConst = EditorGUI.ToggleLeft(rect, "是否使用常量", m_MMCAsset.Parameter[index].useConst);
+            m_MMCAsset.Parameter[index].valueSource = (AttributeSource)EditorGUI.EnumPopup(rect, m_MMCAsset.Parameter[index].valueSource);
             rect.y += 25;
-            using (new EditorGUI.DisabledScope(!m_MMCAsset.Parameter[index].useConst))
-            {
-                m_MMCAsset.Parameter[index].magnitude = EditorGUI.FloatField(rect, m_MMCAsset.Parameter[index].magnitude);
-            }
+            rect.width = 130;
+            m_MMCAsset.Parameter[index].negation = EditorGUI.ToggleLeft(rect, "取反", m_MMCAsset.Parameter[index].negation);
+
             rect.y -= 25;
 
             rect.width = 235;
@@ -228,22 +240,22 @@ namespace GAS.Editor
             rect.x -= 15;
             GUI.Box(rect, "", EditorStyles.helpBox);
             rect.x += 15;
-            using (new EditorGUI.DisabledScope(m_MMCAsset.Parameter[index].useConst))
-            {
 
-                bool isEmpty = string.IsNullOrEmpty(m_MMCAsset.Parameter[index].AttributeSetName);
+            if (m_MMCAsset.Parameter[index].valueSource == AttributeSource.Attaribute)
+            {
+                bool isEmpty = string.IsNullOrEmpty(m_MMCAsset.Parameter[index].attributeSetName);
                 if (isEmpty)
                     EditorGUI.LabelField(rect, "入参属性集：" + "请指定要入参的属性集!");
                 else
                 {
                     EditorGUI.LabelField(rect, "入参属性集：");
-                    int selectIndex = m_AllAttributeSetName.IndexOf(m_MMCAsset.Parameter[index].AttributeSetName);
+                    int selectIndex = m_AllAttributeSetName.IndexOf(m_MMCAsset.Parameter[index].attributeSetName);
                     EditorGUI.BeginChangeCheck();
-                    selectIndex = EditorGUI.Popup(new Rect(rect.x + 80, rect.y, 195, 20), selectIndex, m_AllAttributeSetName.ToArray());
+                    selectIndex = EditorGUI.Popup(new Rect(rect.x + 80, rect.y, 120, 20), selectIndex, m_AllAttributeSetName.ToArray());
                     if (EditorGUI.EndChangeCheck())
                     {
-                        m_MMCAsset.Parameter[index].AttributeSetName = m_AllAttributeSetName[selectIndex];
-                        OnUpdateAllAttributeName(m_AllParametAttributeName[index], m_MMCAsset.Parameter[index].AttributeSetName);
+                        m_MMCAsset.Parameter[index].attributeSetName = m_AllAttributeSetName[selectIndex];
+                        OnUpdateAllAttributeName(m_AllParametAttributeName[index], m_MMCAsset.Parameter[index].attributeSetName);
                     }
                 }
 
@@ -253,26 +265,30 @@ namespace GAS.Editor
                 {
                     TogglesStringWindow.OpenWindow(m_AllAttributeSetName, "Add AttributeSetName", true, (p) =>
                     {
-                        m_MMCAsset.Parameter[index].AttributeSetName = p[0];
-                        OnUpdateAllAttributeName(m_AllParametAttributeName[index], m_MMCAsset.Parameter[index].AttributeSetName);
+                        m_MMCAsset.Parameter[index].attributeSetName = p[0];
+                        OnUpdateAllAttributeName(m_AllParametAttributeName[index], m_MMCAsset.Parameter[index].attributeSetName);
                     });
+                }
+                bool isEmpty2 = string.IsNullOrEmpty(m_MMCAsset.Parameter[index].attributeName);
 
+                if (!isEmpty && isEmpty2 && GUI.Button(new Rect(rect.x + rect.width - 20, rect.y, 20, 20), "-"))
+                {
+                    m_MMCAsset.Parameter[index].attributeSetName = "";
                 }
 
                 rect.y += 25;
                 GUI.Box(rect, "", EditorStyles.helpBox);
                 rect.x += 15;
-                bool isEmpty2 = string.IsNullOrEmpty(m_MMCAsset.Parameter[index].AttributeName);
                 if (isEmpty2)
                     EditorGUI.LabelField(rect, "入参属性：" + "请指定要入参的属性!");
                 else
                 {
                     EditorGUI.LabelField(rect, "入参属性：");
-                    int selectIndex = m_AllParametAttributeName[index].IndexOf(m_MMCAsset.Parameter[index].AttributeName);
+                    int selectIndex = m_AllParametAttributeName[index].IndexOf(m_MMCAsset.Parameter[index].attributeName);
                     EditorGUI.BeginChangeCheck();
-                    selectIndex = EditorGUI.Popup(new Rect(rect.x + 80, rect.y, 195, 20), selectIndex, m_AllParametAttributeName[index].ToArray());
+                    selectIndex = EditorGUI.Popup(new Rect(rect.x + 80, rect.y, 120, 20), selectIndex, m_AllParametAttributeName[index].ToArray());
                     if (EditorGUI.EndChangeCheck())
-                        m_MMCAsset.Parameter[index].AttributeName = m_AllParametAttributeName[index][selectIndex];
+                        m_MMCAsset.Parameter[index].attributeName = m_AllParametAttributeName[index][selectIndex];
                 }
                 rect.x -= 15;
 
@@ -280,8 +296,13 @@ namespace GAS.Editor
                 {
                     TogglesStringWindow.OpenWindow(m_AllParametAttributeName[index], "Add AttributeName", true, (p) =>
                     {
-                        m_MMCAsset.Parameter[index].AttributeName = p[0];
+                        m_MMCAsset.Parameter[index].attributeName = p[0];
                     });
+                }
+
+                if (!isEmpty && !isEmpty2 && GUI.Button(new Rect(rect.x + rect.width - 20, rect.y, 20, 20), "-"))
+                {
+                    m_MMCAsset.Parameter[index].attributeName = "";
                 }
 
                 rect.y -= 25;
@@ -304,6 +325,23 @@ namespace GAS.Editor
                 m_MMCAsset.Parameter[index].capture = (AttributeCaptureType)EditorGUI.EnumPopup(new Rect(rect.x + 80, rect.y, 95, 20), m_MMCAsset.Parameter[index].capture);
 
             }
+            else if (m_MMCAsset.Parameter[index].valueSource == AttributeSource.Const)
+            {
+                EditorGUI.LabelField(rect, "入参常量：");
+                m_MMCAsset.Parameter[index].magnitude = EditorGUI.FloatField(new Rect(rect.x + 80, rect.y, 140, 20), m_MMCAsset.Parameter[index].magnitude);
+            }
+            else if (m_MMCAsset.Parameter[index].valueSource == AttributeSource.MMC)
+            {
+                EditorGUI.LabelField(rect, "引用修改器：");
+                m_MMCAsset.Parameter[index].mmc = (ModifierMagnitudeCalculation)EditorGUI.ObjectField(new Rect(rect.x + 80, rect.y, 140, 20), m_MMCAsset.Parameter[index].mmc, typeof(ModifierMagnitudeCalculation), false);
+            }
+            else if (m_MMCAsset.Parameter[index].valueSource == AttributeSource.Variable)
+            {
+                EditorGUI.LabelField(rect, "入参变量：");
+                m_MMCAsset.Parameter[index].variableName = EditorGUI.TextField(new Rect(rect.x + 80, rect.y, 140, 20), m_MMCAsset.Parameter[index].variableName);
+
+            }
+
         }
     }
 }

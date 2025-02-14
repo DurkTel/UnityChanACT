@@ -12,11 +12,6 @@ namespace GAS.Runtime
         public string Description;
 
         /// <summary>
-        /// 生效的类型
-        /// </summary>
-        public string Type;
-
-        /// <summary>
         /// 持续类型
         /// </summary>
         public EffectDurationType DurationType;
@@ -41,6 +36,11 @@ namespace GAS.Runtime
         /// 叠加处理
         /// </summary>
         public GameplayEffectStacking StackingEffect;
+
+        /// <summary>
+        /// 要触发的修改器
+        /// </summary>
+        public ModifierMagnitudeCalculation MMCAsset;
 
         /// <summary>
         /// 此Effect固有的Tag

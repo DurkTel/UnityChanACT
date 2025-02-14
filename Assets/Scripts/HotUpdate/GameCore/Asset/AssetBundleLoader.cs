@@ -55,10 +55,10 @@ namespace LGameFramework.GameCore.Asset
             if (m_AssetDownloader != null) return null;
 
             string path = AssetModule.GetAssetManifest_Bundle().GetPath(bundleName);
-            string filePath = Path.Combine(AssetModule.GamePath.downloadDataPath.AssetPath, path);
+            string filePath = Path.Combine(GameConfig.Instance.downloadDataPath.AssetPath, path);
             //先去判断下载路径是否有
             if (!File.Exists(filePath))
-                filePath = Path.Combine(AssetModule.GamePath.buildingPath.AssetPath, path); //再判断首包路径
+                filePath = Path.Combine(GameConfig.Instance.buildingPath.AssetPath, path); //再判断首包路径
 
             //都没有 文件异常 重新从资源服务器下载
             if (!File.Exists(filePath))
@@ -84,8 +84,8 @@ namespace LGameFramework.GameCore.Asset
         {
             if (m_AssetDownloader != null) return;
             string path = AssetModule.GetAssetManifest_Bundle().GetPath(fileName);
-            string serverPath = Path.Combine(AssetModule.GamePath.serverDataPath.AssetPath, path);
-            string downloadPath = Path.Combine(AssetModule.GamePath.downloadDataPath.AssetPath, path);
+            string serverPath = Path.Combine(GameConfig.Instance.serverDataPath.AssetPath, path);
+            string downloadPath = Path.Combine(GameConfig.Instance.downloadDataPath.AssetPath, path);
             m_AssetDownloader = AssetModule.EnqueueDownload(serverPath, downloadPath);
         }
 

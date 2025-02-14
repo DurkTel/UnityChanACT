@@ -28,5 +28,11 @@ namespace LGameFramework.GameCore
         SCENE_LOAD_COMPLETE,
 
         #endregion
+
+
+        /// <summary>
+        /// 房间内服务端消息更新
+        /// </summary>
+        GAMEROOM_SERVER_UPDATE_INFO,
     }
 }

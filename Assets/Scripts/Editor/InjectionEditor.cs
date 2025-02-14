@@ -288,7 +288,8 @@ public class InjectionEditor : Editor
 
         if (GUILayout.Button("开始注入"))
         {
-            Transform tra = target as Transform;
+            var inject = target as Injection;
+            Transform tra = inject.transform;
             if (tra == null)
             {
                 Debug.LogError("选中对象为空");

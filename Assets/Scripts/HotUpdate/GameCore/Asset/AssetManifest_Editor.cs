@@ -44,7 +44,7 @@ namespace LGameFramework.GameCore.Asset
 
 
 #if UNITY_EDITOR
-        //[MenuItem("Assets/AssetsManifest/RefreshEditorAssets")]
+        [MenuItem("Assets/AssetsManifest/RefreshEditorAssets")]
         public static void RefreshEditorAssetsManifest()
         {
             AssetManifest_Editor assetManifest = GetAssetManifest(editorPath);

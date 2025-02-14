@@ -243,11 +243,25 @@ namespace GAS.Editor
                     }
                     else if (first.menuType == typeof(GameplayEffectAsset))
                     {
-                        InputStringWindow.OpenWindow("Create New Effect Asset", (p) =>
+                        Type baseType = typeof(GameplayEffectAsset);
+                        var list = GASAssetWindow.GetAllSubClass(baseType);
+                        list.Add(baseType);
+
+                        var types = Assembly.GetAssembly(baseType).GetTypes();
+                        TogglesTypeWindow.OpenWindow(list, "Create New Effect Asset", true, (types) =>
                         {
-                            var asset = ScriptableObject.CreateInstance<GameplayEffectAsset>();
-                            AssetDatabase.CreateAsset(asset, Path.Combine(first.filePath, p[0] + ".asset"));
-                        }, new InputStringWindow.InputStringSet() { tips = "New Effect Name", });
+                            InputStringWindow.OpenWindow("Create New Effect Asset", (p) =>
+                            {
+                                var asset = ScriptableObject.CreateInstance(types[0]);
+                                AssetDatabase.CreateAsset(asset, Path.Combine(first.filePath, p[0] + ".asset"));
+                            }, new InputStringWindow.InputStringSet() { tips = "New Effect Name" });
+                        });
+
+                        //InputStringWindow.OpenWindow("Create New Effect Asset", (p) =>
+                        //{
+                        //    var asset = ScriptableObject.CreateInstance<GameplayEffectAsset>();
+                        //    AssetDatabase.CreateAsset(asset, Path.Combine(first.filePath, p[0] + ".asset"));
+                        //}, new InputStringWindow.InputStringSet() { tips = "New Effect Name", });
                     }
                     else if (first.menuType == typeof(AbilitySystemArchetype))
                     {
@@ -260,10 +274,7 @@ namespace GAS.Editor
                     else if (first.menuType == typeof(ModifierMagnitudeCalculation))
                     {
                         Type type = typeof(ModifierMagnitudeCalculation);
-                        var list = Assembly.GetAssembly(type)
-                        .GetTypes()
-                        .Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(type))
-                        .ToList();
+                        var list = GASAssetWindow.GetAllSubClass(type);
                         TogglesTypeWindow.OpenWindow(list, "Create New MMC Asset", true, (types) =>
                         {
                             InputStringWindow.OpenWindow("Create New MMC Asset", (p) =>

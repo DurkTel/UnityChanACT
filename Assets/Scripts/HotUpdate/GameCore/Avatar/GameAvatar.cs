@@ -217,7 +217,7 @@ namespace LGameFramework.GameCore.Avatar
 
         protected virtual void OnPartLoadComplete(AvatarPartType part)
         {
-
+            
         }
 
     }

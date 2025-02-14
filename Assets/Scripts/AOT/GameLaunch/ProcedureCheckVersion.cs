@@ -17,8 +17,6 @@ public class ProcedureCheckVersion : FSM_Status<ProcedureLaunchProcess>
 
     private UnityWebRequestAsyncOperation m_WebRequestAsync;
 
-    private GamePathSetting.FilePathStruct m_GamePath;
-
     public override void OnAction()
     {
         if (m_WebRequestAsync == null) return;
@@ -45,9 +43,8 @@ public class ProcedureCheckVersion : FSM_Status<ProcedureLaunchProcess>
 
     public override void OnEnter()
     {
-        m_GamePath = GamePathSetting.Get().CurrentPlatform();
         m_LocalVersion = "";
-        string filePath = m_GamePath.downloadDataPath.AssetPath + m_GamePath.versionFileName;
+        string filePath = GameConfig.Instance.downloadDataPath.AssetPath + GameConfig.Instance.versionFileName;
         if (File.Exists(filePath))
         {
             string str = File.ReadAllText(filePath);
@@ -59,7 +56,7 @@ public class ProcedureCheckVersion : FSM_Status<ProcedureLaunchProcess>
 
         dataBase.SetData(ProcedureLauncher.procedureMarkHead + localVersionName, m_LocalVersion);
 
-        m_WebRequest = UnityWebRequest.Get(m_GamePath.serverDataPath.AssetPath + m_GamePath.versionFileName);
+        m_WebRequest = UnityWebRequest.Get(GameConfig.Instance.serverDataPath.AssetPath + GameConfig.Instance.versionFileName);
         m_WebRequestAsync = m_WebRequest.SendWebRequest();
 
     }

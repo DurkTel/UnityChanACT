@@ -1,0 +1,20 @@
+{
+    "ActionInfoList":
+    [
+        {
+            "m_ActionID":"1_Idle",
+            "m_IsLoop":false,
+            "m_ActionTracks":[{"rid":1000},{"rid":1001}]
+        },
+        {
+            "m_ActionID":"1_Run",
+            "m_IsLoop":false,
+            "m_ActionTracks":[{"rid":1002}]
+        },
+        {
+            "m_ActionID":"1_SSS",
+            "m_IsLoop":false,
+            "m_ActionTracks":[]
+        }
+    ],
+    "references":{"version":2,"RefIds":[{"rid":1000,"type":{"class":"ActionAnimationTrack","ns":"UnityChanAct","asm:"Assembly-GameLogic"},"data":{"m_ActionClips":[{"rid":1003}]}},{"rid":1001,"type":{"class":"ActionParticleTrack","ns":"UnityChanAct","asm:"Assembly-GameLogic"},"data":{"m_ActionClips":[{"rid":1004}]}},{"rid":1002,"type":{"class":"ActionAudioTrack","ns":"UnityChanAct","asm:"Assembly-GameLogic"},"data":{"m_ActionClips":[{"rid":1005}]}},{"rid":1003,"type":{"class":"ActionAnimationClip","ns":"UnityChanAct","asm:"Assembly-GameLogic"},"data":{"clipLabel":"","m_StartTick":0,"m_EndTick":25,"layer":0,"duration":0.0,"durationByScript":false,"rootMotion":false,"clip":{"instanceID":0}}},{"rid":1004,"type":{"class":"ActionParticleClip","ns":"UnityChanAct","asm:"Assembly-GameLogic"},"data":{"clipLabel":"","m_StartTick":13,"m_EndTick":38,"particleEffect":{"instanceID":0},"effectPointType":0,"constraintType":0,"bindBone":"","position":{"x":0.0,"y":0.0,"z":0.0},"rotation":{"x":0.0,"y":0.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0},"duration":0.5}},{"rid":1005,"type":{"class":"ActionAudioClip","ns":"UnityChanAct","asm":"Assembly-GameLogic"},"data":{"clipLabel":"","m_StartTick":0,"m_EndTick":25,"audioGroupName":"","audioClip":{"instanceID":0}}}]}}

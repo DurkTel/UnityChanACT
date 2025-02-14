@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using LGameFramework.GameCore.Asset;
 using UnityEngine.UI;
+using System;
 
 namespace LGameFramework.GameLogic.GUI
 {
@@ -28,6 +29,8 @@ namespace LGameFramework.GameLogic.GUI
 
         protected GMGUIManager.GUIViewLayer m_GUIViewLayer;
         public GMGUIManager.GUIViewLayer GUIViewLayer { get { return m_GUIViewLayer; } }
+
+        protected GUIViewData m_ViewData;
         #endregion
 
         #region 派生参数
@@ -75,6 +78,11 @@ namespace LGameFramework.GameLogic.GUI
             OnInit();
         }
 
+        public virtual void SetViewData(GUIViewData data)
+        {
+            m_ViewData = data;
+        }
+
         public virtual void OnInit()
         {
             OnBeforeOpenEffect();
@@ -88,15 +96,19 @@ namespace LGameFramework.GameLogic.GUI
 
         public virtual void OnOpenEffect()
         {
+            if (m_ViewData != null && m_ViewData.OnOpen != null)
+                m_ViewData.OnOpen.Invoke();
+
             if (OpenTween != null)
                 OpenTween.Invoke(this, true, OnEnable);
             else
                 OnEnable();
+
         }
 
         public virtual void OnEnable()
         {
-            
+
         }
 
         public virtual void OnBeforeDisableEffect()
@@ -116,21 +128,40 @@ namespace LGameFramework.GameLogic.GUI
         {
             SetVisible(false);
             UIUtility.WaitToDestroy(this, DestroyTime);
+
+            if (m_ViewData != null && m_ViewData.OnClose != null)
+                m_ViewData.OnClose.Invoke();
         }
 
         public virtual void OnDispose()
         {
-
+            m_ViewData = null;
         }
 
         public virtual void Close()
         {
+
             UIUtility.CloseView(GetType());
         }
 
         public void SetVisible(bool value)
         {
             m_RectTransform.anchoredPosition = value ? Vector2.zero : s_HidePosition;
+        }
+    }
+
+    /// <summary>
+    /// 打开界面时可附带的信息
+    /// </summary>
+    public class GUIViewData : IDisposable
+    {
+        public UnityAction OnOpen;
+        public UnityAction OnClose;
+
+        public virtual void Dispose()
+        {
+            OnOpen = null;
+            OnClose = null;
         }
     }
 }

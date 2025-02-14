@@ -13,9 +13,9 @@ namespace GAS.Runtime
         protected bool m_IsActive;
         public bool IsActive { get { return m_IsActive; } }
 
-        protected AbilitySystemComponent m_ASC;
+        protected IAbilitySystemComponent m_ASC;
 
-        public virtual void OnInit(GameplayAbilityAsset abilityAsset, AbilitySystemComponent asc)
+        public virtual void OnInit(GameplayAbilityAsset abilityAsset, IAbilitySystemComponent asc)
         {
             m_ASC = asc;
             m_AbilityAsset = abilityAsset;

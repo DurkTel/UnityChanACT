@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GAS.Runtime
 {
-    public class AbilitySystemComponent : MonoBehaviour
+    public class AbilitySystemComponent : MonoBehaviour, IAbilitySystemComponent
     {
         [SerializeField]
         private AbilitySystemArchetype m_Archetype;
@@ -25,13 +25,16 @@ namespace GAS.Runtime
 
         private GameplayCueContainer m_CueContainer;
         public GameplayCueContainer Cues { get { return m_CueContainer; } }
+        public GameObject GameObject { get { return gameObject; } }
+        public Transform Transform { get { return transform; } }
+        public int Id { get { return GetInstanceID(); } }
 
         private void Awake()
         {
-            OnInit();
+            OnInit(m_Archetype);
         }
 
-        public void OnInit()
+        public void OnInit(AbilitySystemArchetype archetype)
         {
             if (m_IsInit) return;
             m_TagContainer = new GameplayTagContainer(this);
@@ -55,11 +58,6 @@ namespace GAS.Runtime
             m_AbilityContainer.Update(deltaTime);
             m_EffectContainer.Update(deltaTime);
             m_CueContainer.Update(deltaTime);
-        }
-
-        private void OnAnimatorMove()
-        {
-            m_AbilityContainer.OnAnimationUpdate();
         }
 
         /// <summary>
@@ -178,10 +176,10 @@ namespace GAS.Runtime
         public void OnUpdate(float deltaTime);
     }
 
-    public interface IGameplayAnimationUpdate
+    public interface IGameplaySyncUpdate
     {
         public bool IsActive { get; }
-        public void OnAnimationUpdate();
+        public void OnSyncUpdate(int tick);
     }
 
     public interface IGameplayGrantTag

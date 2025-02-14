@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a31c389cda8d64b91a285ce051748f, type: 3}
+  m_Name: Kohaku
+  m_EditorClassIdentifier: 
+  Description: 
+  FixedTags: []
+  AttributeSets:
+  - AttributeSetName: Fight
+    AttributeData:
+    - AttributeName: AttackPow
+      BaseValue: 135
+    - AttributeName: Defense
+      BaseValue: 102
+    - AttributeName: HP
+      BaseValue: 1851
+    - AttributeName: CriticalHitRate
+      BaseValue: 500
+    - AttributeName: CriticalHitPow
+      BaseValue: 5000
+    - AttributeName: Level
+      BaseValue: 1
+    - AttributeName: Penetrating
+      BaseValue: 0
+    - AttributeName: ReduceDefense
+      BaseValue: 0
+    - AttributeName: DamageBonus
+      BaseValue: 0
+    - AttributeName: MaxHP
+      BaseValue: 1851
+  AbilityAssets:
+  - {fileID: 11400000, guid: 3d40293288b7fd7478e83c91ec40b10b, type: 2}
+  - {fileID: 11400000, guid: d404e9b74dc793c4f97c1f10375ae09e, type: 2}
+  - {fileID: 11400000, guid: a735c43f67e43064482800ed0c8798cf, type: 2}
+  - {fileID: 11400000, guid: 911c3e4ef2c66eb40a3496af90e58d72, type: 2}

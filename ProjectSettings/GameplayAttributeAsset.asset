@@ -15,19 +15,37 @@ MonoBehaviour:
   attributeInfos:
   - name: MP
     description: "\u6CD5\u529B\u503C"
+  - name: HP
+    description: "\u751F\u547D\u503C"
+  - name: MaxHP
+    description: "\u6700\u5927\u751F\u547D\u503C"
   - name: RotateSpeed
     description: "\u65CB\u8F6C\u901F\u5EA6"
   - name: TiltAngle
     description: "\u65CB\u8F6C\u503E\u659C\u89D2\u5EA6"
   - name: AttackPow
     description: "\u653B\u51FB\u529B"
+  - name: Defense
+    description: "\u9632\u5FA1\u529B"
   - name: MoveSpeed
     description: "\u79FB\u52A8\u901F\u5EA6"
-  - name: HP
-    description: "\u751F\u547D\u503C"
   - name: TiltSpeed
     description: "\u65CB\u8F6C\u503E\u659C\u901F\u5EA6"
   - name: AngularVelocity
     description: "\u89D2\u901F\u5EA6"
   - name: TargetDeg
     description: "\u76EE\u6807\u5939\u89D2"
+  - name: Durability
+    description: "\u8010\u4E45\u5EA6"
+  - name: CriticalHitRate
+    description: "\u66B4\u51FB\u7387"
+  - name: CriticalHitPow
+    description: "\u66B4\u51FB\u4F24\u5BB3"
+  - name: Level
+    description: "\u7B49\u7EA7"
+  - name: Penetrating
+    description: "\u9632\u5FA1\u7A7F\u900F"
+  - name: ReduceDefense
+    description: "\u51CF\u5C11\u9632\u5FA1"
+  - name: DamageBonus
+    description: "\u4F24\u5BB3\u52A0\u6210"

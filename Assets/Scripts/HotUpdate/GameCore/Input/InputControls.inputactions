@@ -101,7 +101,7 @@
                     "id": "72c0dfbf-56b2-4cd9-a0f2-7d631104c08c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -110,7 +110,7 @@
                     "id": "51318714-9433-47cc-bdd4-a747f037b6e5",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 }
             ],
@@ -184,7 +184,7 @@
                 {
                     "name": "",
                     "id": "dda0d0b3-7565-48d1-a95a-c4eb24f9016a",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -227,8 +227,19 @@
                 },
                 {
                     "name": "",
+                    "id": "cf8b2ead-f741-43a7-947d-772337651693",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b697bd3d-5393-48a1-8c1d-b0ea38144ccb",
-                    "path": "<Joystick>/stick",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -317,6 +328,17 @@
                     "name": "",
                     "id": "12a298d6-dff7-4b52-bbc1-3ecec6c547d5",
                     "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47b5f4de-a23a-4cac-a005-fac47dc09145",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

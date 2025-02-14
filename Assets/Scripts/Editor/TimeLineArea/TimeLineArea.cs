@@ -48,10 +48,18 @@ namespace LGameFramework.GameEditor
         private const float c_MaxScale = 100f;
 
         /// <summary>
+        /// 帧速率
+        /// </summary>
+        public const float c_FrameRate = 15f;
+
+        public const float c_FrameSec = 1 / c_FrameRate;
+
+        /// <summary>
         /// 时间轴最大长度
         /// </summary>
         private int m_TimelineLength = 500;
         public int TimelineLength { get { return m_TimelineLength; } }
+
 
         /// <summary>
         /// 当前缩放比例
@@ -86,12 +94,6 @@ namespace LGameFramework.GameEditor
                 }
             } 
         }
-
-        /// <summary>
-        /// 帧速率
-        /// </summary>
-        private float m_FrameRate = 50f;
-        public float FrameRate { get { return m_FrameRate; } }
 
         /// <summary>
         /// 帧速率
@@ -197,7 +199,7 @@ namespace LGameFramework.GameEditor
 
                     DrawVerticalLine(contentRect.x + x, y, contentRect.y + contentRect.height, Color.white);
                     if (highlight || m_Scale >= 30)
-                        GUI.Label(new Rect(contentRect.x + x, contentRect.y, 100, 20), (i * 1f / m_FrameRate).ToString("F2"));
+                        GUI.Label(new Rect(contentRect.x + x, contentRect.y, 100, 20), (i * 1f / c_FrameRate).ToString("F2"));
 
                     if (m_CurrentSelectedTick == i)
                     {

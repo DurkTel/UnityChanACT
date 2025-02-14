@@ -23,7 +23,7 @@ namespace LGameFramework.GameBase
 
         public static string ToJason(object obj, bool encrypt = false)
         {
-            string json = JsonUtility.ToJson(obj);
+            string json = JsonUtility.ToJson(obj, true);
             return encrypt ? AESEncryptor.Encrypt(json) : json;
         }
 

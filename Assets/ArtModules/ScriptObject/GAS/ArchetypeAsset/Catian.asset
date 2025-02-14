@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a31c389cda8d64b91a285ce051748f, type: 3}
+  m_Name: Catian
+  m_EditorClassIdentifier: 
+  Description: 
+  FixedTags:
+  - m_FullName: Camp.Enemy
+    m_ShortName: Enemy
+    m_HashCode: -1415818777
+    m_ParentHasCodes: 4f295878
+    m_ParentNames:
+    - Camp
+  AttributeSets: []
+  AbilityAssets:
+  - {fileID: 11400000, guid: 807b0278d2cc62a47bed37decb531896, type: 2}
+  - {fileID: 11400000, guid: bb07e2af5b9454541a00c0117c6527f4, type: 2}
+  - {fileID: 11400000, guid: a95940475851e8b4c9dde98b554d2ea0, type: 2}
+  - {fileID: 11400000, guid: a735c43f67e43064482800ed0c8798cf, type: 2}
+  - {fileID: 11400000, guid: 911c3e4ef2c66eb40a3496af90e58d72, type: 2}
+  - {fileID: 11400000, guid: 1c191eb9ee1ea95478dfeff2e65a7e42, type: 2}

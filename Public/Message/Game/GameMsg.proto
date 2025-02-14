@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package GameMessage;
+
+enum EGateCommand
+{
+	GateNone = 0;
+	GateGameStart = 1;
+}
+
+message GameStartMessage
+{
+	int32 time = 1;
+	string name = 2;
+}

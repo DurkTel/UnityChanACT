@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8df5bb642ab7314f91882a69ab849a7, type: 3}
+  m_Name: 1_Attack5_Config
+  m_EditorClassIdentifier: 
+  Description: 
+  DurationType: 0
+  TriggerType: 0
+  Duration: 0
+  Period: 0
+  StackingEffect:
+    stackingType: 0
+    durationRefreshType: 0
+    expirationType: 0
+    maxStackNum: 0
+  MMCAsset: {fileID: 11400000, guid: dd02b5de823f1c945897dc7900bda96d, type: 2}
+  FixedTags: []
+  ActivationTags: []
+  CancelTags: []
+  BlockActiveTags: []
+  RequireTags: []
+  attackParm:
+    attackMagnification: 29730
+    sourceTickFreeze: 1
+    targetTickFreeze: 2
+    hitEffectPrefab: Hit 4.prefab
+    autoLookTarget: 1
+    priority: 5
+  audioParam:
+    audioGroupName: HurtAudio
+    audioClip: beamswda_hit_02.ogg
+  cameraShakeParam:
+    shakeMode: 2
+    period: 1
+    shakeTime: 0.15
+    minWave: 0.1
+    maxWave: 0.1
+    offPeriod: 0

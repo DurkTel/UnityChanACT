@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d62f164d604a0d4683ad2e547ac0434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionInfoList:
+  - m_ActionID: 1_Idle
+    m_IsLoop: 0
+    m_ActionTracks:
+    - rid: 90298632676048936
+    - rid: 90298632676048937
+  - m_ActionID: 1_Run
+    m_IsLoop: 0
+    m_ActionTracks:
+    - rid: 90298632676048940
+  - m_ActionID: 1_SSS
+    m_IsLoop: 0
+    m_ActionTracks: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 90298632676048936
+      type: {class: ActionAnimationTrack, ns: UnityChanAct, asm: UnityChanAct}
+      data:
+        m_ActionClips:
+        - rid: 90298632676048938
+    - rid: 90298632676048937
+      type: {class: ActionParticleTrack, ns: UnityChanAct, asm: UnityChanAct}
+      data:
+        m_ActionClips:
+        - rid: 90298632676048939
+    - rid: 90298632676048938
+      type: {class: ActionAnimationClip, ns: UnityChanAct, asm: UnityChanAct}
+      data:
+        clipLabel: 
+        m_StartTick: 0
+        m_EndTick: 25
+        layer: 0
+        duration: 0
+        durationByScript: 0
+        rootMotion: 0
+        clip: {fileID: 0}
+    - rid: 90298632676048939
+      type: {class: ActionParticleClip, ns: UnityChanAct, asm: UnityChanAct}
+      data:
+        clipLabel: 
+        m_StartTick: 13
+        m_EndTick: 38
+        particleEffect: {fileID: 0}
+        effectPointType: 0
+        constraintType: 0
+        bindBone: 
+        position: {x: 0, y: 0, z: 0}
+        rotation: {x: 0, y: 0, z: 0}
+        scale: {x: 1, y: 1, z: 1}
+        duration: 0.5
+    - rid: 90298632676048940
+      type: {class: ActionAudioTrack, ns: UnityChanAct, asm: UnityChanAct}
+      data:
+        m_ActionClips:
+        - rid: 90298632676048941
+    - rid: 90298632676048941
+      type: {class: ActionAudioClip, ns: UnityChanAct, asm: UnityChanAct}
+      data:
+        clipLabel: 
+        m_StartTick: 0
+        m_EndTick: 25
+        audioGroupName: 
+        audioClip: {fileID: 0}

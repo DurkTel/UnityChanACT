@@ -5,6 +5,7 @@ using UnityEngine.InputSystem.UI;
 using System;
 using LGameFramework.GameCore.Asset;
 using LGameFramework.GameCore;
+using UnityEngine.Rendering.Universal;
 
 namespace LGameFramework.GameLogic.GUI
 {
@@ -95,7 +96,7 @@ namespace LGameFramework.GameLogic.GUI
             return false;
         }
 
-        internal T OpenView<T>() where T : GUIView, new()
+        internal T OpenView<T>(GUIViewData data) where T : GUIView, new()
         {
             GUIView view = null;
             if (!IsCanOpenView<T>()) return null;
@@ -106,10 +107,12 @@ namespace LGameFramework.GameLogic.GUI
                 view = CreateView<T>();
                 if (view == null) return null;
                 m_AllViewDict.Add(viewType, view);
+                view.SetViewData(data);
+
             }
             else
             {
-                view = m_AllViewDict[viewType];
+                //view = m_AllViewDict[viewType];
                 if (m_WaitDestroy != null && m_WaitDestroy.ContainsKey(view))
                     m_WaitDestroy.Remove(view);
 
@@ -117,6 +120,7 @@ namespace LGameFramework.GameLogic.GUI
                 GUIViewLayer layer = m_Layers[guiView.LayerLevel];
                 layer.UpdateSortingOrder(view);
                 layer.SetAsTop(view);
+                view.SetViewData(data);
                 guiView.OnBeforeOpenEffect();
             }
 
@@ -127,6 +131,7 @@ namespace LGameFramework.GameLogic.GUI
         {
             T view = new T();
             GameObject go = new GameObject(view.GetType().Name + "_Container");
+            go.layer = m_UILayer;
             GUIViewLayer layer = m_Layers[view.LayerLevel];
 
             view.OnConstructor(go, layer);
@@ -157,10 +162,20 @@ namespace LGameFramework.GameLogic.GUI
             cameraGO.tag = "UICamera";
             m_UICamera = cameraGO.AddComponent<Camera>();
             m_UICamera.clearFlags = CameraClearFlags.Depth;
-            m_UICamera.cullingMask = m_UILayer;
+            m_UICamera.cullingMask = 1 << m_UILayer;
             m_UICamera.orthographic = true;
             m_UICamera.depth = 2;
             m_UICamera.farClipPlane = 50;
+
+#if UNITY_PIPELINE_URP
+            m_UICamera.clearFlags = CameraClearFlags.Nothing;
+            var urpData = m_UICamera.TryAddComponent<UniversalAdditionalCameraData>();
+            urpData.renderType = CameraRenderType.Overlay;
+
+            var mainCamera = GameFrameworkEntry.GetModule<GMOrbitCamera>();
+            var mainUrp = mainCamera.Transform.GetComponentInChildren<UniversalAdditionalCameraData>();
+            mainUrp.cameraStack.Add(m_UICamera);
+#endif
         }
 
         private void InitializeCanvas()

@@ -95,7 +95,12 @@ namespace GAS.Runtime
 
         public override bool Equals(object obj)
         {
-            return obj is GameplayTag tag && this == tag;
+            if (obj is string tag1)
+                return this == tag1;
+            else if (obj is GameplayTag tag2)
+                return this == tag2;
+
+            return false;
         }
 
         public static bool operator ==(GameplayTag x, GameplayTag y)
@@ -106,6 +111,16 @@ namespace GAS.Runtime
         public static bool operator !=(GameplayTag x, GameplayTag y)
         {
             return x.HashCode != y.HashCode;
+        }
+
+        public static bool operator ==(GameplayTag x, string y)
+        {
+            return x.FullName == y;
+        }
+
+        public static bool operator !=(GameplayTag x, string y)
+        {
+            return x.FullName != y;
         }
     }
 }

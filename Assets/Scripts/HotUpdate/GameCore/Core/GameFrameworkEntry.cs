@@ -17,9 +17,7 @@ namespace LGameFramework.GameCore
         public static void Instantiate(bool logic = true)
         {
             s_StartLogic = logic;
-            GameObject go = new GameObject("GameFrameworkEntry");
-            var entry = go.AddComponent<GameFrameworkEntry>();
-            entry.m_GameRoot = go.transform;
+            GameObject go = new GameObject("GameFrameworkEntry", typeof(GameFrameworkEntry));
             DontDestroyOnLoad(go);
             GameLogger.INFO("游戏入口实例化完成，进入游戏");
         }
@@ -27,6 +25,7 @@ namespace LGameFramework.GameCore
         protected void Awake()
         {
             m_Entry = this;
+            m_GameRoot = transform;
 
 #if UNITY_EDITOR
             gameObject.AddComponent<DebugHelper>();

@@ -5,6 +5,8 @@ using System.Linq;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.UI;
+using static GAS.Editor.GameplayAttributeSetAsset;
 
 namespace GAS.Editor
 {
@@ -25,11 +27,11 @@ namespace GAS.Editor
             if (m_ArchetypeAsset == null) return;
             m_TagsArrayInspector ??= new TagsArrayInspector(m_ArchetypeAsset);
 
-            m_ArchetypeAsset.AttributeSets ??= new string[0];
+            m_ArchetypeAsset.AttributeSets ??= new AttributeSetData[0];
             m_ArchetypeAsset.AbilityAssets ??= new GameplayAbilityAsset[0];
 
             m_AttributeSetList = new AttributeSetList(m_ArchetypeAsset.AttributeSets.ToList(), m_ArchetypeAsset, new string[] {"属性集"});
-            m_AttributeSetList.OnEnable(true, true, true, true, 16);
+            m_AttributeSetList.OnEnable(true, true, true, true, 100);
 
             m_AbilityAssetList = new AbilityAssetList(m_ArchetypeAsset.AbilityAssets.ToList(), m_ArchetypeAsset, new string[] { "能力集" });
             m_AbilityAssetList.OnEnable(true, true, true, true, 16);
@@ -144,17 +146,63 @@ namespace GAS.Editor
 
         }
 
-        public class AttributeSetList : ReorderableGenericList<string>
+        public class AttributeSetList : ReorderableGenericList<AttributeSetData>
         {
             private AbilitySystemArchetype m_ArchetypeAsset;
 
-            public AttributeSetList(List<string> dataList, string[] headers = null) : base(dataList, headers)
+            private GameplayAttributeSetAsset m_AttributeSetAsset;
+
+            private List<Vector2> m_ScrollPositions = new List<Vector2>();
+
+            public AttributeSetList(List<AttributeSetData> dataList, string[] headers = null) : base(dataList, headers)
             {
             }
 
-            public AttributeSetList(List<string> dataList, AbilitySystemArchetype archetype, string[] headers = null) : base(dataList, headers)
+            public AttributeSetList(List<AttributeSetData> dataList, AbilitySystemArchetype archetype, string[] headers = null) : base(dataList, headers)
             {
-                m_ArchetypeAsset = archetype;   
+                m_ArchetypeAsset = archetype;
+            }
+
+            public override void OnEnable(bool draggable = true, bool displayHeader = true, bool displayAddButton = true, bool displayRemoveButton = true, float elementHeight = 16)
+            {
+                base.OnEnable(draggable, displayHeader, displayAddButton, displayRemoveButton, elementHeight);
+
+                m_AttributeSetAsset = GameplayAttributeSetAsset.LoadOrCreate();
+                m_ScrollPositions = new List<Vector2>();
+
+
+                for (int i = 0; i < m_ArchetypeAsset.AttributeSets.Length; i++)
+                {
+                    var info = m_ArchetypeAsset.AttributeSets[i];
+                    m_ScrollPositions.Add(Vector2.zero);
+
+                    List<AttributeData> newData = new List<AttributeData>();
+
+                    AttributeSetInfo setInfo = null;
+
+                    foreach (var item in m_AttributeSetAsset.attributeSets)
+                    {
+                        if (item.setName == info.AttributeSetName)
+                        {
+                            setInfo = item;
+                            break;
+                        }
+                    }
+
+                    foreach (var attr in setInfo.attributes)
+                    {
+                        float value = 0;
+                        foreach (var data in info.AttributeData)
+                        {
+                            if (data.AttributeName == attr.attributeName)
+                                value = data.BaseValue;
+                        }
+                        newData.Add(new AttributeData() { AttributeName = attr.attributeName, BaseValue = value });
+                    }
+
+                    m_ArchetypeAsset.AttributeSets[i].AttributeData = newData.ToArray();
+                }
+
             }
 
             protected override void AddElement(ReorderableList list)
@@ -162,8 +210,20 @@ namespace GAS.Editor
                 var typeList = new List<string>();
                 foreach (var item in GameplayAttributeSetLib.AttributeSetMap.Keys)
                 {
-                    if (!m_DataList.Contains(item))
-                        typeList.Add(item);
+                    bool skip = false;
+                    foreach (var data in m_DataList)
+                    {
+                        if (data.AttributeSetName == item)
+                        {
+                            skip = true;
+                            continue;
+                        }
+                    }
+
+                    if (skip)
+                        continue;
+
+                    typeList.Add(item);
                 }
 
                 if (typeList.Count <= 0)
@@ -174,11 +234,27 @@ namespace GAS.Editor
 
                 TogglesStringWindow.OpenWindow(typeList, "Add AttributesSet", false, (select) =>
                 {
-                    var newArray = new string[m_DataList.Count + select.Length];
-                    m_ArchetypeAsset.AttributeSets.CopyTo(newArray, 0);
-                    select.CopyTo(newArray, m_DataList.Count);
-                    m_ArchetypeAsset.AttributeSets = newArray;
+                    var newArray = new List<AttributeSetData>();
+                    newArray.AddRange(m_ArchetypeAsset.AttributeSets);
+                    foreach (var item in select)
+                    {
+                        foreach (var set in m_AttributeSetAsset.attributeSets)
+                        {
+                            if (set.setName == item)
+                            {
+                                List<AttributeData> tempData = new List<AttributeData>();
+                                foreach (var attInfo in set.attributes)
+                                    tempData.Add(new AttributeData() { AttributeName = attInfo.attributeName });
+
+                                newArray.Add(new AttributeSetData() { AttributeSetName = item, AttributeData = tempData.ToArray() });
+                            }
+                        }
+
+                    }
+
+                    m_ArchetypeAsset.AttributeSets = newArray.ToArray();
                     m_DataList = newArray.ToList();
+                    m_ScrollPositions.Add(Vector2.zero);
                     EditorUtility.SetDirty(m_ArchetypeAsset);
                 });
             }
@@ -186,14 +262,42 @@ namespace GAS.Editor
             protected override void RemoveElement(ReorderableList list)
             {
                 base.RemoveElement(list);
+                m_ScrollPositions.RemoveAt(list.index);
                 m_ArchetypeAsset.AttributeSets = m_DataList.ToArray();
                 EditorUtility.SetDirty(m_ArchetypeAsset);
             }
 
             protected override void DrawElement(Rect rect, int index, bool selected, bool focused)
             {
-                GUI.Label(rect, m_DataList[index], EditorStyles.label);
+                var info = m_ArchetypeAsset.AttributeSets[index];
+                if (info.AttributeData == null)
+                    return;
 
+                float titleY = rect.y - rect.height / 2f + 10f;
+                GUI.Label(new Rect(rect.x, titleY, rect.width - 20f, rect.height), info.AttributeSetName, EditorStyles.label);
+
+                Rect area = new Rect(rect.x, rect.y + 20f, rect.width - 20f, rect.height - 25f);
+                GUI.Box(area, "", EditorStyles.helpBox);
+
+                Rect scrollRect = new Rect(area.x, area.y + 5f, area.width + 20f, area.height - 10f);
+                Rect viewRect = new Rect(area.x, area.y + 0f, area.width - 20f, 26f * info.AttributeData.Length);
+
+                m_ScrollPositions[index] = GUI.BeginScrollView(scrollRect, m_ScrollPositions[index], viewRect);
+
+                for (int i = 0; i < info.AttributeData.Length; i++)
+                {
+                    EditorGUI.BeginChangeCheck();
+                    var newValue = EditorGUI.FloatField(new Rect(area.x + 10f, area.y, area.width - 20f, 20f), info.AttributeData[i].AttributeName, info.AttributeData[i].BaseValue);
+                    area.y += 25f;
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        info.AttributeData[i] = new AttributeData() { AttributeName = info.AttributeData[i].AttributeName, BaseValue = newValue };
+                        m_DataList[index] = new AttributeSetData() { AttributeSetName = info.AttributeSetName, AttributeData = info.AttributeData };
+                        EditorUtility.SetDirty(m_ArchetypeAsset);
+                    }
+                }
+
+                GUI.EndScrollView();
             }
         }
 
@@ -211,6 +315,13 @@ namespace GAS.Editor
                 m_ArchetypeAsset = archetype;
             }
 
+            protected override void OnChanged(ReorderableList list)
+            {
+                base.OnChanged(list);
+                m_ArchetypeAsset.AbilityAssets = m_DataList.ToArray();
+                EditorUtility.SetDirty(m_ArchetypeAsset);
+            }
+
             protected override void AddElement(ReorderableList list)
             {
                 m_DataList.Add(null);
@@ -221,6 +332,7 @@ namespace GAS.Editor
             {
                 base.RemoveElement(list);
                 m_ArchetypeAsset.AbilityAssets = m_DataList.ToArray();
+                EditorUtility.SetDirty(m_ArchetypeAsset);
             }
 
             protected override void DrawElement(Rect rect, int index, bool selected, bool focused)

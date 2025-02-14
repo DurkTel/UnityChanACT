@@ -4,14 +4,14 @@ using LGameFramework.GameBase.RangeDetection;
 using LGameFramework.GameCore.Asset;
 using LGameFramework.GameCore.Audio;
 using LGameFramework.GameCore.Config;
-using LGameFramework.GameCore.GameEntity;
 using LGameFramework.GameCore.GameScene;
 using LGameFramework.GameCore.Input;
 using LGameFramework.GameLogic;
 using LGameFramework.GameLogic.GUI;
-using LGameFramework.GameLogic.Level;
+using LGameFramework.GameNet;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using static LGameFramework.GameCore.GameWorldMessage;
@@ -27,21 +27,17 @@ namespace LGameFramework.GameCore
 
         public static void OnInit()
         {
-            //初始化UI
-            //GameLogicEntry.GetModule<GMGUIManager>();
+            GameRequire.RequireModule();
 
-            //初始化副本管理
-            //GameLogicEntry.GetModule<GMLevelManager>();
+            AssetUtility.LoadAssetBundle("shader.asset");
+            AssetUtility.LoadAssetBundle("commoneffect.asset");
+            AssetUtility.LoadAssetBundle("fonts.asset");
 
-            //EntityUtility.EnterEntity(GMEntityArchetype.s_TestEntityArchetype);
+            NetworkUtility.ConnentGateServer();
+            //NetworkUtility.ConnentFightServer();
 
-            var loader = AssetUtility.LoadAssetAsync<GameObject>("Player_GAS.prefab");
-            loader.onComplete += (p) =>
-            {
-                var player = p.GetInstantiate<GameObject>();
-                player.transform.position = Vector3.zero;
-                GameFrameworkEntry.GetModule<GMOrbitCamera>().Focus = player.transform;
-            };
+            UIUtility.OpenView<LoginView>();
+            AudioUtility.Play("CopyLoopAudio", "Unite2017_music_prepro.wav");
 
         }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 using LGameFramework.GameBase;
 using UnityEngine.Events;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 
 namespace LGameFramework.GameCore.Asset
 {
@@ -18,7 +19,6 @@ namespace LGameFramework.GameCore.Asset
         private static AssetLoadMode s_AssetLoadMode;
         public static AssetLoadMode AssetLoadMode { get { return s_AssetLoadMode; } }
         public override int Priority { get { return 99; } }
-        internal GamePathSetting.FilePathStruct GamePath { get; set; }
 
         /// <summary>
         /// 正在加载的资源加载器
@@ -67,8 +67,7 @@ namespace LGameFramework.GameCore.Asset
         #region 生命周期函数
         public override void OnInit()
         {
-            GamePath = GamePathSetting.Get().CurrentPlatform();
-            s_AssetLoadMode = GameLaunchSetting.Get().assetLoadMode == GameLaunchSetting.AssetLoadMode.Editor ? AssetLoadMode.Editor : AssetLoadMode.AssetBundle;
+            s_AssetLoadMode = GameConfig.Instance.assetLoadMode == 0 ? AssetLoadMode.Editor : AssetLoadMode.AssetBundle;
 
             m_AssetLoaders = new GameDictionary<string, Loader>();
             m_CompleteList = new List<string>();
@@ -219,9 +218,9 @@ namespace LGameFramework.GameCore.Asset
             if (m_FileManifest == null)
             {
                 m_FileManifest = ScriptableObject.CreateInstance<AssetManifest_Bundle>();
-                string path = Path.Combine(GamePath.downloadDataPath.AssetPath, GamePath.assetManifestFileName);
+                string path = Path.Combine(GameConfig.Instance.downloadDataPath.AssetPath, GameConfig.Instance.assetManifestFileName);
                 if(!File.Exists(path))
-                    path = Path.Combine(GamePath.buildingPath.AssetPath, GamePath.assetManifestFileName);
+                    path = Path.Combine(GameConfig.Instance.buildingPath.AssetPath, GameConfig.Instance.assetManifestFileName);
 
                 string allData = File.ReadAllText(path);
                 if (!string.IsNullOrEmpty(allData))
@@ -460,7 +459,6 @@ namespace LGameFramework.GameCore.Asset
 
             return loader;
         }
-
 
         /// <summary>
         /// 添加一个待下载的资源

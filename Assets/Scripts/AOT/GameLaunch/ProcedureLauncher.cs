@@ -18,25 +18,9 @@ public class ProcedureLauncher : MonoBehaviour
     /// </summary>
     private ProcedureFSM m_Procedure;
 
-    /// <summary>
-    /// 启动设置
-    /// </summary>
-    [SerializeField]
-    private GameLaunchSetting m_GameLaunchSetting;
-
-    /// <summary>
-    /// 路径设置
-    /// </summary>
-    [SerializeField]
-    private GamePathSetting m_GamePathSetting;
-
 
     private void Awake()
     {
-        //如果有挂载就用挂载的实例 没有就用默认的
-        GameLaunchSetting.Init(m_GameLaunchSetting);
-        GamePathSetting.Init(m_GamePathSetting);
-
         m_Procedure = new ProcedureFSM();
         m_Procedure.dataBase = gameObject.AddComponent<FSM_DataBase>();
         m_Procedure.AddStatus<ProcedureLaunch>(ProcedureLaunchProcess.Launch);
@@ -46,11 +30,16 @@ public class ProcedureLauncher : MonoBehaviour
         m_Procedure.AddStatus<ProcedureGameEntry>(ProcedureLaunchProcess.GameEntry);
         
         m_Procedure.OnInit();
+
     }
 
     private void Update()
     {
         m_Procedure.OnAction();
+    }
+    private void OnDestroy()
+    {
+        m_Procedure = null;
     }
 
 }

@@ -132,5 +132,49 @@ namespace LGameFramework.GameCore.Input
             return false;
         }
 
+        internal InputBehaviour GetBehaviour(string name)
+        {
+            return inputBehaviour.GetValueOrDefault(name);
+        }
+
+        internal bool GetButton(string name)
+        {
+            if (inputBehaviour.TryGetValue(name, out var behaviour))
+                 return behaviour.OnHold;
+
+            return false;
+        }
+
+        internal bool GetButtonDown(string name)
+        {
+            if (inputBehaviour.TryGetValue(name, out var behaviour))
+                return behaviour.OnPressed;
+
+            return false;
+        }
+
+        internal bool GetButtonUp(string name)
+        {
+            if (inputBehaviour.TryGetValue(name, out var behaviour))
+                return behaviour.OnRelease;
+
+            return false;
+        }
+
+        internal bool GetButtonMulti(string name)
+        {
+            if (inputBehaviour.TryGetValue(name, out var behaviour))
+                return behaviour.OnMulti;
+
+            return false;
+        }
+
+        internal Vector2 GetAxis(string name)
+        {
+            if (inputBehaviour.TryGetValue(name, out var behaviour))
+                return behaviour.InputAction.ReadValue<Vector2>();
+
+            return Vector2.zero;
+        }
     }
 }

@@ -14,8 +14,6 @@ public class ProcedureUpdateVersion : FSM_Status<ProcedureLaunchProcess>
 
     private AssetFileDownloadQueue m_FileDownloadQueue;
 
-    private GamePathSetting.FilePathStruct m_GamePath;
-
     public override void OnAction()
     {
         if (m_FileDownloadQueue != null)
@@ -26,14 +24,14 @@ public class ProcedureUpdateVersion : FSM_Status<ProcedureLaunchProcess>
             GameLogger.INFO("更新完成");
             if (m_UpdateCShare)
             {
-                string path = Path.Combine(m_GamePath.downloadDataPath.AssetPath, "001/001.asset");
+                string path = Path.Combine(GameConfig.Instance.downloadDataPath.AssetPath, "001/001.asset");
                 if (File.Exists(path))
                 {
                     try
                     {
                         AssetBundle ab = AssetBundle.LoadFromFile(path);
                         TextAsset[] texts = ab.LoadAllAssets<TextAsset>();
-                        string dllPath = m_GamePath.hotUpdateDllPath.AssetPath;
+                        string dllPath = GameConfig.Instance.hotUpdateDllPath.AssetPath;
 
                         foreach (var text in texts)
                         {
@@ -68,8 +66,6 @@ public class ProcedureUpdateVersion : FSM_Status<ProcedureLaunchProcess>
 
     public override void OnEnter()
     {
-        m_GamePath = GamePathSetting.Get().CurrentPlatform();
-
         m_DownloadList = new List<string>();
         BuildFiles netFiles;
         BuildFiles localFiles;
@@ -109,9 +105,9 @@ public class ProcedureUpdateVersion : FSM_Status<ProcedureLaunchProcess>
 
         if (m_DownloadList.Count > 0)
         { 
-            m_DownloadList.Add(m_GamePath.versionFileName);
-            m_DownloadList.Add(m_GamePath.assetManifestFileName);
-            m_DownloadList.Add(m_GamePath.buildingFileName);
+            m_DownloadList.Add(GameConfig.Instance.versionFileName);
+            m_DownloadList.Add(GameConfig.Instance.assetManifestFileName);
+            m_DownloadList.Add(GameConfig.Instance.buildingFileName);
             m_IsNeedUpdate = true;
             m_FileDownloadQueue = new AssetFileDownloadQueue();
         }
@@ -119,8 +115,8 @@ public class ProcedureUpdateVersion : FSM_Status<ProcedureLaunchProcess>
 
         foreach (var assetName in m_DownloadList)
         {
-            string url = m_GamePath.serverDataPath.AssetPath + assetName.Replace("\\", "/");
-            string localPath = Path.Combine(m_GamePath.downloadDataPath.AssetPath, assetName).Replace("\\", "/");
+            string url = GameConfig.Instance.serverDataPath.AssetPath + assetName.Replace("\\", "/");
+            string localPath = Path.Combine(GameConfig.Instance.downloadDataPath.AssetPath, assetName).Replace("\\", "/");
             m_FileDownloadQueue.Enqueue(url, localPath);
         }
 

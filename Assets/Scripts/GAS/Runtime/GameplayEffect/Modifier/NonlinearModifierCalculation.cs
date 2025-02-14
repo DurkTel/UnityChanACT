@@ -20,7 +20,9 @@ namespace GAS.Runtime
             float b = GetParameterValue(effect, 2);
             float c = GetParameterValue(effect, 3);
 
-            return a * Mathf.Pow(x, b) + c;
+            float answer = a * Mathf.Pow(x, b) + c;
+
+            return AnswerNegation ? -answer : answer;
         }
 
 #if UNITY_EDITOR

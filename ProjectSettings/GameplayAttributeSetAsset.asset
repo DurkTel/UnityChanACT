@@ -27,11 +27,37 @@ MonoBehaviour:
       attributeIndex: 7
     - attributeName: TargetDeg
       attributeIndex: 8
+  - setName: Weapon
+    attributes:
+    - attributeName: AttackPow
+      attributeIndex: 3
+    - attributeName: Durability
+      attributeIndex: 9
+    - attributeName: Defense
+      attributeIndex: 4
+    - attributeName: CriticalHitRate
+      attributeIndex: 11
+    - attributeName: CriticalHitPow
+      attributeIndex: 12
   - setName: Fight
     attributes:
-    - attributeName: HP
-      attributeIndex: 0
-    - attributeName: MP
-      attributeIndex: 1
     - attributeName: AttackPow
+      attributeIndex: 3
+    - attributeName: Defense
+      attributeIndex: 4
+    - attributeName: HP
+      attributeIndex: 6
+    - attributeName: CriticalHitRate
+      attributeIndex: 11
+    - attributeName: CriticalHitPow
+      attributeIndex: 12
+    - attributeName: Level
+      attributeIndex: 13
+    - attributeName: Penetrating
+      attributeIndex: 14
+    - attributeName: ReduceDefense
+      attributeIndex: 15
+    - attributeName: DamageBonus
+      attributeIndex: 16
+    - attributeName: MaxHP
       attributeIndex: 2

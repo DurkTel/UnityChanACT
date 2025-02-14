@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86cc47719e515344b82f1482d1fb092, type: 3}
+  m_Name: "\u653B\u51FB\u4F24\u5BB3\u516C\u5F0F"
+  m_EditorClassIdentifier: 
+  Description: 
+  ToTarget: 1
+  AttributeSetName: Fight
+  AttributeName: HP
+  Operation: 0
+  AnswerNegation: 1
+  Parameter:
+  - negation: 0
+    valueSource: 0
+    form: 0
+    capture: 1
+    attributeSetName: Fight
+    attributeName: AttackPow
+    magnitude: 0
+    variableName: 
+    mmc: {fileID: 0}
+  - negation: 0
+    valueSource: 3
+    form: 0
+    capture: 0
+    attributeSetName: 
+    attributeName: 
+    magnitude: 0
+    variableName: AttackMagnification
+    mmc: {fileID: 0}
+  - negation: 0
+    valueSource: 3
+    form: 0
+    capture: 0
+    attributeSetName: 
+    attributeName: 
+    magnitude: 0
+    variableName: CriticalDamage
+    mmc: {fileID: 0}
+  - negation: 0
+    valueSource: 0
+    form: 0
+    capture: 1
+    attributeSetName: Fight
+    attributeName: DamageBonus
+    magnitude: 0
+    variableName: 
+    mmc: {fileID: 0}
+  - negation: 0
+    valueSource: 2
+    form: 0
+    capture: 0
+    attributeSetName: 
+    attributeName: 
+    magnitude: 0
+    variableName: 
+    mmc: {fileID: 11400000, guid: a3fed6e4692b6754d98f06d29888fa75, type: 2}
+  - negation: 0
+    valueSource: 3
+    form: 0
+    capture: 0
+    attributeSetName: 
+    attributeName: 
+    magnitude: 0
+    variableName: DizzyDamage
+    mmc: {fileID: 0}

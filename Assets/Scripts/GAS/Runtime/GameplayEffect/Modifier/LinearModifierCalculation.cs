@@ -19,7 +19,9 @@ namespace GAS.Runtime
             float x = GetParameterValue(effect, 1);
             float b = GetParameterValue(effect, 2);
 
-            return k * x + b;
+            float answer = k * x + b;
+
+            return AnswerNegation ? -answer : answer;
         }
 
 #if UNITY_EDITOR

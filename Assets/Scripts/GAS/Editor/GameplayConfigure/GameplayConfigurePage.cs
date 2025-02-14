@@ -1,3 +1,4 @@
+using GluonGui.WorkspaceWindow.Views.WorkspaceExplorer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -34,6 +35,7 @@ namespace GAS.Editor
                 string path = EditorUtility.OpenFolderPanel("选择目录", "", "");
                 if (!string.IsNullOrEmpty(path))
                 {
+                    path = path.Substring(Application.dataPath.Length - 6).Replace("\\", "/");
                     m_ConfigureAsset.ScriptGenPath = path;
                     m_ConfigureAsset.SaveAsset();   
                 }
@@ -56,6 +58,7 @@ namespace GAS.Editor
                 string path = EditorUtility.OpenFolderPanel("选择目录", "", "");
                 if (!string.IsNullOrEmpty(path))
                 {
+                    path = path.Substring(Application.dataPath.Length - 6).Replace("\\", "/");
                     m_ConfigureAsset.AssetGenPath = path;
                     m_ConfigureAsset.SaveAsset();
                 }

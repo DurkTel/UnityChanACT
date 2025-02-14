@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GAS.Runtime
 {
@@ -25,36 +26,44 @@ namespace GAS.Runtime
         public float BaseValue { get { return m_Value.BaseValue; } }
         public float CurrentValue { get { return m_Value.CurrentValue; } }
 
+        public UnityEvent OnBaseValueChange, OnCurrentValueChange;
+
         public GameplayAttribute(string setName, string attName, float value)
         {
             m_SetName = setName;
             m_Name = attName;
             m_FullName = setName + "." + attName;
-            m_Value = new GameplayAttributeValue(value);    
+            m_Value = new GameplayAttributeValue(value);
+            OnBaseValueChange = new UnityEvent();
+            OnCurrentValueChange = new UnityEvent();
         }
 
-        public GameplayAttribute(string setName, string attName)
-        {
-            m_SetName = setName;
-            m_Name = attName;
-            m_FullName = setName + "." + attName;
-            m_Value = new GameplayAttributeValue(0);
-        }
+        public GameplayAttribute(string setName, string attName) : this(setName, attName, 0) { }
 
         public void SetBaseValue(float baseValue)
         {
+            float lastValue = BaseValue;
             m_Value.SetBaseValue(baseValue);
+            if (lastValue != BaseValue)
+                OnBaseValueChange.Invoke();
         }
 
 
         public void SetCurrentValue(float currentValue)
         {
+            float lastValue = CurrentValue;
             m_Value.SetCurrentValue(currentValue);
+            if (lastValue != CurrentValue)
+                OnCurrentValueChange.Invoke();
         }
 
         public void Dispose()
         {
-            
+            OnBaseValueChange.RemoveAllListeners();
+            OnCurrentValueChange.RemoveAllListeners();
+
+            OnBaseValueChange = null;
+            OnCurrentValueChange = null;
         }
     }
 }

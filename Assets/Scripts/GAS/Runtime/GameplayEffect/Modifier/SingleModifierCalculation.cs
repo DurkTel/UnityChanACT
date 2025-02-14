@@ -14,7 +14,9 @@ namespace GAS.Runtime
 
         public override float CalculateMagnitude(GameplayEffect effect)
         {
-            return GetParameterValue(effect, 0);
+            float answer = GetParameterValue(effect, 0);
+
+            return AnswerNegation ? -answer : answer;
         }
 
 #if UNITY_EDITOR

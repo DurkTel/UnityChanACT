@@ -251,6 +251,7 @@ namespace Actioner.Runtime
         /// <returns></returns>
         private ActionerAction InternalPlay(AnimationClip clip, float duration, float timeOffset = 0f)
         {
+            //Debug.Log("²¥·ÅÐÐÎªInternalPlay" + clip);
             if (m_CurrentAction != null && m_CurrentAction is ActionerAction action && ReferenceEquals(action.Clip, clip))
             {
                 action.Time = action.Length * timeOffset;

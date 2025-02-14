@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69982423d4259bf468456a300c3a3a30, type: 3}
+  m_Name: "\u654C\u4EBA\u9632\u5FA1\u51CF\u4F24\u6BD4"
+  m_EditorClassIdentifier: 
+  Description: 
+  ToTarget: 2
+  AttributeSetName: 
+  AttributeName: 
+  Operation: 0
+  AnswerNegation: 0
+  Parameter:
+  - negation: 0
+    valueSource: 0
+    form: 0
+    capture: 1
+    attributeSetName: Fight
+    attributeName: Level
+    magnitude: 0
+    variableName: 
+    mmc: {fileID: 0}
+  - negation: 0
+    valueSource: 2
+    form: 0
+    capture: 0
+    attributeSetName: 
+    attributeName: 
+    magnitude: 0
+    variableName: 
+    mmc: {fileID: 11400000, guid: 6de6dea3c94ad024984b9fd3fb0d2ebe, type: 2}
+  - negation: 0
+    valueSource: 0
+    form: 0
+    capture: 1
+    attributeSetName: Fight
+    attributeName: Penetrating
+    magnitude: 0
+    variableName: 
+    mmc: {fileID: 0}
+  - negation: 0
+    valueSource: 0
+    form: 0
+    capture: 1
+    attributeSetName: Fight
+    attributeName: ReduceDefense
+    magnitude: 0
+    variableName: 
+    mmc: {fileID: 0}

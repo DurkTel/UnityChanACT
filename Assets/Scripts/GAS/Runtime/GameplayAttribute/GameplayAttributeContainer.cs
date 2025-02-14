@@ -6,13 +6,13 @@ namespace GAS.Runtime
 {
     public class GameplayAttributeContainer
     {
-        private readonly AbilitySystemComponent m_ASC;
+        private readonly IAbilitySystemComponent m_ASC;
 
         private readonly Dictionary<string, GameplayAttributeSet> m_AttributeSets;
 
         private readonly Dictionary<string, float> m_AttributeSnapshot;
 
-        public GameplayAttributeContainer(AbilitySystemComponent asc)
+        public GameplayAttributeContainer(IAbilitySystemComponent asc)
         {
             m_ASC = asc;
             m_AttributeSets = new Dictionary<string, GameplayAttributeSet>();
@@ -22,7 +22,16 @@ namespace GAS.Runtime
         public void OnInit(AbilitySystemArchetype archetype)
         {
             foreach (var setType in archetype.AttributeSets)
-                AddAttributeSet(setType);
+            {
+                AddAttributeSet(setType.AttributeSetName);
+
+                foreach (var data in setType.AttributeData)
+                {
+                    var attr = GetAttribute(setType.AttributeSetName, data.AttributeName);
+                    attr.SetBaseValue(data.BaseValue);
+                    attr.SetCurrentValue(data.BaseValue);
+                }
+            }
         }
 
         public void AddAttributeSet(string typeName)
@@ -65,6 +74,8 @@ namespace GAS.Runtime
         public float GetAttributeCurrentValue(string attrSetName, string attrName)
         {
             var attr = GetAttribute(attrSetName, attrName);
+            if (attr == null)
+                return 0f;
             return attr.CurrentValue;
         }
 
@@ -90,9 +101,9 @@ namespace GAS.Runtime
             return GetAttribute(attrName[0], attrName[1]);
         }
 
-        public GameplayAttributeSet GetAttributeSet<T>() where T : GameplayAttributeSet, new()
+        public T GetAttributeSet<T>() where T : GameplayAttributeSet, new()
         {
-            return GetAttributeSet(typeof(T).Name);
+            return GetAttributeSet(typeof(T).Name) as T;
         }
 
         public GameplayAttributeSet GetAttributeSet(string attrSetName)
@@ -133,13 +144,12 @@ namespace GAS.Runtime
 
         public void GetSnapshot(Dictionary<string, float> snapshotMap)
         {
-            snapshotMap ??= new Dictionary<string, float>();
             snapshotMap.Clear();
             foreach (var set in m_AttributeSets)
             {
                 foreach (var name in set.Value.AttributeNames)
                 {
-                    snapshotMap.Add(name, set.Value[set.Key + "." + name].CurrentValue);
+                    snapshotMap.Add(set.Key + "." + name, set.Value[name].CurrentValue);
                 }
             }
         }

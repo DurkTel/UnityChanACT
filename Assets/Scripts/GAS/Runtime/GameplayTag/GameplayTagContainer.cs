@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GAS.Runtime
 {
     public class GameplayTagContainer
     {
-        private readonly AbilitySystemComponent m_ASC;
+        private readonly IAbilitySystemComponent m_ASC;
 
         /// <summary>
         /// 固定的Tags
@@ -22,17 +23,40 @@ namespace GAS.Runtime
         private readonly Dictionary<GameplayTag, HashSet<object>> m_DynamicTags;
         public Dictionary<GameplayTag, HashSet<object>> DynamicTags { get { return m_DynamicTags; } }
 
-        public GameplayTagContainer(AbilitySystemComponent asc)
+        private readonly Dictionary<GameplayTag, UnityAction<bool>> m_ChangeEvents;
+
+        public GameplayTagContainer(IAbilitySystemComponent asc)
         {
             m_ASC = asc;
             m_FixedTags = new Dictionary<GameplayTag, HashSet<object>>();
             m_DynamicTags = new Dictionary<GameplayTag, HashSet<object>>();
+            m_ChangeEvents = new Dictionary<GameplayTag, UnityAction<bool>>();
         }
 
         public void OnInit(AbilitySystemArchetype archetype)
         {
             AddFixedTags(archetype, archetype.FixedTags);
         }
+
+        public void AddTagsChangeEvent(GameplayTag tag, UnityAction<bool> action)
+        {
+            if (!m_ChangeEvents.ContainsKey(tag))
+                m_ChangeEvents.Add(tag, action);
+            else
+                m_ChangeEvents[tag] += action;
+        }
+
+        public void RemoveTagsChangeEvent(GameplayTag tag, UnityAction<bool> action)
+        {
+            if (m_ChangeEvents.ContainsKey(tag))
+            {
+                if (m_ChangeEvents.Count == 1)
+                    m_ChangeEvents.Remove(tag);
+                else
+                    m_ChangeEvents[tag] -= action;
+            }
+        }
+
 
         public void UpdateFixedTags<T>(T source, bool value, params GameplayTag[] tags)
         {
@@ -98,6 +122,12 @@ namespace GAS.Runtime
                 RemoveDynamicTags(source, tags);
         }
 
+        public void AddDynamicTags<T>(T source, params string[] tags)
+        {
+            foreach (var tag in tags)
+                TryAddDynamicTag(source, GameplayTagsLib.TagMap[tag]);
+        }
+
         public void AddDynamicTags<T>(T source, params GameplayTag[] tags)
         {
             foreach (var tag in tags)
@@ -107,6 +137,12 @@ namespace GAS.Runtime
         public void AddDynamicTags<T>(T source, GameplayTagSet tags)
         {
             AddDynamicTags(source, tags.Tags);
+        }
+
+        public void RemoveDynamicTags<T>(T source, params string[] tags)
+        {
+            foreach (var tag in tags)
+                TryRemoveDynamicTag(source, GameplayTagsLib.TagMap[tag]);
         }
 
         public void RemoveDynamicTags<T>(T source, params GameplayTag[] tags)
@@ -145,6 +181,8 @@ namespace GAS.Runtime
                 container.Add(tag, list);
             }
 
+            if (m_ChangeEvents.TryGetValue(tag, out var action))
+                action.Invoke(true);
             return true;
         }
 
@@ -156,6 +194,43 @@ namespace GAS.Runtime
             list.Remove(source);
             if (list.Count == 0)
                 container.Remove(tag);
+
+            if (m_ChangeEvents.TryGetValue(tag, out var action))
+                action.Invoke(false);
+            return true;
+        }
+
+        /// <summary>
+        /// 检测条件Tag
+        /// </summary>
+        /// <param name="conditionTags"></param>
+        /// <returns></returns>
+        public bool CheckTagCondition(GameplayTag[] blockActiveTags, GameplayTag[] requireTags)
+        {
+            if (HasAnyTags(blockActiveTags))
+                return false;
+
+            if (!HasAllTags(requireTags))
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// 检测条件Tag
+        /// </summary>
+        /// <param name="conditionTags"></param>
+        /// <returns></returns>
+        public bool CheckTagCondition(GameplayConditionTags conditionTags)
+        {
+            var checkTags = conditionTags.BlockActiveTags;
+
+            if (HasAnyTags(checkTags))
+                return false;
+
+            checkTags = conditionTags.RequireTags;
+            if (!HasAllTags(checkTags))
+                return false;
 
             return true;
         }

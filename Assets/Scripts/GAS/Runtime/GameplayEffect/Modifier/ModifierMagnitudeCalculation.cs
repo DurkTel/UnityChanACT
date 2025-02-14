@@ -15,6 +15,11 @@ namespace GAS.Runtime
         public string Description;
 
         /// <summary>
+        /// 修改谁的属性
+        /// </summary>
+        public AttributeFrom ToTarget;
+
+        /// <summary>
         /// 需要修改的属性集
         /// </summary>
         public string AttributeSetName;
@@ -28,6 +33,11 @@ namespace GAS.Runtime
         /// 修改方式
         /// </summary>
         public ModifierOperation Operation;
+
+        /// <summary>
+        /// 结算结果取反
+        /// </summary>
+        public bool AnswerNegation;
 
         /// <summary>
         /// 计算幅值
@@ -52,21 +62,33 @@ namespace GAS.Runtime
                 return 0;
 
             var param = Parameter[index];
+            float answer = 0f;
 
-            if (param.useConst)
-                return param.magnitude;
+            if (param.valueSource == AttributeSource.Attaribute)
+            {
+                var asc = param.form == AttributeFrom.Source ? effect.Source : effect.Target;
 
-            var asc = param.form == AttributeFrom.Source ? effect.Source : effect.Target;
-
-            if (param.capture == AttributeCaptureType.SnapShot) //effect里快照的数据
+                if (param.capture == AttributeCaptureType.SnapShot && effect.AttributeSnapshot != null) //effect里快照的数据
+                {
+                    var snapShotMap = effect.AttributeSnapshot;
+                    answer = snapShotMap.GetValueOrDefault(param.attributeSetName + "." + param.attributeName);
+                }
+                else
+                {
+                    answer = asc.Attributes.GetAttributeCurrentValue(param.attributeSetName, param.attributeName);
+                }
+            }
+            else if (param.valueSource == AttributeSource.Variable && effect.AttributeSnapshot != null)
             {
                 var snapShotMap = effect.AttributeSnapshot;
-                return snapShotMap.GetValueOrDefault(param.AttributeSetName + "." + param.AttributeName);
+                answer = snapShotMap.GetValueOrDefault(param.variableName);
             }
+            else if (param.valueSource == AttributeSource.MMC && param.mmc != null)
+                answer = param.mmc.CalculateMagnitude(effect);
             else
-            {
-                return asc.Attributes.GetAttributeCurrentValue(param.AttributeSetName, param.AttributeName);
-            }
+                answer = param.magnitude;
+
+            return param.negation ? -answer : answer;   
         }
 
 
@@ -91,9 +113,14 @@ namespace GAS.Runtime
     public struct ModifierParameter
     {
         /// <summary>
-        /// 使用常量
+        /// 取反
         /// </summary>
-        public bool useConst;
+        public bool negation;
+
+        /// <summary>
+        /// 数值来源
+        /// </summary>
+        public AttributeSource valueSource;
 
         /// <summary>
         /// 使用属性的来源
@@ -108,17 +135,27 @@ namespace GAS.Runtime
         /// <summary>
         /// 需要修改的属性集
         /// </summary>
-        public string AttributeSetName;
+        public string attributeSetName;
 
         /// <summary>
         /// 需要修改的属性
         /// </summary>
-        public string AttributeName;
+        public string attributeName;
 
         /// <summary>
         /// 常量修改值
         /// </summary>
         public float magnitude;
+
+        /// <summary>
+        /// 变量值名
+        /// </summary>
+        public string variableName;
+
+        /// <summary>
+        /// 修改器
+        /// </summary>
+        public ModifierMagnitudeCalculation mmc;
     }
 
     /// <summary>
@@ -146,8 +183,8 @@ namespace GAS.Runtime
     public enum AttributeFrom
     {
         Source,
-
-        Target
+        Target,
+        None
     }
 
     /// <summary>
@@ -156,7 +193,29 @@ namespace GAS.Runtime
     public enum AttributeCaptureType
     {
         SnapShot,
-
         Track
+    }
+
+    /// <summary>
+    /// 属性计算方式
+    /// </summary>
+    public enum AttributeSource
+    { 
+        /// <summary>
+        /// 属性计算
+        /// </summary>
+        Attaribute,
+        /// <summary>
+        /// 常量
+        /// </summary>
+        Const,
+        /// <summary>
+        /// 修改器
+        /// </summary>
+        MMC,
+        /// <summary>
+        /// 变量
+        /// </summary>
+        Variable
     }
 }

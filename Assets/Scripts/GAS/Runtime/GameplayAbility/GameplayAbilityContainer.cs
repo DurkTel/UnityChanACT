@@ -2,26 +2,28 @@ using LGameFramework.GameBase;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 namespace GAS.Runtime
 {
-    public class GameplayAbilityContainer
+    public class GameplayAbilityContainer : IDisposable
     {
-        private readonly AbilitySystemComponent m_ASC;
+        private readonly IAbilitySystemComponent m_ASC;
 
         private readonly Dictionary<string, GameplayAbility> m_Abilitys;
 
         private readonly List<IGameplayUpdate> m_PreUpdateAbilitys;
 
-        private readonly List<IGameplayAnimationUpdate> m_PreAnimationUpdateAbilitys;
+        private readonly List<IGameplaySyncUpdate> m_PreSyncUpdateAbilitys;
 
-        public GameplayAbilityContainer(AbilitySystemComponent asc)
+        public GameplayAbilityContainer(IAbilitySystemComponent asc)
         {
             m_ASC = asc;
             m_Abilitys = new Dictionary<string, GameplayAbility>();
             m_PreUpdateAbilitys = new List<IGameplayUpdate>();
-            m_PreAnimationUpdateAbilitys = new List<IGameplayAnimationUpdate>();
+            m_PreSyncUpdateAbilitys = new List<IGameplaySyncUpdate>();
         }
 
         public void OnInit(AbilitySystemArchetype archetype)
@@ -43,30 +45,53 @@ namespace GAS.Runtime
                     
         }
 
-        public void OnAnimationUpdate()
+        public void OnSyncUpdate(int tick)
         {
-            if (m_PreAnimationUpdateAbilitys.Count <= 0)
+            if (m_PreSyncUpdateAbilitys.Count <= 0)
                 return;
 
-            foreach (var abilityUpdate in m_PreAnimationUpdateAbilitys)
+            foreach (var abilityUpdate in m_PreSyncUpdateAbilitys)
             {
                 if (abilityUpdate.IsActive)
-                    abilityUpdate.OnAnimationUpdate();
+                    abilityUpdate.OnSyncUpdate(tick);
             }
         }
 
         private void AddAbilityInternal(GameplayAbility ability, GameplayAbilityAsset abilityAsset)
         {
+            //依赖注入
+            var fields = ability.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
+            .Where(f => f.GetCustomAttributes(typeof(AbilityInject), false).Any());
+
+            foreach (var field in fields)
+            {
+                var inject = field.GetCustomAttribute<AbilityInject>();
+                GameplayAbility injectAbility = null;
+                if (!string.IsNullOrEmpty(inject.abilityName))
+                    injectAbility = GetAbility(inject.abilityName); //填了名字 就按名字找
+                else
+                    injectAbility = GetAbility(field.FieldType); //没填就按类型找
+
+                if (injectAbility != null)
+                    field.SetValue(ability, injectAbility);
+                else
+                    Debug.LogError($"依赖注入AbilityInject失败 注入名{inject.abilityName} 注入字段{field.FieldType} 注入类{ability.GetType()} 请检测是否添加了对应的Ability或者先后顺序是否正确");
+
+            }
+
             ability.OnInit(abilityAsset, m_ASC);
             m_Abilitys.Add(abilityAsset.UID, ability);
 
-            if (ability is IGameplayUpdate update && ability.ConditionTags.AssetTags.HasNoneTags(GameplayTagsLib.Ability_Action))
+            if (ability is IGameplayUpdate update)
                 m_PreUpdateAbilitys.Add(update);
 
-            if (ability is IGameplayAnimationUpdate aupdate)
-                m_PreAnimationUpdateAbilitys.Add(aupdate);
+            if (ability is IGameplaySyncUpdate aupdate)
+                m_PreSyncUpdateAbilitys.Add(aupdate);
 
-            m_ASC.AddTagFromFixed(ability);
+            m_ASC.Tags.AddFixedTags(ability, ability.ConditionTags.AssetTags);
+
+            if (ability.ConditionTags.AssetTags.HasTag(GameplayTagsLib.Ability_AutoActive))
+                TryActivateAbility(abilityAsset.UID);
         }
 
         public bool AddAbility(GameplayAbilityAsset abilityAsset)
@@ -110,10 +135,10 @@ namespace GAS.Runtime
             if (ability is IGameplayUpdate update)
                 m_PreUpdateAbilitys.Remove(update);
 
-            if (ability is IGameplayAnimationUpdate aupdate)
-                m_PreAnimationUpdateAbilitys.Remove(aupdate);
+            if (ability is IGameplaySyncUpdate aupdate)
+                m_PreSyncUpdateAbilitys.Remove(aupdate);
 
-            m_ASC.RemoveTagFromFixed(ability);
+            m_ASC.Tags.RemoveFixedTags(ability);
 
             return true;
         }
@@ -148,7 +173,7 @@ namespace GAS.Runtime
             if (!m_Abilitys.TryGetValue(name, out GameplayAbility ability))
                 return false;
 
-            if (!m_ASC.CheckTagCondition(ability.ConditionTags) || !ability.TryActivateAbility())
+            if (!m_ASC.Tags.CheckTagCondition(ability.ConditionTags) || !ability.TryActivateAbility())
                 return false;
 
             var cancelTag = ability.ConditionTags.CancelTags;
@@ -162,7 +187,7 @@ namespace GAS.Runtime
             }
 
             var activationTag = ability.ConditionTags.ActivationTags;
-            m_ASC.AddTagFromDynamic(ability, activationTag);
+            m_ASC.Tags.AddDynamicTags(ability, activationTag);
 
             ability.OnActivation(paramsArgs);
             return true;
@@ -197,7 +222,7 @@ namespace GAS.Runtime
                 return false;
 
             var activationTag = ability.ConditionTags.ActivationTags;
-            m_ASC.RemoveTagFromDynamic(ability, activationTag);
+            m_ASC.Tags.RemoveDynamicTags(ability, activationTag);
             ability.OnInactivation();
 
             return true;
@@ -208,9 +233,40 @@ namespace GAS.Runtime
             return m_Abilitys.GetValueOrDefault(name);
         }
 
+        public T GetAbility<T>() where T : GameplayAbility
+        {
+            return GetAbility(typeof(T)) as T;
+        }
+
+        public GameplayAbility GetAbility(Type type)
+        {
+            foreach (var ability in m_Abilitys.Values)
+            {
+                if (ability.GetType() == type)
+                    return ability;
+            }
+
+            return null;
+        }
+
         public bool TryGetAbility(string name, out GameplayAbility ability)
         {
             return m_Abilitys.TryGetValue(name, out ability);
+        }
+
+        public bool TryGetAbility<T>(out T ability) where T : GameplayAbility
+        {
+            ability = GetAbility<T>();
+            return ability != null;
+        }
+
+        public void Dispose()
+        {
+            foreach (var ability in m_Abilitys.Values)
+                ability.Dispose();
+
+            m_Abilitys.Clear();
+
         }
     }
 }

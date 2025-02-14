@@ -1,0 +1,104 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+extern void NavMeshAgent_SetDestination_mD5D960933827F1F14B29CF4A3B6F305C064EBF46 (void);
+extern void NavMeshAgent_get_destination_m1BE2C5EEF53F7EB6317449726C99E0D0955C677E (void);
+extern void NavMeshAgent_get_remainingDistance_m051C1B408E2740A95B5A5577C5EC7222311AA73A (void);
+extern void NavMeshAgent_Warp_mAD14E576F74544EEDAD0AF097E498C58D3C0E4F5 (void);
+extern void NavMeshAgent_Move_m90D996635C2056733BB3497CB716DA2E8CB9DCB9 (void);
+extern void NavMeshAgent_get_isStopped_m1CF52CE58CC025C1617F9E745924624C35D0B598 (void);
+extern void NavMeshAgent_set_isStopped_mF374E697F39845233B84D8C4873DEABC3AA490DF (void);
+extern void NavMeshAgent_ResetPath_mE29D3956C1BFABDB3D6B4B7DF2B376B4EEB24E7F (void);
+extern void NavMeshAgent_get_speed_m3E4720882ED0C65A4E19AADD53BB6CFFB5BB1345 (void);
+extern void NavMeshAgent_set_speed_m820E45289B3AE7DEE16F2F4BF163EAC361E64646 (void);
+extern void NavMeshAgent_get_angularSpeed_m3767F066BFA2C5130EB4662234442B530ACC0290 (void);
+extern void NavMeshAgent_set_angularSpeed_mD2AE9EE187EF1C45F519576B5FC8581DC6B7D683 (void);
+extern void NavMeshAgent_get_acceleration_m130C96AAA6246983D17AEB4EB4FC6ECAE9800D5E (void);
+extern void NavMeshAgent_set_acceleration_mEAA92D7837B8D726891846DBBB6114DB13CD597E (void);
+extern void NavMeshAgent_SetDestination_Injected_mC3EF405F5AAFF9F98C5D5AECAD641525CDF742EA (void);
+extern void NavMeshAgent_get_destination_Injected_m864513574C2AD2BA558D85B213CC518C064F893A (void);
+extern void NavMeshAgent_Warp_Injected_m408EB62DABE62C1C5B568598DBF54FDCA502E56E (void);
+extern void NavMeshAgent_Move_Injected_m470CF469F6DE021B2C44A4CB3619AC9C441491D8 (void);
+extern void NavMesh_Internal_CallOnNavMeshPreUpdate_m2A62DB32F5E1435F527AD8A59A882B9F2A193177 (void);
+extern void OnNavMeshPreUpdate__ctor_m7142A3AA991BE50B637A16D946AB7604C64EF9BA (void);
+extern void OnNavMeshPreUpdate_Invoke_mFB224B9BBF9C78B7F39AA91A047F175C69897914 (void);
+static Il2CppMethodPointer s_methodPointers[21] = 
+{
+	NavMeshAgent_SetDestination_mD5D960933827F1F14B29CF4A3B6F305C064EBF46,
+	NavMeshAgent_get_destination_m1BE2C5EEF53F7EB6317449726C99E0D0955C677E,
+	NavMeshAgent_get_remainingDistance_m051C1B408E2740A95B5A5577C5EC7222311AA73A,
+	NavMeshAgent_Warp_mAD14E576F74544EEDAD0AF097E498C58D3C0E4F5,
+	NavMeshAgent_Move_m90D996635C2056733BB3497CB716DA2E8CB9DCB9,
+	NavMeshAgent_get_isStopped_m1CF52CE58CC025C1617F9E745924624C35D0B598,
+	NavMeshAgent_set_isStopped_mF374E697F39845233B84D8C4873DEABC3AA490DF,
+	NavMeshAgent_ResetPath_mE29D3956C1BFABDB3D6B4B7DF2B376B4EEB24E7F,
+	NavMeshAgent_get_speed_m3E4720882ED0C65A4E19AADD53BB6CFFB5BB1345,
+	NavMeshAgent_set_speed_m820E45289B3AE7DEE16F2F4BF163EAC361E64646,
+	NavMeshAgent_get_angularSpeed_m3767F066BFA2C5130EB4662234442B530ACC0290,
+	NavMeshAgent_set_angularSpeed_mD2AE9EE187EF1C45F519576B5FC8581DC6B7D683,
+	NavMeshAgent_get_acceleration_m130C96AAA6246983D17AEB4EB4FC6ECAE9800D5E,
+	NavMeshAgent_set_acceleration_mEAA92D7837B8D726891846DBBB6114DB13CD597E,
+	NavMeshAgent_SetDestination_Injected_mC3EF405F5AAFF9F98C5D5AECAD641525CDF742EA,
+	NavMeshAgent_get_destination_Injected_m864513574C2AD2BA558D85B213CC518C064F893A,
+	NavMeshAgent_Warp_Injected_m408EB62DABE62C1C5B568598DBF54FDCA502E56E,
+	NavMeshAgent_Move_Injected_m470CF469F6DE021B2C44A4CB3619AC9C441491D8,
+	NavMesh_Internal_CallOnNavMeshPreUpdate_m2A62DB32F5E1435F527AD8A59A882B9F2A193177,
+	OnNavMeshPreUpdate__ctor_m7142A3AA991BE50B637A16D946AB7604C64EF9BA,
+	OnNavMeshPreUpdate_Invoke_mFB224B9BBF9C78B7F39AA91A047F175C69897914,
+};
+static const int32_t s_InvokerIndices[21] = 
+{
+	9723,
+	16413,
+	16327,
+	9723,
+	12837,
+	16111,
+	12538,
+	16428,
+	16327,
+	12753,
+	16327,
+	12753,
+	16327,
+	12753,
+	9378,
+	12512,
+	9378,
+	12512,
+	28219,
+	6709,
+	16428,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_UnityEngine_AIModule_CodeGenModule;
+const Il2CppCodeGenModule g_UnityEngine_AIModule_CodeGenModule = 
+{
+	"UnityEngine.AIModule.dll",
+	21,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};

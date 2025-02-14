@@ -8,14 +8,14 @@ namespace GAS.Runtime
 {
     public class GameplayCueContainer
     {
-        private readonly AbilitySystemComponent m_ASC;
+        private readonly IAbilitySystemComponent m_ASC;
 
         private readonly Dictionary<Type, Queue<GameplayCue>> m_GameplayCueCache;
 
         private readonly List<GameplayCueDuration> m_PreUpdateCues;
 
         private readonly List<GameplayCueDuration> m_UpdateCues;
-        public GameplayCueContainer(AbilitySystemComponent asc)
+        public GameplayCueContainer(IAbilitySystemComponent asc)
         {
             m_ASC = asc;
             m_GameplayCueCache = new Dictionary<Type, Queue<GameplayCue>>();
@@ -37,7 +37,7 @@ namespace GAS.Runtime
             {
                 cueUpdate.OnUpdate(deltaTime);
 
-                if (currentTick >= cueUpdate.EndTimeStamp)
+                if (cueUpdate.EndTimeStamp > 0 && currentTick >= cueUpdate.EndTimeStamp)
                     BreakDurationCue(cueUpdate);
             }
         }
@@ -78,7 +78,7 @@ namespace GAS.Runtime
         }
 
         public T TriggerCue<T, V>(V arg) where T : GameplayCue, new() where V : struct
-        { 
+        {
             T cue = GetOrCreateCue<T>();
 
             cue.triggerTime = Time.unscaledTime;

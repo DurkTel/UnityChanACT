@@ -220,7 +220,8 @@ namespace LGameFramework.GameCore.Asset
                 return;
 
             //µÈ´ýÏú»Ù
-            AssetModule.WaitDestroyList.Add(rawInfo.asstName, Time.unscaledTime);
+            if (!AssetModule.WaitDestroyList.ContainsKey(rawInfo.asstName))
+                AssetModule.WaitDestroyList.Add(rawInfo.asstName, Time.unscaledTime);
         }
     }
 }

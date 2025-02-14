@@ -47,7 +47,7 @@ namespace LGameFramework.GameCore.GameScene
 
         internal void SwitchScene(string name, LoadSceneMode mode = LoadSceneMode.Single)
         {
-            EventUtility.DispatchImmediately(GMEventRegister.SCENE_LOAD_BEGIN, null, CommonEventArg.Get(name));
+            //EventUtility.DispatchImmediately(GMEventRegister.SCENE_LOAD_BEGIN, null, CommonEventArg.Get(name));
             GameScene scene = null;
 
             if (!m_AllScene.TryGetValue(name, out scene))
@@ -72,7 +72,7 @@ namespace LGameFramework.GameCore.GameScene
         internal IEnumerator LoadScene(string name, LoadSceneMode mode)
         {
             var fullSceneName = name;
-            if (GameLaunchSetting.Get().assetLoadMode == GameLaunchSetting.AssetLoadMode.AssetBundle)
+            if (GameConfig.Instance.assetLoadMode == 1)
             {
                 string abName = name.ToLower() + ".asset"; ;
                 var loader = AssetUtility.LoadAssetBundleAsync(abName);
@@ -95,7 +95,7 @@ namespace LGameFramework.GameCore.GameScene
             if (m_AllScene.TryGetValue(scene.name, out GameScene gameScene))
             {
                 gameScene.OnLoadComplete(scene);
-                EventUtility.Dispatch(GMEventRegister.SCENE_LOAD_COMPLETE, this, CommonEventArg.Get(gameScene.SceneName, m_LastScene == null));
+                //EventUtility.Dispatch(GMEventRegister.SCENE_LOAD_COMPLETE, this, CommonEventArg.Get(gameScene.SceneName, m_LastScene == null));
 
                 SwitchSceneInternal(gameScene);
             }

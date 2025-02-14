@@ -19,11 +19,27 @@ namespace GAS.Runtime
         /// <summary>
         /// 属性集
         /// </summary>
-        public string[] AttributeSets;
+        public AttributeSetData[] AttributeSets;
 
         /// <summary>
         /// 能力集
         /// </summary>
         public GameplayAbilityAsset[] AbilityAssets;
+    }
+
+    [Serializable]
+    public struct AttributeSetData
+    {
+        public string AttributeSetName;
+
+        public AttributeData[] AttributeData;
+    }
+
+    [Serializable]
+    public struct AttributeData
+    {
+        public string AttributeName;
+
+        public float BaseValue;
     }
 }

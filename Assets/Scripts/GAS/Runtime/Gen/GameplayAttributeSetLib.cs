@@ -70,23 +70,31 @@ namespace GAS.Runtime
             }
         }
 
-        public class Fight : GameplayAttributeSet
+        public class Weapon : GameplayAttributeSet
         {
-            private readonly GameplayAttribute m_HP = new GameplayAttribute("Fight", "HP");
-            public GameplayAttribute HP  { get { return m_HP; } }
-
-            private readonly GameplayAttribute m_MP = new GameplayAttribute("Fight", "MP");
-            public GameplayAttribute MP  { get { return m_MP; } }
-
-            private readonly GameplayAttribute m_AttackPow = new GameplayAttribute("Fight", "AttackPow");
+            private readonly GameplayAttribute m_AttackPow = new GameplayAttribute("Weapon", "AttackPow");
             public GameplayAttribute AttackPow  { get { return m_AttackPow; } }
+
+            private readonly GameplayAttribute m_Durability = new GameplayAttribute("Weapon", "Durability");
+            public GameplayAttribute Durability  { get { return m_Durability; } }
+
+            private readonly GameplayAttribute m_Defense = new GameplayAttribute("Weapon", "Defense");
+            public GameplayAttribute Defense  { get { return m_Defense; } }
+
+            private readonly GameplayAttribute m_CriticalHitRate = new GameplayAttribute("Weapon", "CriticalHitRate");
+            public GameplayAttribute CriticalHitRate  { get { return m_CriticalHitRate; } }
+
+            private readonly GameplayAttribute m_CriticalHitPow = new GameplayAttribute("Weapon", "CriticalHitPow");
+            public GameplayAttribute CriticalHitPow  { get { return m_CriticalHitPow; } }
 
 
             private readonly string[] m_AttributeNames = new string[]
             {
-                "HP",
-                "MP",
                 "AttackPow",
+                "Durability",
+                "Defense",
+                "CriticalHitRate",
+                "CriticalHitPow",
             };
 
             public override string[] AttributeNames { get { return m_AttributeNames; } }
@@ -97,12 +105,98 @@ namespace GAS.Runtime
                 {
                     switch (name)
                     {
-                        case "HP":
-                            return HP;
-                        case "MP":
-                            return MP;
                         case "AttackPow":
                             return AttackPow;
+                        case "Durability":
+                            return Durability;
+                        case "Defense":
+                            return Defense;
+                        case "CriticalHitRate":
+                            return CriticalHitRate;
+                        case "CriticalHitPow":
+                            return CriticalHitPow;
+                        default:
+                            return null;
+                    }
+                }
+            }
+        }
+
+        public class Fight : GameplayAttributeSet
+        {
+            private readonly GameplayAttribute m_AttackPow = new GameplayAttribute("Fight", "AttackPow");
+            public GameplayAttribute AttackPow  { get { return m_AttackPow; } }
+
+            private readonly GameplayAttribute m_Defense = new GameplayAttribute("Fight", "Defense");
+            public GameplayAttribute Defense  { get { return m_Defense; } }
+
+            private readonly GameplayAttribute m_HP = new GameplayAttribute("Fight", "HP");
+            public GameplayAttribute HP  { get { return m_HP; } }
+
+            private readonly GameplayAttribute m_CriticalHitRate = new GameplayAttribute("Fight", "CriticalHitRate");
+            public GameplayAttribute CriticalHitRate  { get { return m_CriticalHitRate; } }
+
+            private readonly GameplayAttribute m_CriticalHitPow = new GameplayAttribute("Fight", "CriticalHitPow");
+            public GameplayAttribute CriticalHitPow  { get { return m_CriticalHitPow; } }
+
+            private readonly GameplayAttribute m_Level = new GameplayAttribute("Fight", "Level");
+            public GameplayAttribute Level  { get { return m_Level; } }
+
+            private readonly GameplayAttribute m_Penetrating = new GameplayAttribute("Fight", "Penetrating");
+            public GameplayAttribute Penetrating  { get { return m_Penetrating; } }
+
+            private readonly GameplayAttribute m_ReduceDefense = new GameplayAttribute("Fight", "ReduceDefense");
+            public GameplayAttribute ReduceDefense  { get { return m_ReduceDefense; } }
+
+            private readonly GameplayAttribute m_DamageBonus = new GameplayAttribute("Fight", "DamageBonus");
+            public GameplayAttribute DamageBonus  { get { return m_DamageBonus; } }
+
+            private readonly GameplayAttribute m_MaxHP = new GameplayAttribute("Fight", "MaxHP");
+            public GameplayAttribute MaxHP  { get { return m_MaxHP; } }
+
+
+            private readonly string[] m_AttributeNames = new string[]
+            {
+                "AttackPow",
+                "Defense",
+                "HP",
+                "CriticalHitRate",
+                "CriticalHitPow",
+                "Level",
+                "Penetrating",
+                "ReduceDefense",
+                "DamageBonus",
+                "MaxHP",
+            };
+
+            public override string[] AttributeNames { get { return m_AttributeNames; } }
+
+            public override GameplayAttribute this[string name]
+            {
+                get
+                {
+                    switch (name)
+                    {
+                        case "AttackPow":
+                            return AttackPow;
+                        case "Defense":
+                            return Defense;
+                        case "HP":
+                            return HP;
+                        case "CriticalHitRate":
+                            return CriticalHitRate;
+                        case "CriticalHitPow":
+                            return CriticalHitPow;
+                        case "Level":
+                            return Level;
+                        case "Penetrating":
+                            return Penetrating;
+                        case "ReduceDefense":
+                            return ReduceDefense;
+                        case "DamageBonus":
+                            return DamageBonus;
+                        case "MaxHP":
+                            return MaxHP;
                         default:
                             return null;
                     }
@@ -114,6 +208,7 @@ namespace GAS.Runtime
         public static Dictionary<string, Type> AttributeSetMap = new Dictionary<string, Type>()
         {
             ["Locomotion"] = typeof(Locomotion),
+            ["Weapon"] = typeof(Weapon),
             ["Fight"] = typeof(Fight),
         };
     }
